@@ -1,4 +1,6 @@
-# nuxt-realworld
+# ![](https://github.com/gothinkster/realworld/raw/master/media/realworld.png)
+
+# Nuxt + RealWorld Example App
 
 ## Build Setup
 
