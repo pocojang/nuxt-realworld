@@ -2,18 +2,18 @@
   <nav class="navbar navbar-light">
     <div class="container">
       <nuxt-link to="/" class="navbar-brand">conduit</nuxt-link>
-      <NavigationBar />
+      <AuthNavigationBar />
     </div>
   </nav>
 </template>
 
 <script lang="ts">
-import NavigationBar from './NavigationBar.vue'
+import AuthNavigationBar from './AuthNavigationBar.vue'
 
 export default {
   name: 'GlobalHeader',
   components: {
-    NavigationBar,
+    AuthNavigationBar,
   },
 }
 </script>

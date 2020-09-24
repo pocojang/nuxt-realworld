@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div class="container">
-      <a class="logo-font" href="/"> conduit </a>
+      <nuxt-link to="/" class="logo-font"> conduit </nuxt-link>
       <span class="attribution">
         © 2020. An interactive learning project from
         <a href="https://thinkster.io">Thinkster</a>. Code licensed under MIT.

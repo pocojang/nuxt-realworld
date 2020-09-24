@@ -5,9 +5,7 @@
         <div class="col-md-6 offset-md-3 col-xs-12">
           <h1 class="text-xs-center">Sign In</h1>
           <p class="text-xs-center">
-            <nuxt-link to="/register">
-              <a>Need an account?</a>
-            </nuxt-link>
+            <nuxt-link to="/register">Need an account?</nuxt-link>
           </p>
           <form>
             <fieldset>

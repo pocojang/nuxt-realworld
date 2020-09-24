@@ -2,16 +2,22 @@
   <div class="sidebar">
     <p>Popular Tags</p>
     <div class="tag-list">
-      <a class="tag-default tag-pill">HuManIty</a>
-      <a class="tag-default tag-pill">Hu&zwnj;Man&zwnj;Ity</a>
-      <a class="tag-default tag-pill">Gandhi</a>
-      <a class="tag-default tag-pill">HITLER</a>
-      <a class="tag-default tag-pill">SIDA</a>
-      <a class="tag-default tag-pill">BlackLivesMatter</a>
-      <a class="tag-default tag-pill">Black&zwnj;Lives&zwnj;Matter</a>
-      <a class="tag-default tag-pill">test</a>
-      <a class="tag-default tag-pill">dragons</a>
-      <a class="tag-default tag-pill">butt</a>
+      <nuxt-link to="/" class="tag-default tag-pill">HuManIty</nuxt-link>
+      <nuxt-link to="/" class="tag-default tag-pill"
+        >Hu&zwnj;Man&zwnj;Ity</nuxt-link
+      >
+      <nuxt-link to="/" class="tag-default tag-pill">Gandhi</nuxt-link>
+      <nuxt-link to="/" class="tag-default tag-pill">HITLER</nuxt-link>
+      <nuxt-link to="/" class="tag-default tag-pill">SIDA</nuxt-link>
+      <nuxt-link to="/" class="tag-default tag-pill"
+        >BlackLivesMatter</nuxt-link
+      >
+      <nuxt-link to="/" class="tag-default tag-pill"
+        >Black&zwnj;Lives&zwnj;Matter</nuxt-link
+      >
+      <nuxt-link to="/" class="tag-default tag-pill">test</nuxt-link>
+      <nuxt-link to="/" class="tag-default tag-pill">dragons</nuxt-link>
+      <nuxt-link to="/" class="tag-default tag-pill">butt</nuxt-link>
     </div>
   </div>
 </template>

@@ -3,14 +3,14 @@
     <div class="container">
       <h1>Why</h1>
       <div class="article-meta">
-        <a>
+        <nuxt-link to="/">
           <img
             src="https://avatars0.githubusercontent.com/u/68723614?s=400&amp;u=9676acd378ca0802e86a17f845a536af648497e0&amp;v=4"
             alt="author profile image"
           />
-        </a>
+        </nuxt-link>
         <div class="info">
-          <a class="author">devJang</a>
+          <nuxt-link to="/" class="author">devJang</nuxt-link>
           <span class="date">Wed Sep 02 2020</span>
         </div>
         <span>

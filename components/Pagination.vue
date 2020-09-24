@@ -2,7 +2,7 @@
   <nav>
     <ul class="pagination">
       <li class="page-item active">
-        <a class="page-link">1</a>
+        <nuxt-link to="/" class="page-link">1</nuxt-link>
       </li>
     </ul>
   </nav>

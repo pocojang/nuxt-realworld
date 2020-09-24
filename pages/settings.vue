@@ -23,7 +23,7 @@
               <fieldset class="form-group">
                 <textarea
                   class="form-control form-control-lg"
-                  rows="{8}"
+                  rows="8"
                   placeholder="Short bio about you"
                 />
               </fieldset>

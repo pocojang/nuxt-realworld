@@ -44,16 +44,14 @@
                   <p class="card-text">Goo2</p>
                 </div>
                 <div class="card-footer">
-                  <nuxt-link to="userName">
-                    <a class="comment-author">
-                      <img
-                        src="https://avatars0.githubusercontent.com/u/68723614?s=400&amp;u=9676acd378ca0802e86a17f845a536af648497e0&amp;v=4"
-                        class="comment-author-img"
-                        alt="author profile image"
-                      />
-                    </a>
-                    <a class="comment-author">devJang</a>
+                  <nuxt-link to="userName" class="comment-author">
+                    <img
+                      src="https://avatars0.githubusercontent.com/u/68723614?s=400&amp;u=9676acd378ca0802e86a17f845a536af648497e0&amp;v=4"
+                      class="comment-author-img"
+                      alt="author profile image"
+                    />
                   </nuxt-link>
+                  <nuxt-link to="/" class="comment-author">devJang</nuxt-link>
                   <span class="date-posted">Wed Sep 02 2020</span>
                   <span class="mod-options">
                     <i class="ion-trash-a"></i>
@@ -65,16 +63,14 @@
                   <p class="card-text">Good</p>
                 </div>
                 <div class="card-footer">
-                  <nuxt-link to="userName">
-                    <a class="comment-author">
-                      <img
-                        src="https://avatars0.githubusercontent.com/u/68723614?s=400&amp;u=9676acd378ca0802e86a17f845a536af648497e0&amp;v=4"
-                        class="comment-author-img"
-                        alt="author profile image"
-                      />
-                    </a>
-                    <a class="comment-author">devJang</a>
+                  <nuxt-link to="userName" class="comment-author">
+                    <img
+                      src="https://avatars0.githubusercontent.com/u/68723614?s=400&amp;u=9676acd378ca0802e86a17f845a536af648497e0&amp;v=4"
+                      class="comment-author-img"
+                      alt="author profile image"
+                    />
                   </nuxt-link>
+                  <nuxt-link to="/" class="comment-author">devJang</nuxt-link>
                   <span class="date-posted">Wed Sep 02 2020</span>
                   <span class="mod-options">
                     <i class="ion-trash-a"></i>

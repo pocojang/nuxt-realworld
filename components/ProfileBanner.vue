@@ -10,11 +10,12 @@
           />
           <h4>devJang</h4>
           <p></p>
-          <Link href="/settings">
-            <a class="btn btn-sm btn-outline-secondary action-btn">
-              <i class="ion-gear-a"></i>
-            </a>
-          </Link>
+          <nuxt-link
+            to="/settings"
+            class="btn btn-sm btn-outline-secondary action-btn"
+          >
+            <i class="ion-gear-a"></i>
+          </nuxt-link>
         </div>
       </div>
     </div>

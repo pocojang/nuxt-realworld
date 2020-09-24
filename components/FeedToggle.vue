@@ -2,10 +2,10 @@
   <div class="feed-toggle">
     <ul class="nav nav-pills outline-active">
       <li class="nav-item">
-        <a class="nav-link active">Your Feed</a>
+        <nuxt-link to="/" class="nav-link active">Your Feed</nuxt-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link">Global Feed</a>
+        <nuxt-link to="/" class="nav-link">Global Feed</nuxt-link>
       </li>
     </ul>
   </div>

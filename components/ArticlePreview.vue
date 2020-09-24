@@ -2,14 +2,14 @@
   <div class="article-preview">
     <div class="article-meta">
       <nuxt-link to="/">
-        <a>
+        <nuxt-link to="/">
           <img
             src="https://cdn.cnn.com/cnnnext/dam/assets/190410090959-01-black-hole-event-horizon-telescope-exlarge-169.jpg"
             alt="author profile image"
           />
-        </a>
+        </nuxt-link>
         <div class="info">
-          <a class="author">yomogan</a>
+          <nuxt-link to="/" class="author">yomogan</nuxt-link>
           <span class="date">Sun Sep 06 2020</span>
         </div>
       </nuxt-link>
@@ -20,7 +20,7 @@
       </div>
     </div>
     <nuxt-link to="/article/slug">
-      <a class="preview-link">
+      <nuxt-link to="/" class="preview-link">
         <h1>test_yomogan_06_september</h1>
         <p>test_yomogan_06_september</p>
         <span>Read more...</span>
@@ -28,7 +28,7 @@
           <li class="tag-default tag-pill tag-outline">dragons</li>
           <li class="tag-default tag-pill tag-outline">test</li>
         </ul>
-      </a>
+      </nuxt-link>
     </nuxt-link>
   </div>
 </template>
