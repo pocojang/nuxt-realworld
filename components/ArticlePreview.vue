@@ -19,7 +19,7 @@
         </button>
       </div>
     </div>
-    <nuxt-link to="/">
+    <nuxt-link to="/article/slug">
       <a class="preview-link">
         <h1>test_yomogan_06_september</h1>
         <p>test_yomogan_06_september</p>

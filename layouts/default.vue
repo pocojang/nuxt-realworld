@@ -1,19 +1,19 @@
 <template>
-  <div>
-    <NavigationBar />
+  <div id="main">
+    <GlobalHeader />
     <Nuxt />
     <FooterCopyright />
   </div>
 </template>
 
 <script lang="ts">
-import NavigationBar from '~/components/NavigationBar.vue'
+import GlobalHeader from '~/components/GlobalHeader.vue'
 import FooterCopyright from '~/components/FooterCopyright.vue'
 
 export default {
   name: 'Default',
   components: {
-    NavigationBar,
+    GlobalHeader,
     FooterCopyright,
   },
 }

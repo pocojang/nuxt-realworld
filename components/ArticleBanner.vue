@@ -14,10 +14,8 @@
           <span class="date">Wed Sep 02 2020</span>
         </div>
         <span>
-          <nuxt-link to="/editor">
-            <a class="btn btn-outline-secondary btn-sm">
-              <i class="ion-edit"></i>
-            </a>
+          <nuxt-link to="/editor/slug" class="btn btn-outline-secondary btn-sm">
+            <i class="ion-edit"></i>
           </nuxt-link>
           <button class="btn btn-outline-danger btn-sm">
             <i class="ion-trash-a"></i>
