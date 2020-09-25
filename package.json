@@ -22,6 +22,7 @@
     }
   },
   "dependencies": {
+    "@nuxt/http": "^0.5.12",
     "@nuxt/typescript-runtime": "^2.0.0",
     "@vue/composition-api": "^1.0.0-beta.14",
     "core-js": "^3.6.5",
