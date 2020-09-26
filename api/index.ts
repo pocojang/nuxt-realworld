@@ -1,5 +1,6 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import articleRepository from './articleRepository'
+import commentRepository from './commentRepository'
 import profileRepository from './profileRepository'
 import userRepository from './userRepository'
 
@@ -9,6 +10,7 @@ import userRepository from './userRepository'
  */
 export default ($axios: NuxtAxiosInstance) => ({
   article: articleRepository($axios),
+  comment: commentRepository($axios),
   profile: profileRepository($axios),
   user: userRepository($axios),
 })
