@@ -4,7 +4,7 @@ import { User } from '~/types'
 type UserName = User['username']
 
 // TODO: Response Model Typing
-const profileRepository = (axios: NuxtAxiosInstance) => ({
+export const profileRepository = (axios: NuxtAxiosInstance) => ({
   getProfile(userName: UserName) {
     return axios.$get(`/profiles/${userName}`)
   },
@@ -16,4 +16,4 @@ const profileRepository = (axios: NuxtAxiosInstance) => ({
   },
 })
 
-export default profileRepository
+export type ProfileRepository = ReturnType<typeof profileRepository>

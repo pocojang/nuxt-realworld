@@ -8,7 +8,7 @@ type AuthRegisterRequest = Pick<User, 'username' | 'email'> & {
 type UpdateUserRequest = User & Pick<Partial<User>, 'email' | 'bio' | 'image'>
 
 // TODO: Response Model Typing
-const userRepository = (axios: NuxtAxiosInstance) => ({
+export const userRepository = (axios: NuxtAxiosInstance) => ({
   authLogin(payload: AuthLoginRequest) {
     // No authentication required, returns a User
     return axios.$post(`/api/users/login`, payload)
@@ -28,4 +28,4 @@ const userRepository = (axios: NuxtAxiosInstance) => ({
   },
 })
 
-export default userRepository
+export type UserRepository = ReturnType<typeof userRepository>

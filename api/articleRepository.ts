@@ -2,6 +2,7 @@ import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import { Article, Author, Tag } from '~/types'
 
 type Slug = Article['slug']
+type UserName = Author['username']
 type FeedArticleListRequest = {
   limit?: number
   offset?: number
@@ -13,23 +14,29 @@ type UpdateArticleRequest = Partial<
 >
 interface ArticleListRequest extends FeedArticleListRequest {
   tag?: Tag
-  author?: Author['username']
-  favorited?: Author['username']
+  author?: UserName
+  favorited?: UserName
 }
 
 // TODO: Response Model Typing
-const articleRepository = (axios: NuxtAxiosInstance) => ({
+export const articleRepository = (axios: NuxtAxiosInstance) => ({
   getArticleList({
     tag,
     author,
     favorited,
     limit = 20,
     offset = 0,
-  }: ArticleListRequest) {
+  }: ArticleListRequest = {}) {
+    const defaultParam = {
+      ...(tag && { tag }),
+      ...(author && { author }),
+      ...(favorited && { favorited }),
+    }
+
     // Returns most recent articles globally by default, provide tag, author or favorited query parameter to filter results
     // Authentication optional, will return multiple articles, ordered by most recent first
     return axios.$get('/articles', {
-      params: { tag, author, favorited, limit, offset },
+      params: { ...defaultParam, limit, offset },
     })
   },
   getFeedArticleList(params: FeedArticleListRequest) {
@@ -64,4 +71,4 @@ const articleRepository = (axios: NuxtAxiosInstance) => ({
   },
 })
 
-export default articleRepository
+export type ArticleRepository = ReturnType<typeof articleRepository>

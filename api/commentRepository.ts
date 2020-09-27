@@ -6,7 +6,7 @@ type CreateComment = Pick<Comment, 'body'> & Pick<Article, 'slug'>
 type DeleteComment = Pick<Comment, 'id'> & Pick<Article, 'slug'>
 
 // TODO: Response Model Typing
-const commentRepository = (axios: NuxtAxiosInstance) => ({
+export const commentRepository = (axios: NuxtAxiosInstance) => ({
   getCommentList(slug: Slug) {
     // Authentication optional, returns multiple comments
     return axios.$get(`/articles/${slug}/comments`)
@@ -23,4 +23,4 @@ const commentRepository = (axios: NuxtAxiosInstance) => ({
   },
 })
 
-export default commentRepository
+export type CommentRepository = ReturnType<typeof commentRepository>
