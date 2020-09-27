@@ -1,4 +1,4 @@
-interface User {
+export interface User {
   email: string
   token: string
   username: string
@@ -6,23 +6,23 @@ interface User {
   image: string
 }
 
-interface Profile {
+export interface Profile {
   username: string
   bio: string
   image: string
   following: boolean
 }
 
-interface Author {
+export interface Author {
   username: string
   bio: string
   image: string
   following: false
 }
 
-type Tag = string
+export type Tag = string
 
-interface Article {
+export interface Article {
   slug: string
   title: string
   description: string
@@ -35,7 +35,7 @@ interface Article {
   author: Author
 }
 
-interface Comment {
+export interface Comment {
   id: number
   createdAt: string
   updatedAt: string

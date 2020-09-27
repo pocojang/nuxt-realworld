@@ -1,32 +1,18 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
+import { User } from '~/types'
+
+type AuthLoginRequest = Pick<User, 'email'> & { password: string }
+type AuthRegisterRequest = Pick<User, 'username' | 'email'> & {
+  password: string
+}
+type UpdateUserRequest = User & Pick<Partial<User>, 'email' | 'bio' | 'image'>
 
 const userRepository = (axios: NuxtAxiosInstance) => ({
-  /**
-   * TODO: Model Typing
-   *
-   * {
-   *   "user":{
-   *     "email": "jake@jake.jake",
-   *     "password": "jakejake"
-   *   }
-   * }
-   */
-  authLogin(payload: any) {
+  authLogin(payload: AuthLoginRequest) {
     // No authentication required, returns a User
     return axios.$post(`/api/users/login`, payload)
   },
-  /**
-   * TODO: Model Typing
-   *
-   * {
-   *   "user":{
-   *     "username": "Jacob",
-   *     "email": "jake@jake.jake",
-   *     "password": "jakejake"
-   *   }
-   * }
-   */
-  authRegister(payload: any) {
+  authRegister(payload: AuthRegisterRequest) {
     // No authentication required, returns a User
     return axios.$post(`/api/users`, payload)
   },
@@ -34,22 +20,10 @@ const userRepository = (axios: NuxtAxiosInstance) => ({
     // Authentication required, returns a User that's the current user
     return axios.$get('/api/user')
   },
-  /**
-   * TODO: Model Typing
-   *
-   * {
-   *   "user":{
-   *     "email": "jake@jake.jake",
-   *     "bio": "I like to skateboard",
-   *     "image": "https://i.stack.imgur.com/xHWG8.jpg"
-   *   }
-   * }
-   *
-   * Accepted fields: email, username, password, image, bio
-   */
-  updateUser() {
+  // Accepted fields: email, username, password, image, bio
+  updateUser(payload: UpdateUserRequest) {
     // Authentication required, returns the User
-    return axios.$put('/user')
+    return axios.$put('/user', payload)
   },
 })
 
