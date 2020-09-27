@@ -1,27 +1,25 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
+import { Article, Comment } from '~/types'
+
+type Slug = Article['slug']
+type CreateComment = Pick<Comment, 'body'> & Pick<Article, 'slug'>
+type DeleteComment = Pick<Comment, 'id'> & Pick<Article, 'slug'>
 
 // TODO: Model Typing
 const commentRepository = (axios: NuxtAxiosInstance) => ({
-  getCommentList(slug: string) {
+  getCommentList(slug: Slug) {
     // Authentication optional, returns multiple comments
     return axios.$get(`/articles/${slug}/comments`)
   },
-  /**
-   * {
-   *   "comment": {
-   *     "body": "His name was my name too."
-   *   }
-   * }
-   */
-  addComment(payload: any) {
+  addComment({ body, slug }: CreateComment) {
     // Authentication required, returns the created Comment
-    return axios.$post(`/articles/${payload.slug}/comments`, {
-      data: payload.comment,
+    return axios.$post(`/articles/${slug}/comments`, {
+      data: { comment: body },
     })
   },
-  deleteComment(payload: any) {
+  deleteComment({ slug, id }: DeleteComment) {
     // Authentication optional, returns multiple comments
-    return axios.$delete(`/articles/${payload.slug}/comments/${payload.id}`)
+    return axios.$delete(`/articles/${slug}/comments/${id}`)
   },
 })
 
