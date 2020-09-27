@@ -1,25 +1,21 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import { Article, Author, Tag } from '~/types'
 
+type Slug = Article['slug']
 type FeedArticleListRequest = {
   limit?: number
   offset?: number
 }
-
-type Slug = Article['slug']
-
+type CreateArticleRequest = Pick<Article, 'title' | 'description' | 'body'> &
+  Pick<Partial<Article>, 'tagList'>
+type UpdateArticleRequest = Partial<
+  Pick<Article, 'title' | 'description' | 'body'>
+>
 interface ArticleListRequest extends FeedArticleListRequest {
   tag?: Tag
   author?: Author['username']
   favorited?: Author['username']
 }
-
-type CreateArticleRequest = Pick<Article, 'title' | 'description' | 'body'> &
-  Pick<Partial<Article>, 'tagList'>
-
-type UpdateArticleRequest = Partial<
-  Pick<Article, 'title' | 'description' | 'body'>
->
 
 const articleRepository = (axios: NuxtAxiosInstance) => ({
   getArticleList({
