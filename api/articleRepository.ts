@@ -17,6 +17,7 @@ interface ArticleListRequest extends FeedArticleListRequest {
   favorited?: Author['username']
 }
 
+// TODO: Response Model Typing
 const articleRepository = (axios: NuxtAxiosInstance) => ({
   getArticleList({
     tag,

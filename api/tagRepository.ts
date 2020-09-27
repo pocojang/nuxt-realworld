@@ -1,6 +1,6 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
 
-// TODO: Model Typing
+// TODO: Response Model Typing
 const tagRepository = (axios: NuxtAxiosInstance) => ({
   getTagList() {
     // No authentication required, returns a List of Tags

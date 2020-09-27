@@ -1,14 +1,17 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
+import { User } from '~/types'
 
-// TODO: Model Typing
+type UserName = User['username']
+
+// TODO: Response Model Typing
 const profileRepository = (axios: NuxtAxiosInstance) => ({
-  getProfile(userName: string) {
+  getProfile(userName: UserName) {
     return axios.$get(`/profiles/${userName}`)
   },
-  followUser(userName: string) {
+  followUser(userName: UserName) {
     return axios.$post(`/profiles/${userName}/follow`)
   },
-  unFollowUser(userName: string) {
+  unFollowUser(userName: UserName) {
     return axios.$delete(`/profiles/${userName}/follow`)
   },
 })
