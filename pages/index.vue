@@ -14,7 +14,7 @@
           <Pagination />
         </div>
         <div class="col-md-3">
-          <SideBar />
+          <PopularTagList :tag-list="tagList" />
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@ import Vue from 'vue'
 import ArticlePreview from '~/components/ArticlePreview.vue'
 import FeedToggle from '~/components/FeedToggle.vue'
 import Pagination from '~/components/Pagination.vue'
-import SideBar from '~/components/SideBar.vue'
+import PopularTagList from '~/components/PopularTagList.vue'
 import { Tag } from '~/types'
 
 export default Vue.extend({
@@ -36,7 +36,7 @@ export default Vue.extend({
     ArticlePreview,
     FeedToggle,
     Pagination,
-    SideBar,
+    PopularTagList,
   },
   async asyncData({ $repository }) {
     const {
