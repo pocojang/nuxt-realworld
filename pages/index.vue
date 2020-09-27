@@ -22,18 +22,43 @@
 </template>
 
 <script lang="ts">
+import Vue from 'vue'
+
 import ArticlePreview from '~/components/ArticlePreview.vue'
 import FeedToggle from '~/components/FeedToggle.vue'
 import Pagination from '~/components/Pagination.vue'
 import SideBar from '~/components/SideBar.vue'
+import { Tag } from '~/types'
 
-export default {
-  name: 'Index',
+export default Vue.extend({
+  name: 'IndexPage',
   components: {
     ArticlePreview,
     FeedToggle,
     Pagination,
     SideBar,
   },
-}
+  async asyncData({ $repository }) {
+    const {
+      articles,
+      articlesCount,
+    } = await $repository.article.getArticleList()
+    const { tags } = await await $repository.tag.getTagList()
+
+    return {
+      articleCount: articlesCount,
+      articleList: articles,
+      tagList: tags.filter((tag: Tag) =>
+        String(tag).replace(/[\u200B-\u200D\uFEFF]/g, '')
+      ),
+    }
+  },
+  data() {
+    return {
+      articleCount: [],
+      articleList: [],
+      tagList: [],
+    }
+  },
+})
 </script>
