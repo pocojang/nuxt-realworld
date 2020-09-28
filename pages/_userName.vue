@@ -6,7 +6,7 @@
         <div class="col-xs-12 col-md-10 offset-md-1">
           <FeedToggle />
           <div>
-            <ArticlePreview />
+            <ArticlePreviewList />
           </div>
         </div>
       </div>
@@ -15,14 +15,14 @@
 </template>
 
 <script lang="ts">
-import ArticlePreview from '~/components/ArticlePreview.vue'
+import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
 import FeedToggle from '~/components/FeedToggle.vue'
 import ProfileBanner from '~/components/ProfileBanner.vue'
 
 export default {
   name: 'Profile',
   components: {
-    ArticlePreview,
+    ArticlePreviewList,
     FeedToggle,
     ProfileBanner,
   },

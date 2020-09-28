@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-md-9">
           <FeedToggle />
-          <div><ArticlePreview /></div>
+          <ArticlePreviewList :article-list="articleList" />
           <Pagination />
         </div>
         <div class="col-md-3">
@@ -24,7 +24,7 @@
 <script lang="ts">
 import Vue from 'vue'
 
-import ArticlePreview from '~/components/ArticlePreview.vue'
+import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
 import FeedToggle from '~/components/FeedToggle.vue'
 import Pagination from '~/components/Pagination.vue'
 import PopularTagList from '~/components/PopularTagList.vue'
@@ -33,7 +33,7 @@ import { Tag } from '~/types'
 export default Vue.extend({
   name: 'IndexPage',
   components: {
-    ArticlePreview,
+    ArticlePreviewList,
     FeedToggle,
     Pagination,
     PopularTagList,
