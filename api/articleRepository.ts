@@ -20,6 +20,9 @@ interface ArticleListRequest extends FeedArticleListRequest {
 
 // TODO: Response Model Typing
 export const articleRepository = (axios: NuxtAxiosInstance) => ({
+  getArticle(slug: Slug) {
+    return axios.$get(`/articles/${slug}`)
+  },
   getArticleList({
     tag,
     author,
