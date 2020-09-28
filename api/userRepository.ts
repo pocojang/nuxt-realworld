@@ -11,15 +11,15 @@ type UpdateUserRequest = User & Pick<Partial<User>, 'email' | 'bio' | 'image'>
 export const userRepository = (axios: NuxtAxiosInstance) => ({
   authLogin(payload: AuthLoginRequest) {
     // No authentication required, returns a User
-    return axios.$post(`/api/users/login`, payload)
+    return axios.$post(`/users/login`, payload)
   },
   authRegister(payload: AuthRegisterRequest) {
     // No authentication required, returns a User
-    return axios.$post(`/api/users`, payload)
+    return axios.$post(`/users`, payload)
   },
   getCurrentUser() {
     // Authentication required, returns a User that's the current user
-    return axios.$get('/api/user')
+    return axios.$get('/user')
   },
   // Accepted fields: email, username, password, image, bio
   updateUser(payload: UpdateUserRequest) {
