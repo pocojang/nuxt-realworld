@@ -43,7 +43,7 @@ export default Vue.extend({
       articles,
       articlesCount,
     } = await $repository.article.getArticleList()
-    const { tags } = await await $repository.tag.getTagList()
+    const { tags } = await $repository.tag.getTagList()
 
     return {
       articleCount: articlesCount,
