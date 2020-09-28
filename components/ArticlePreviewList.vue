@@ -24,22 +24,20 @@
           </button>
         </div>
       </div>
-      <nuxt-link to="/article/slug">
-        <nuxt-link to="/" class="preview-link">
-          <h1>{{ article.title }}</h1>
-          <p>{{ article.description }}</p>
-          <span>Read more...</span>
+      <nuxt-link :to="`/article/${article.slug}`" class="preview-link">
+        <h1>{{ article.title }}</h1>
+        <p>{{ article.description }}</p>
+        <span>Read more...</span>
 
-          <ul v-if="article.tagList.length" class="tag-list">
-            <li
-              v-for="(value, tagIndex) in article.tagList"
-              :key="tagIndex"
-              class="tag-default tag-pill tag-outline"
-            >
-              {{ value }}
-            </li>
-          </ul>
-        </nuxt-link>
+        <ul v-if="article.tagList.length" class="tag-list">
+          <li
+            v-for="(value, tagIndex) in article.tagList"
+            :key="tagIndex"
+            class="tag-default tag-pill tag-outline"
+          >
+            {{ value }}
+          </li>
+        </ul>
       </nuxt-link>
     </div>
   </div>
