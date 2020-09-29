@@ -1,4 +1,4 @@
-# ![](https://github.com/gothinkster/realworld/raw/master/media/realworld.png)
+# ![](https://github.com/gothinkster/realworld/blob/3155494efe68432772157de38a90c49b3698897f/media/realworld.png?raw=true)
 
 # Nuxt + RealWorld Example App
 

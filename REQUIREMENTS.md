@@ -152,6 +152,8 @@
 
 ## Resource
 
+- RealWorld Guide
+  - https://github.com/gothinkster/realworld-starter-kit/blob/master/FRONTEND_INSTRUCTIONS.md
 - RealWorld example apps
   - https://github.com/gothinkster/realworld
 - CSS
