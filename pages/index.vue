@@ -14,7 +14,10 @@
           <Pagination />
         </div>
         <div class="col-md-3">
-          <PopularTagList :tag-list="tagList" />
+          <PopularTagList
+            :tag-list="tagList"
+            @on-click-tag="getArticleListByTag"
+          />
         </div>
       </div>
     </div>
@@ -73,8 +76,19 @@ export default defineComponent({
       )
     })
 
+    const getArticleListByTag = async (tag: Tag) => {
+      const {
+        articles,
+        articlesCount,
+      } = await $repository.article.getArticleList({ tag })
+
+      state.articleList = articles
+      state.articleCount = articlesCount
+    }
+
     return {
       ...toRefs(state),
+      getArticleListByTag,
     }
   },
 })
