@@ -3,7 +3,7 @@
     <p>Popular Tags</p>
     <div class="tag-list">
       <a
-        v-for="(tag, index) in tagList"
+        v-for="(tag, index) in existTagList"
         :key="index"
         class="tag-default tag-pill"
         >{{ tag }}</a
@@ -13,17 +13,26 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropOptions } from 'vue'
+/* eslint-disable import/named */
+import { defineComponent, computed, PropType } from '@nuxtjs/composition-api'
 import { Tag } from '~/types'
 
-export default Vue.extend({
+export default defineComponent({
   name: 'PopularTagList',
   props: {
     tagList: {
-      type: Array,
-      required: false,
-      default: () => [],
-    } as PropOptions<Tag[]>,
+      type: Array as PropType<Tag[]>,
+      required: true,
+    },
+  },
+  setup(props) {
+    const existTagList = computed(() =>
+      props.tagList.filter((tag: Tag) =>
+        String(tag).replace(/[\u200B-\u200D\uFEFF]/g, '')
+      )
+    )
+
+    return { existTagList }
   },
 })
 </script>

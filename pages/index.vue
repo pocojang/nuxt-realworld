@@ -22,15 +22,20 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import {
+  defineComponent,
+  useAsync,
+  useContext,
+  ref,
+} from '@nuxtjs/composition-api'
 
 import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
 import FeedToggle from '~/components/FeedToggle.vue'
 import Pagination from '~/components/Pagination.vue'
 import PopularTagList from '~/components/PopularTagList.vue'
-import { Tag } from '~/types'
+import { Article, Tag } from '~/types'
 
-export default Vue.extend({
+export default defineComponent({
   name: 'IndexPage',
   components: {
     ArticlePreviewList,
@@ -38,26 +43,29 @@ export default Vue.extend({
     Pagination,
     PopularTagList,
   },
-  async asyncData({ $repository }) {
-    const {
-      articles,
-      articlesCount,
-    } = await $repository.article.getArticleList()
-    const { tags } = await $repository.tag.getTagList()
+  setup() {
+    const articleList = ref<Article[]>([])
+    const articleCount = ref<number>(0)
+    const tagList = ref<Tag[]>([])
+
+    const { $repository } = useContext()
+
+    useAsync(async () => {
+      const {
+        articles,
+        articlesCount,
+      } = await $repository.article.getArticleList()
+      const { tags } = await $repository.tag.getTagList()
+
+      articleList.value = articles
+      articleCount.value = articlesCount
+      tagList.value = tags
+    })
 
     return {
-      articleCount: articlesCount,
-      articleList: articles,
-      tagList: tags.filter((tag: Tag) =>
-        String(tag).replace(/[\u200B-\u200D\uFEFF]/g, '')
-      ),
-    }
-  },
-  data() {
-    return {
-      articleCount: [],
-      articleList: [],
-      tagList: [],
+      articleCount,
+      articleList,
+      tagList,
     }
   },
 })
