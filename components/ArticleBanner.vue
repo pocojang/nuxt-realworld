@@ -5,11 +5,11 @@
         <slot name="title" />
       </h1>
       <div class="article-meta">
-        <nuxt-link :to="`/@${author.username}`">
+        <nuxt-link :to="`/${author.username}`">
           <img :src="author.image" alt="author profile image" />
         </nuxt-link>
         <div class="info">
-          <nuxt-link :to="`/@${author.username}`" class="author">{{
+          <nuxt-link :to="`/${author.username}`" class="author">{{
             author.username
           }}</nuxt-link>
           <span class="date">{{ new Date(createdAt) }}</span>
