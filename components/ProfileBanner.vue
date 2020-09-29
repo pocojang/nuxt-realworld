@@ -3,12 +3,8 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-md-10 offset-md-1">
-          <img
-            src="https://avatars0.githubusercontent.com/u/68723614?s=400&amp;u=9676acd378ca0802e86a17f845a536af648497e0&amp;v=4"
-            class="user-img"
-            alt="user profile image"
-          />
-          <h4>devJang</h4>
+          <img :src="profile.image" class="user-img" alt="user profile image" />
+          <h4>{{ profile.username }}</h4>
           <p></p>
           <nuxt-link
             to="/settings"
@@ -21,3 +17,22 @@
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import Vue, { PropOptions } from 'vue'
+import { Profile } from '~/types'
+
+/**
+ * TODO Follow
+ */
+export default Vue.extend({
+  name: 'ProfileBanner',
+  props: {
+    profile: {
+      type: Object,
+      required: true,
+      default: () => {},
+    } as PropOptions<Profile>,
+  },
+})
+</script>

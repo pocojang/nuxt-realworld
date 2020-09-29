@@ -6,17 +6,15 @@
       class="article-preview"
     >
       <div class="article-meta">
-        <nuxt-link to="/">
-          <nuxt-link to="/">
-            <img :src="article.author.image" alt="author profile image" />
-          </nuxt-link>
-          <div class="info">
-            <nuxt-link to="/" class="author">
-              {{ article.author.username }}</nuxt-link
-            >
-            <span class="date">{{ new Date(article.createdAt) }}</span>
-          </div>
+        <nuxt-link :to="`/${article.author.username}`">
+          <img :src="article.author.image" alt="author profile image" />
         </nuxt-link>
+        <div class="info">
+          <nuxt-link :to="`/${article.author.username}`" class="author">
+            {{ article.author.username }}</nuxt-link
+          >
+          <span class="date">{{ new Date(article.createdAt) }}</span>
+        </div>
         <div class="pull-xs-right">
           <button class="btn btn-sm btn-outline-primary">
             <i class="ion-heart" />
