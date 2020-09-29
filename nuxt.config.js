@@ -30,7 +30,7 @@ export default {
   css: ['@/assets/main.css'],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: ['@/plugins/repository', '@/plugins/composition-api'],
+  plugins: ['@/plugins/repository'],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
@@ -41,6 +41,8 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
+    // https://composition-api.nuxtjs.org
+    '@nuxtjs/composition-api',
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
