@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <ArticleBanner
-      :author="article.author"
-      :title="article.title"
-      :created-at="article.createdAt"
-    />
+  <div v-if="!fetchState.pending && !fetchState.error">
     <div class="article-page">
+      <ArticleBanner :author="article.author" :created-at="article.createdAt">
+        <template v-slot:title>
+          {{ article.title }}
+        </template>
+      </ArticleBanner>
       <div class="container page">
         <div class="row article-content">
           <div class="col-xs-12">
@@ -41,7 +41,13 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import {
+  defineComponent,
+  useContext,
+  reactive,
+  toRefs,
+  useFetch,
+} from '@nuxtjs/composition-api'
 
 import ArticleBanner from '~/components/ArticleBanner.vue'
 import CommentCardList from '~/components/CommentCardList.vue'
@@ -56,34 +62,33 @@ import CommentEditor from '~/components/CommentEditor.vue'
  * 3. Body Parser
  *
  */
-export default Vue.extend({
+export default defineComponent({
   name: 'AritclePage',
   components: {
     ArticleBanner,
     CommentEditor,
     CommentCardList,
   },
-  async asyncData({ route, $repository }) {
-    if (!route.params.slug) {
-      console.error('Not Found Slug of Router')
-
-      return
-    }
-
-    const { slug } = route.params
-
-    const { article } = await $repository.article.getArticle(slug)
-    const { comments } = await $repository.comment.getCommentList(slug)
-
-    return {
-      article,
-      commentList: comments,
-    }
-  },
-  data() {
-    return {
+  setup() {
+    const state = reactive({
       article: {},
       commentList: [],
+    })
+
+    const { $repository, params } = useContext()
+    const { slug } = params.value
+
+    const { fetchState } = useFetch(async () => {
+      const { article } = await $repository.article.getArticle(slug)
+      const { comments } = await $repository.comment.getCommentList(slug)
+
+      state.article = article
+      state.commentList = comments
+    })
+
+    return {
+      ...toRefs(state),
+      fetchState,
     }
   },
 })

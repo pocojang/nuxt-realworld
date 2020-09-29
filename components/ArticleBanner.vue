@@ -1,13 +1,17 @@
 <template>
   <div class="banner">
     <div class="container">
-      <h1>Why</h1>
+      <h1>
+        <slot name="title" />
+      </h1>
       <div class="article-meta">
-        <nuxt-link to="/">
+        <nuxt-link :to="`/@${author.username}`">
           <img :src="author.image" alt="author profile image" />
         </nuxt-link>
         <div class="info">
-          <nuxt-link to="/" class="author">{{ author.username }}</nuxt-link>
+          <nuxt-link :to="`/@${author.username}`" class="author">{{
+            author.username
+          }}</nuxt-link>
           <span class="date">{{ new Date(createdAt) }}</span>
         </div>
         <span>

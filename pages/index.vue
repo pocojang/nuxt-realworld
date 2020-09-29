@@ -24,9 +24,10 @@
 <script lang="ts">
 import {
   defineComponent,
-  useAsync,
   useContext,
-  ref,
+  reactive,
+  toRefs,
+  useFetch,
 } from '@nuxtjs/composition-api'
 
 import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
@@ -34,6 +35,12 @@ import FeedToggle from '~/components/FeedToggle.vue'
 import Pagination from '~/components/Pagination.vue'
 import PopularTagList from '~/components/PopularTagList.vue'
 import { Article, Tag } from '~/types'
+
+type State = {
+  articleList: Article[]
+  tagList: Tag[]
+  articleCount: number
+}
 
 export default defineComponent({
   name: 'IndexPage',
@@ -44,28 +51,30 @@ export default defineComponent({
     PopularTagList,
   },
   setup() {
-    const articleList = ref<Article[]>([])
-    const articleCount = ref<number>(0)
-    const tagList = ref<Tag[]>([])
+    const state = reactive<State>({
+      articleList: [],
+      tagList: [],
+      articleCount: 0,
+    })
 
     const { $repository } = useContext()
 
-    useAsync(async () => {
+    useFetch(async () => {
       const {
         articles,
         articlesCount,
       } = await $repository.article.getArticleList()
       const { tags } = await $repository.tag.getTagList()
 
-      articleList.value = articles
-      articleCount.value = articlesCount
-      tagList.value = tags
+      state.articleList = articles
+      state.articleCount = articlesCount
+      state.tagList = tags.filter((tag: Tag) =>
+        String(tag).replace(/[\u200B-\u200D\uFEFF]/g, '')
+      )
     })
 
     return {
-      articleCount,
-      articleList,
-      tagList,
+      ...toRefs(state),
     }
   },
 })
