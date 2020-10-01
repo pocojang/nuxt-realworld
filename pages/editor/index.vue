@@ -49,6 +49,9 @@
 </template>
 
 <script lang="ts">
+/**
+ * Create Article
+ */
 export default {
   name: 'Editor',
 }
