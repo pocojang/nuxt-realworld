@@ -1,8 +1,8 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
+import { Tag, ResponseType } from '~/types'
 
-// TODO: Response Model Typing
 export const tagRepository = (axios: NuxtAxiosInstance) => ({
-  getTagList() {
+  getTagList(): ResponseType<'tags', Tag[]> {
     // No authentication required, returns a List of Tags
     return axios.$get('/tags')
   },

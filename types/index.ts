@@ -42,3 +42,5 @@ export interface Comment {
   body: string
   author: Author
 }
+
+export type ResponseType<K extends string, V> = Promise<{ [P in K]: V }>

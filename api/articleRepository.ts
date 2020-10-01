@@ -1,5 +1,5 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-import { Article, Author, Tag } from '~/types'
+import { Article, Author, Tag, ResponseType } from '~/types'
 
 type Slug = Article['slug']
 type UserName = Author['username']
@@ -18,9 +18,11 @@ interface ArticleListRequest extends FeedArticleListRequest {
   favorited?: UserName
 }
 
-// TODO: Response Model Typing
+type ArticleResponse = ResponseType<'article', Article>
+type ArticleListResponse = ResponseType<'articles', Article[]>
+
 export const articleRepository = (axios: NuxtAxiosInstance) => ({
-  getArticle(slug: Slug) {
+  getArticle(slug: Slug): ArticleResponse {
     return axios.$get(`/articles/${slug}`)
   },
   getArticleList({
@@ -29,7 +31,7 @@ export const articleRepository = (axios: NuxtAxiosInstance) => ({
     favorited,
     limit = 20,
     offset = 0,
-  }: ArticleListRequest = {}) {
+  }: ArticleListRequest = {}): ArticleListResponse {
     const defaultParam = {
       ...(tag && { tag }),
       ...(author && { author }),
@@ -42,33 +44,32 @@ export const articleRepository = (axios: NuxtAxiosInstance) => ({
       params: { ...defaultParam, limit, offset },
     })
   },
-  getFeedArticleList(params: FeedArticleListRequest) {
+  getFeedArticleList(params: FeedArticleListRequest): ArticleListResponse {
     // Can also take limit and offset query parameters like List Articles
     // Authentication required, will return multiple articles created by followed users, ordered by most recent first.
     return axios.$get('/articles/feed', { params })
   },
-  getSlugArticleList(slug: Slug) {
+  getSlugArticleList(slug: Slug): ArticleResponse {
     // No authentication required, will return single article
     return axios.$get(`/articles/feed/${slug}`)
   },
-  createArticle(payload: CreateArticleRequest) {
+  createArticle(payload: CreateArticleRequest): ArticleResponse {
     // Authentication required, will return an Article
     return axios.$post('/articles', payload)
   },
-  updateArticle(payload: UpdateArticleRequest) {
+  updateArticle(payload: UpdateArticleRequest): ArticleResponse {
     // Authentication required, returns the updated Article
     return axios.$put('/articles', payload)
   },
   deleteArticle(slug: Slug) {
-    // Authentication required, returns the updated Article
-    // Optional fields: title, description, body
+    // Authentication required
     return axios.$delete(`/articles/${slug}`)
   },
-  favoriteArticle(slug: Slug) {
+  favoriteArticle(slug: Slug): ArticleResponse {
     // Authentication required, returns the Article
     return axios.$post(`/articles/${slug}/favorite`)
   },
-  unFavoriteArticle(slug: Slug) {
+  unFavoriteArticle(slug: Slug): ArticleResponse {
     // Authentication required, returns the Article
     return axios.$delete(`/articles/${slug}/favorite`)
   },
