@@ -1,11 +1,11 @@
 <template>
   <div v-if="!fetchState.pending && !fetchState.error">
     <div class="article-page">
-      <ArticleBanner :author="article.author" :created-at="article.createdAt">
+      <article-banner :author="article.author" :created-at="article.createdAt">
         <template v-slot:title>
           {{ article.title }}
         </template>
-      </ArticleBanner>
+      </article-banner>
       <div class="container page">
         <div class="row article-content">
           <div class="col-xs-12">
@@ -28,8 +28,8 @@
         <div class="article-actions"></div>
         <div class="row">
           <div class="col-xs-12 col-md-8 offset-md-2">
-            <CommentEditor />
-            <CommentCardList
+            <comment-editor />
+            <comment-card-list
               v-if="commentList.length"
               :comment-list="commentList"
             />

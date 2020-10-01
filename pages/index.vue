@@ -9,12 +9,12 @@
     <div class="container">
       <div class="row">
         <div class="col-md-9">
-          <FeedToggle />
-          <ArticlePreviewList :article-list="articleList" />
-          <Pagination />
+          <feed-toggle />
+          <article-preview-list :article-list="articleList" />
+          <pagination />
         </div>
         <div class="col-md-3">
-          <PopularTagList
+          <popular-tag-list
             :tag-list="tagList"
             @on-click-tag="getArticleListByTag"
           />
@@ -37,6 +37,7 @@ import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
 import FeedToggle from '~/components/FeedToggle.vue'
 import Pagination from '~/components/Pagination.vue'
 import PopularTagList from '~/components/PopularTagList.vue'
+
 import { Article, Tag } from '~/types'
 
 type State = {
