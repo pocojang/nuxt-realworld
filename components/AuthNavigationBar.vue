@@ -18,7 +18,7 @@
             </nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link to="/userName" class="nav-link">
+            <nuxt-link to="/profile/userName" class="nav-link">
               <img
                 src="https://avatars0.githubusercontent.com/u/68723614?s=400&amp;u=9676acd378ca0802e86a17f845a536af648497e0&amp;v=4"
                 class="user-pic"

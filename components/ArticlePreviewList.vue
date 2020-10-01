@@ -6,11 +6,11 @@
       class="article-preview"
     >
       <div class="article-meta">
-        <nuxt-link :to="`/${article.author.username}`">
+        <nuxt-link :to="`/profile/${article.author.username}`">
           <img :src="article.author.image" alt="author profile image" />
         </nuxt-link>
         <div class="info">
-          <nuxt-link :to="`/${article.author.username}`" class="author">
+          <nuxt-link :to="`/profile/${article.author.username}`" class="author">
             {{ article.author.username }}</nuxt-link
           >
           <span class="date">{{ new Date(article.createdAt) }}</span>

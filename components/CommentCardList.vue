@@ -5,16 +5,21 @@
         <p class="card-text">{{ comment.body }}</p>
       </div>
       <div class="card-footer">
-        <nuxt-link :to="`/${comment.author.username}`" class="comment-author">
+        <nuxt-link
+          :to="`/profile/${comment.author.username}`"
+          class="comment-author"
+        >
           <img
             :src="comment.author.image"
             class="comment-author-img"
             alt="author profile image"
           />
         </nuxt-link>
-        <nuxt-link :to="`/${comment.author.username}`" class="comment-author">{{
-          comment.author.username
-        }}</nuxt-link>
+        <nuxt-link
+          :to="`/profile/${comment.author.username}`"
+          class="comment-author"
+          >{{ comment.author.username }}</nuxt-link
+        >
         <span class="date-posted">{{ comment.createdAt }}</span>
         <span class="mod-options">
           <i class="ion-trash-a"></i>
