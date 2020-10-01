@@ -1,12 +1,12 @@
 <template>
   <div v-if="!fetchState.pending && !fetchState.error" class="profile-page">
-    <ProfileBanner :profile="profile" />
+    <profile-banner :profile="profile" />
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-md-10 offset-md-1">
-          <FeedToggle />
+          <feed-toggle />
           <div>
-            <ArticlePreviewList :article-list="articleList" />
+            <article-preview-list :article-list="articleList" />
           </div>
         </div>
       </div>

@@ -15,12 +15,10 @@
           >
           <span class="date">{{ new Date(article.createdAt) }}</span>
         </div>
-        <div class="pull-xs-right">
-          <button class="btn btn-sm btn-outline-primary">
-            <i class="ion-heart" />
-            {{ article.favoritesCount }}
-          </button>
-        </div>
+        <button class="btn btn-outline-primary btn-sm pull-xs-right">
+          <i class="ion-heart" />
+          {{ article.favoritesCount }}
+        </button>
       </div>
       <nuxt-link :to="`/article/${article.slug}`" class="preview-link">
         <h1>{{ article.title }}</h1>
