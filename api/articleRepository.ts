@@ -1,5 +1,12 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-import { Article, Author, Tag, ResponseType, OptionalPick } from '~/types'
+import {
+  Article,
+  Author,
+  Tag,
+  ResponseType,
+  OptionalPick,
+  ResponseTypes,
+} from '~/types'
 
 type Slug = Article['slug']
 type UserName = Author['username']
@@ -21,7 +28,10 @@ interface ArticleListRequest extends FeedArticleListRequest {
 }
 
 type ArticleResponse = ResponseType<'article', Article>
-type ArticleListResponse = ResponseType<'articles', Article[]>
+type ArticleListResponse = ResponseTypes<{
+  articles: Article[]
+  articlesCount: number
+}>
 
 export const articleRepository = (axios: NuxtAxiosInstance) => ({
   getArticle(slug: Slug): ArticleResponse {
