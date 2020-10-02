@@ -44,3 +44,7 @@ export interface Comment {
 }
 
 export type ResponseType<K extends string, V> = Promise<{ [P in K]: V }>
+
+export type OptionalPick<T, K extends keyof T> = Pick<Partial<T>, K>
+
+export type Optional<T, K extends keyof T> = OptionalPick<T, K> & Omit<T, K>

@@ -1,5 +1,5 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-import { Article, Author, Tag, ResponseType } from '~/types'
+import { Article, Author, Tag, ResponseType, OptionalPick } from '~/types'
 
 type Slug = Article['slug']
 type UserName = Author['username']
@@ -8,10 +8,12 @@ type FeedArticleListRequest = {
   offset?: number
 }
 type CreateArticleRequest = Pick<Article, 'title' | 'description' | 'body'> &
-  Pick<Partial<Article>, 'tagList'>
-type UpdateArticleRequest = Partial<
-  Pick<Article, 'title' | 'description' | 'body'>
+  OptionalPick<Article, 'tagList'>
+type UpdateArticleRequest = OptionalPick<
+  Article,
+  'title' | 'description' | 'body'
 >
+
 interface ArticleListRequest extends FeedArticleListRequest {
   tag?: Tag
   author?: UserName

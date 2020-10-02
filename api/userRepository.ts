@@ -1,9 +1,12 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-import { User, ResponseType } from '~/types'
+import { User, ResponseType, OptionalPick } from '~/types'
 
 type AuthLoginRequest = Pick<User, 'email'> & { password: string }
 type AuthRegisterRequest = AuthLoginRequest & Pick<User, 'username'>
-type UpdateUserRequest = User & Pick<Partial<User>, 'email' | 'bio' | 'image'>
+type UpdateUserRequest = OptionalPick<
+  User,
+  'email' | 'username' | 'bio' | 'image'
+> & { password?: string }
 type UserResponse = ResponseType<'user', User>
 
 export const userRepository = (axios: NuxtAxiosInstance) => ({
