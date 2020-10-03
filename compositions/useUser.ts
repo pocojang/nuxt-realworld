@@ -14,18 +14,19 @@ const state = reactive({
 export default function useUser() {
   const { $repository, $axios } = useContext()
 
-  const fetchAuthLogin = async (payload: AuthLoginRequest) => {
-    if (!payload.email || !payload.password) {
+  const fetchAuthLogin = async ({ email, password }: AuthLoginRequest) => {
+    if (!email || !password) {
       return
     }
 
     const response = await $repository.user.authLogin({
-      email: payload.email,
-      password: payload.password,
+      email,
+      password,
     })
 
     if (response.user) {
-      $axios.setToken(response.user.token, 'token')
+      $axios.setToken(response.user.token, 'Token')
+
       state.user = response.user
     }
   }
