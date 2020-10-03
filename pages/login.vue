@@ -7,29 +7,31 @@
           <p class="text-xs-center">
             <nuxt-link to="/register">Need an account?</nuxt-link>
           </p>
-          <form>
-            <fieldset>
-              <fieldset class="form-group">
-                <input
-                  type="email"
-                  class="form-control form-control-lg"
-                  placeholder="Email"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <input
-                  type="password"
-                  class="form-control form-control-lg"
-                  placeholder="Password"
-                />
-              </fieldset>
-              <button
-                class="btn btn-lg btn-primary pull-xs-right"
-                type="submit"
-              >
-                Sign in
-              </button>
+
+          <ul class="error-messages">
+            <li>That email is already taken</li>
+          </ul>
+
+          <form @submit.prevent="handleLogin">
+            <fieldset class="form-group">
+              <input
+                v-model="email"
+                type="email"
+                class="form-control form-control-lg"
+                placeholder="Email"
+              />
             </fieldset>
+            <fieldset class="form-group">
+              <input
+                v-model="password"
+                type="password"
+                class="form-control form-control-lg"
+                placeholder="Password"
+              />
+            </fieldset>
+            <button class="btn btn-lg btn-primary pull-xs-right" type="submit">
+              Sign in
+            </button>
           </form>
         </div>
       </div>
@@ -38,7 +40,43 @@
 </template>
 
 <script lang="ts">
-export default {
-  name: 'Login',
-}
+import {
+  defineComponent,
+  reactive,
+  useContext,
+  toRefs,
+} from '@nuxtjs/composition-api'
+import useUser from '~/compositions/useUser'
+
+/**
+ * TODO: WIP
+ *
+ * 1. Validation
+ * 2. Fail => View
+ * 3. Success => Redirect to login before page & Persist Storage & User Info
+ * 4. Duplicated
+ */
+export default defineComponent({
+  name: 'LoginPage',
+  setup() {
+    const { fetchAuthLogin } = useUser()
+    const { redirect } = useContext()
+
+    const state = reactive({
+      email: '',
+      password: '',
+    })
+
+    // TODO: Always Success
+    const handleLogin = () => {
+      fetchAuthLogin(state)
+      redirect('/')
+    }
+
+    return {
+      ...toRefs(state),
+      handleLogin,
+    }
+  },
+})
 </script>

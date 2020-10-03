@@ -1,15 +1,12 @@
-import { useContext } from '@nuxtjs/composition-api'
-import Vue from 'vue'
+import { computed, reactive, useContext, toRef } from '@nuxtjs/composition-api'
+import { AuthLoginRequest } from '~/api'
 
-const observable = Vue.observable({
+const state = reactive({
   user: {
     bio: '',
-    createdAt: '',
     email: '',
-    id: -1,
     image: '',
     token: '',
-    updatedAt: '',
     username: '',
   },
 })
@@ -17,7 +14,7 @@ const observable = Vue.observable({
 export default function useUser() {
   const { $repository, $axios } = useContext()
 
-  const fetchAuthLogin = async (payload: any) => {
+  const fetchAuthLogin = async (payload: AuthLoginRequest) => {
     if (!payload.email || !payload.password) {
       return
     }
@@ -29,13 +26,13 @@ export default function useUser() {
 
     if (response.user) {
       $axios.setToken(response.user.token, 'token')
-
-      observable.user = response.user
+      state.user = response.user
     }
   }
 
   return {
-    user: observable.user,
+    user: toRef(state, 'user'),
+    isLogin: computed(() => !!state.user.token),
     fetchAuthLogin,
   }
 }

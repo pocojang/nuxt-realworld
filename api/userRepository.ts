@@ -1,7 +1,7 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import { User, ResponseType, OptionalPick } from '~/types'
 
-type AuthLoginRequest = Pick<User, 'email'> & { password: string }
+export type AuthLoginRequest = Pick<User, 'email'> & { password: string }
 type AuthRegisterRequest = AuthLoginRequest & Pick<User, 'username'>
 type UpdateUserRequest = OptionalPick<
   User,
