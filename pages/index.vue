@@ -20,13 +20,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  useContext,
-  reactive,
-  toRef,
-  useFetch,
-} from '@nuxtjs/composition-api'
+import { defineComponent, toRef, useFetch } from '@nuxtjs/composition-api'
 
 import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
 import Banner from '~/components/Banner.vue'
@@ -34,13 +28,8 @@ import FeedTabNavigation from '~/components/FeedTabNavigation.vue'
 import Pagination from '~/components/Pagination.vue'
 import PopularTagList from '~/components/PopularTagList.vue'
 import useArticle from '~/compositions/useArticle'
+import useTag from '~/compositions/useTag'
 import useUser from '~/compositions/useUser'
-
-import { Tag } from '~/types'
-
-type State = {
-  tagList: Tag[]
-}
 
 export default defineComponent({
   name: 'IndexPage',
@@ -52,32 +41,24 @@ export default defineComponent({
     PopularTagList,
   },
   setup() {
-    const { $repository } = useContext()
     const { isLogin } = useUser()
     const {
       state: articleState,
       getArticleList,
       getArticleListByTag,
     } = useArticle()
-
-    const state = reactive<State>({
-      tagList: [],
-    })
+    const { state: tagState, getTagList } = useTag()
 
     useFetch(async () => {
-      const { tags } = await $repository.tag.getTagList()
       await getArticleList()
-
-      state.tagList = tags.filter((tag: Tag) =>
-        String(tag).replace(/[\u200B-\u200D\uFEFF]/g, '')
-      )
+      await getTagList()
     })
 
     console.log(isLogin)
 
     return {
       articleList: toRef(articleState, 'articleList'),
-      tagList: toRef(state, 'tagList'),
+      tagList: toRef(tagState, 'tagList'),
       getArticleListByTag,
       isLogin,
     }
