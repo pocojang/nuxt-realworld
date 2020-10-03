@@ -29,7 +29,7 @@ import {
   defineComponent,
   useContext,
   reactive,
-  toRefs,
+  toRef,
   useFetch,
 } from '@nuxtjs/composition-api'
 
@@ -88,7 +88,8 @@ export default defineComponent({
     }
 
     return {
-      ...toRefs(state),
+      articleList: toRef(state, 'articleList'),
+      tagList: toRef(state, 'tagList'),
       getArticleListByTag,
     }
   },

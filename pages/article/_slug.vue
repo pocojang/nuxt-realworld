@@ -45,7 +45,7 @@ import {
   defineComponent,
   useContext,
   reactive,
-  toRefs,
+  toRef,
   useFetch,
 } from '@nuxtjs/composition-api'
 
@@ -87,7 +87,8 @@ export default defineComponent({
     })
 
     return {
-      ...toRefs(state),
+      article: toRef(state, 'article'),
+      commentList: toRef(state, 'commentList'),
       fetchState,
     }
   },
