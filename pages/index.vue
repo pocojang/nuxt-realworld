@@ -1,15 +1,10 @@
 <template>
   <div class="home-page">
-    <div class="banner">
-      <div class="container">
-        <h1 class="logo-font">conduit</h1>
-        <p>A place to share your knowledge.</p>
-      </div>
-    </div>
+    <Banner v-if="!isLogin" />
     <div class="container">
       <div class="row">
         <div class="col-md-9">
-          <feed-toggle />
+          <feed-tab-navigation :is-login="isLogin" />
           <article-preview-list :article-list="articleList" />
           <pagination />
         </div>
@@ -34,63 +29,57 @@ import {
 } from '@nuxtjs/composition-api'
 
 import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
-import FeedToggle from '~/components/FeedToggle.vue'
+import Banner from '~/components/Banner.vue'
+import FeedTabNavigation from '~/components/FeedTabNavigation.vue'
 import Pagination from '~/components/Pagination.vue'
 import PopularTagList from '~/components/PopularTagList.vue'
+import useArticle from '~/compositions/useArticle'
+import useUser from '~/compositions/useUser'
 
-import { Article, Tag } from '~/types'
+import { Tag } from '~/types'
 
 type State = {
-  articleList: Article[]
   tagList: Tag[]
-  articleCount: number
 }
 
 export default defineComponent({
   name: 'IndexPage',
   components: {
     ArticlePreviewList,
-    FeedToggle,
+    Banner,
+    FeedTabNavigation,
     Pagination,
     PopularTagList,
   },
   setup() {
+    const { $repository } = useContext()
+    const { isLogin } = useUser()
+    const {
+      state: articleState,
+      getArticleList,
+      getArticleListByTag,
+    } = useArticle()
+
     const state = reactive<State>({
-      articleList: [],
       tagList: [],
-      articleCount: 0,
     })
 
-    const { $repository } = useContext()
-
     useFetch(async () => {
-      const {
-        articles,
-        articlesCount,
-      } = await $repository.article.getArticleList()
       const { tags } = await $repository.tag.getTagList()
+      await getArticleList()
 
-      state.articleList = articles
-      state.articleCount = articlesCount
       state.tagList = tags.filter((tag: Tag) =>
         String(tag).replace(/[\u200B-\u200D\uFEFF]/g, '')
       )
     })
 
-    const getArticleListByTag = async (tag: Tag) => {
-      const {
-        articles,
-        articlesCount,
-      } = await $repository.article.getArticleList({ tag })
-
-      state.articleList = articles
-      state.articleCount = articlesCount
-    }
+    console.log(isLogin)
 
     return {
-      articleList: toRef(state, 'articleList'),
+      articleList: toRef(articleState, 'articleList'),
       tagList: toRef(state, 'tagList'),
       getArticleListByTag,
+      isLogin,
     }
   },
 })
