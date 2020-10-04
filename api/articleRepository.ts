@@ -21,7 +21,7 @@ type UpdateArticleRequest = OptionalPick<
   'title' | 'description' | 'body'
 >
 
-interface ArticleListRequest extends FeedArticleListRequest {
+export interface ArticleListRequest extends FeedArticleListRequest {
   tag?: Tag
   author?: UserName
   favorited?: UserName

@@ -1,4 +1,5 @@
 import { reactive, useContext } from '@nuxtjs/composition-api'
+import { ArticleListRequest } from '~/api/articleRepository'
 import { Article, Tag } from '~/types'
 
 type State = {
@@ -20,11 +21,11 @@ const setFeedType = (type: State['feedType']) => {
 export default function useArticle() {
   const { $repository } = useContext()
 
-  const getArticleList = async () => {
+  const getArticleList = async (payload: ArticleListRequest = {}) => {
     const {
       articles,
       articlesCount,
-    } = await $repository.article.getArticleList()
+    } = await $repository.article.getArticleList(payload)
 
     state.articleList = articles
     state.articleCount = articlesCount
