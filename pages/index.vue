@@ -4,7 +4,11 @@
     <div class="container">
       <div class="row">
         <div class="col-md-9">
-          <feed-tab-navigation :is-login="isLogin" />
+          <feed-tab-navigation
+            :is-login="isLogin"
+            :feed-type="feedType"
+            @handle-feed-toggle="handleFeedToggle"
+          />
           <article-preview-list :article-list="articleList" />
           <pagination />
         </div>
@@ -45,22 +49,29 @@ export default defineComponent({
     const {
       state: articleState,
       getArticleList,
+      getFeedArticleList,
       getArticleListByTag,
+      handleFeedToggle,
     } = useArticle()
     const { state: tagState, getTagList } = useTag()
 
     useFetch(async () => {
-      await getArticleList()
+      if (articleState.feedType === 'YOUR') {
+        await getFeedArticleList()
+      } else {
+        await getArticleList()
+      }
+
       await getTagList()
     })
-
-    console.log(isLogin)
 
     return {
       articleList: toRef(articleState, 'articleList'),
       tagList: toRef(tagState, 'tagList'),
+      feedType: toRef(articleState, 'feedType'),
       getArticleListByTag,
       isLogin,
+      handleFeedToggle,
     }
   },
 })

@@ -4,12 +4,18 @@ import { Article, Tag } from '~/types'
 type State = {
   articleList: Article[]
   articleCount: number
+  feedType: 'GLOBAL' | 'YOUR'
 }
 
 const state = reactive<State>({
   articleList: [],
   articleCount: 0,
+  feedType: 'GLOBAL',
 })
+
+const setFeedType = (type: State['feedType']) => {
+  state.feedType = type
+}
 
 export default function useArticle() {
   const { $repository } = useContext()
@@ -19,6 +25,16 @@ export default function useArticle() {
       articles,
       articlesCount,
     } = await $repository.article.getArticleList()
+
+    state.articleList = articles
+    state.articleCount = articlesCount
+  }
+
+  const getFeedArticleList = async () => {
+    const {
+      articles,
+      articlesCount,
+    } = await $repository.article.getFeedArticleList()
 
     state.articleList = articles
     state.articleCount = articlesCount
@@ -34,9 +50,23 @@ export default function useArticle() {
     state.articleCount = articlesCount
   }
 
+  const handleFeedToggle = async (feedType: 'GLOBAL' | 'YOUR') => {
+    const fetchArticleBy = {
+      GLOBAL: getArticleList,
+      YOUR: getFeedArticleList,
+    }
+
+    await fetchArticleBy[feedType]()
+
+    setFeedType(feedType)
+  }
+
   return {
     state,
     getArticleList,
+    getFeedArticleList,
     getArticleListByTag,
+    handleFeedToggle,
+    setFeedType,
   }
 }
