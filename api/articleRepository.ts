@@ -76,11 +76,9 @@ export const articleRepository = (axios: NuxtAxiosInstance) => ({
     return axios.$delete(`/articles/${slug}`)
   },
   favoriteArticle(slug: Slug): ArticleResponse {
-    // Authentication required, returns the Article
     return axios.$post(`/articles/${slug}/favorite`)
   },
   unFavoriteArticle(slug: Slug): ArticleResponse {
-    // Authentication required, returns the Article
     return axios.$delete(`/articles/${slug}/favorite`)
   },
 })
