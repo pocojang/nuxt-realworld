@@ -1,6 +1,6 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import { reactive, useContext, toRef } from '@nuxtjs/composition-api'
-import { AuthLoginRequest, AuthRegisterRequest } from '~/api'
+import { AuthLoginRequest, AuthRegisterRequest, UpdateUserRequest } from '~/api'
 import { User } from '~/types'
 
 type State = {
@@ -70,6 +70,18 @@ export default function useUser() {
     return false
   }
 
+  const fetchUpdateUser = async (payload: UpdateUserRequest) => {
+    const response = await $repository.user.updateUser(payload)
+
+    if (response.user) {
+      state.user = response.user
+
+      return true
+    }
+
+    return false
+  }
+
   const authLogout = () => {
     $axios.setToken(false)
 
@@ -88,6 +100,7 @@ export default function useUser() {
     isLogin: toRef(state, 'isLogin'),
     fetchAuthLogin,
     fetchAuthRegister,
+    fetchUpdateUser,
     authLogout,
   }
 }

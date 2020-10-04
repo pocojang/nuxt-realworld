@@ -4,10 +4,11 @@
       <div class="row">
         <div class="col-md-6 offset-md-3 col-xs-12">
           <h1 class="text-xs-center">Your Settings</h1>
-          <form>
+          <form @submit.prevent="onSubmitUpdate">
             <fieldset>
               <fieldset class="form-group">
                 <input
+                  v-model="image"
                   type="text"
                   class="form-control"
                   placeholder="URL of profile picture"
@@ -15,6 +16,7 @@
               </fieldset>
               <fieldset class="form-group">
                 <input
+                  v-model="userName"
                   type="text"
                   class="form-control form-control-lg"
                   placeholder="Username"
@@ -22,6 +24,7 @@
               </fieldset>
               <fieldset class="form-group">
                 <textarea
+                  v-model="bio"
                   class="form-control form-control-lg"
                   rows="8"
                   placeholder="Short bio about you"
@@ -29,6 +32,7 @@
               </fieldset>
               <fieldset class="form-group">
                 <input
+                  v-model="email"
                   type="email"
                   class="form-control form-control-lg"
                   placeholder="Email"
@@ -36,6 +40,7 @@
               </fieldset>
               <fieldset class="form-group">
                 <input
+                  v-model="password"
                   type="password"
                   class="form-control form-control-lg"
                   placeholder="New Password"
@@ -44,6 +49,7 @@
               <button
                 class="btn btn-lg btn-primary pull-xs-right"
                 type="submit"
+                @click.prevent="onSubmitUpdate"
               >
                 Update Settings
               </button>
@@ -60,23 +66,56 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useContext } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  reactive,
+  useContext,
+  toRefs,
+  useFetch,
+} from '@nuxtjs/composition-api'
+import useArticle from '~/compositions/useArticle'
 import useUser from '~/compositions/useUser'
 
 export default defineComponent({
   name: 'SettingsPage',
   setup() {
     const { redirect } = useContext()
-    const { authLogout } = useUser()
+    const { setFeedType } = useArticle()
+    const { user, fetchUpdateUser, authLogout } = useUser()
+
+    const state = reactive({
+      userName: '',
+      email: '',
+      password: '',
+      bio: '',
+      image: '',
+    })
+
+    useFetch(() => {
+      const userInfo = user.value
+
+      state.userName = userInfo.username
+      state.email = userInfo.email
+      state.bio = userInfo.bio
+      state.image = userInfo.image
+    })
+
+    const onSubmitUpdate = async () => {
+      const isOK = await fetchUpdateUser({ ...state, username: state.userName })
+
+      if (isOK) {
+        setFeedType('YOUR')
+        await redirect('/')
+      }
+    }
 
     const onLogout = () => {
       authLogout()
+      setFeedType('GLOBAL')
       redirect('/')
     }
 
-    return {
-      onLogout,
-    }
+    return { ...toRefs(state), onSubmitUpdate, onLogout }
   },
 })
 </script>

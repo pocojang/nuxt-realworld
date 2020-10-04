@@ -3,7 +3,7 @@ import { User, ResponseType, OptionalPick } from '~/types'
 
 export type AuthLoginRequest = Pick<User, 'email'> & { password: string }
 export type AuthRegisterRequest = AuthLoginRequest & Pick<User, 'username'>
-type UpdateUserRequest = OptionalPick<
+export type UpdateUserRequest = OptionalPick<
   User,
   'email' | 'username' | 'bio' | 'image'
 > & { password?: string }
@@ -20,9 +20,7 @@ export const userRepository = (axios: NuxtAxiosInstance) => ({
     // Authentication required, returns a User that's the current user
     return axios.$get('/user')
   },
-  // Accepted fields: email, username, password, image, bio
   updateUser(payload: UpdateUserRequest): UserResponse {
-    // Authentication required, returns the User
     return axios.$put('/user', payload)
   },
 })
