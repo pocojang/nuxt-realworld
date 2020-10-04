@@ -1,6 +1,9 @@
 import { reactive, useContext } from '@nuxtjs/composition-api'
 import useUser from './useUser'
-import { ArticleListRequest } from '~/api/articleRepository'
+import {
+  ArticleListRequest,
+  CreateArticleRequest,
+} from '~/api/articleRepository'
 import { Article, Tag, User } from '~/types'
 
 type FeedType = 'GLOBAL' | 'YOUR'
@@ -62,6 +65,16 @@ export default function useArticle() {
     state.articleCount = articlesCount
   }
 
+  const createArticle = async (payload: CreateArticleRequest) => {
+    const response = await $repository.article.createArticle(payload)
+
+    if (response) {
+      return response.article.slug
+    }
+
+    return false
+  }
+
   const handleFeedToggle = async (listType: FeedType) => {
     const fetchArticleBy = {
       GLOBAL: getArticleList,
@@ -113,6 +126,7 @@ export default function useArticle() {
     getArticleList,
     getFeedArticleList,
     getArticleListByTag,
+    createArticle,
     handleFeedToggle,
     handlePostToggle,
     fetchToggleFavorite,

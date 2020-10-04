@@ -14,7 +14,10 @@ type FeedArticleListRequest = {
   limit?: number
   offset?: number
 }
-type CreateArticleRequest = Pick<Article, 'title' | 'description' | 'body'> &
+export type CreateArticleRequest = Pick<
+  Article,
+  'title' | 'description' | 'body'
+> &
   OptionalPick<Article, 'tagList'>
 type UpdateArticleRequest = OptionalPick<
   Article,
@@ -62,8 +65,7 @@ export const articleRepository = (axios: NuxtAxiosInstance) => ({
     return axios.$get(`/articles/feed/${slug}`)
   },
   createArticle(payload: CreateArticleRequest): ArticleResponse {
-    // Authentication required, will return an Article
-    return axios.$post('/articles', payload)
+    return axios.$post('/articles', { article: payload })
   },
   updateArticle(payload: UpdateArticleRequest): ArticleResponse {
     // Authentication required, returns the updated Article
