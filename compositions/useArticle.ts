@@ -29,8 +29,8 @@ const setPostType = (type: PostType) => {
 }
 
 export default function useArticle() {
-  const { $repository } = useContext()
-  const { user } = useUser()
+  const { $repository, redirect } = useContext()
+  const { user, isLogin } = useUser()
 
   const getArticleList = async (payload: ArticleListRequest = {}) => {
     const {
@@ -82,6 +82,12 @@ export default function useArticle() {
   }
 
   const fetchToggleFavorite = async (articleIndex: number) => {
+    if (!isLogin.value) {
+      redirect('/login')
+
+      return
+    }
+
     const selectedArticle = state.articleList[articleIndex]
     const response = selectedArticle?.favorited
       ? await $repository.article.unFavoriteArticle(selectedArticle.slug)
