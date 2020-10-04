@@ -15,7 +15,14 @@
           >
           <span class="date">{{ new Date(article.createdAt) }}</span>
         </div>
-        <button class="btn btn-outline-primary btn-sm pull-xs-right">
+        <button
+          class="btn btn-sm pull-xs-right"
+          :class="{
+            'btn-outline-primary': !article.favorited,
+            'btn-primary': article.favorited,
+          }"
+          @click="fetchToggleFavorite(articleIndex)"
+        >
           <i class="ion-heart" />
           {{ article.favoritesCount }}
         </button>
@@ -40,8 +47,10 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropOptions } from 'vue'
+import { PropType } from 'vue'
+import { defineComponent } from '@nuxtjs/composition-api'
 import { Article } from '~/types'
+import useArticle from '~/compositions/useArticle'
 
 /**
  * TODO:
@@ -49,14 +58,18 @@ import { Article } from '~/types'
  * 1. createdAt? updatedAt?
  * 2. Date Format
  */
-export default Vue.extend({
+export default defineComponent({
   name: 'ArticlePreviewList',
   props: {
     articleList: {
-      type: Array,
+      type: Array as () => PropType<Article[]>,
       required: false,
-      default: () => [],
-    } as PropOptions<Article[]>,
+    },
+  },
+  setup() {
+    const { fetchToggleFavorite } = useArticle()
+
+    return { fetchToggleFavorite }
   },
 })
 </script>

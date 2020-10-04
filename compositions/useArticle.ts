@@ -81,6 +81,21 @@ export default function useArticle() {
     setPostType(postType)
   }
 
+  const fetchToggleFavorite = async (articleIndex: number) => {
+    const selectedArticle = state.articleList[articleIndex]
+    const response = selectedArticle?.favorited
+      ? await $repository.article.unFavoriteArticle(selectedArticle.slug)
+      : await $repository.article.favoriteArticle(selectedArticle.slug)
+
+    if (response.article) {
+      state.articleList = [
+        ...state.articleList.slice(0, articleIndex),
+        response.article,
+        ...state.articleList.slice(articleIndex + 1),
+      ]
+    }
+  }
+
   return {
     state,
     getArticleList,
@@ -88,6 +103,7 @@ export default function useArticle() {
     getArticleListByTag,
     handleFeedToggle,
     handlePostToggle,
+    fetchToggleFavorite,
     setFeedType,
     setPostType,
   }
