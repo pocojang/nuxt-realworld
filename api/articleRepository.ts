@@ -50,15 +50,11 @@ export const articleRepository = (axios: NuxtAxiosInstance) => ({
       ...(favorited && { favorited }),
     }
 
-    // Returns most recent articles globally by default, provide tag, author or favorited query parameter to filter results
-    // Authentication optional, will return multiple articles, ordered by most recent first
     return axios.$get('/articles', {
       params: { ...defaultParam, limit, offset },
     })
   },
   getFeedArticleList(params: FeedArticleListRequest = {}): ArticleListResponse {
-    // Can also take limit and offset query parameters like List Articles
-    // Authentication required, will return multiple articles created by followed users, ordered by most recent first.
     return axios.$get('/articles/feed', { params })
   },
   getSlugArticleList(slug: Slug): ArticleResponse {

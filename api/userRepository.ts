@@ -11,11 +11,9 @@ type UserResponse = ResponseType<'user', User>
 
 export const userRepository = (axios: NuxtAxiosInstance) => ({
   authLogin(payload: AuthLoginRequest): UserResponse {
-    // No authentication required, returns a User
     return axios.$post('/users/login', { user: payload })
   },
   authRegister(payload: AuthRegisterRequest): UserResponse {
-    // No authentication required, returns a User
     return axios.$post(`/users`, { user: payload })
   },
   getCurrentUser(): UserResponse {
