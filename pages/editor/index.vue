@@ -35,8 +35,17 @@
                   type="text"
                   class="form-control"
                   placeholder="Enter tags"
+                  @keydown.enter="onEnterTag"
                 />
-                <div class="tag-list"></div>
+                <div v-if="tagList.length" class="tag-list">
+                  <span
+                    v-for="(tag, index) in tagList"
+                    :key="index"
+                    class="tag-default tag-pill"
+                    ><i class="ion-close-round" @click="removeTag(index)"></i
+                    >{{ tag }}</span
+                  >
+                </div>
               </fieldset>
               <button
                 class="btn btn-lg pull-xs-right btn-primary"
@@ -57,10 +66,14 @@
 import {
   defineComponent,
   reactive,
+  ref,
   toRefs,
   useContext,
 } from '@nuxtjs/composition-api'
+import { CreateArticleRequest } from '~/api/articleRepository'
 import useArticle from '~/compositions/useArticle'
+
+type CreateArticle = Required<CreateArticleRequest>
 
 export default defineComponent({
   name: 'CreateEditorPage',
@@ -68,20 +81,29 @@ export default defineComponent({
     const { redirect } = useContext()
     const { createArticle } = useArticle()
 
-    const state = reactive({
+    const state = reactive<CreateArticle>({
       title: '',
       description: '',
       body: '',
-      inputTag: '',
+      tagList: [],
     })
+    const inputTag = ref('')
+
+    const onEnterTag = () => {
+      if (inputTag.value) {
+        state.tagList.push(inputTag.value)
+
+        inputTag.value = ''
+      }
+    }
+
+    const removeTag = (index: number) => {
+      state.tagList = state.tagList.filter((_, i) => i !== index)
+    }
 
     // TODO: always success
     const onCreateArticle = async () => {
-      const response = await createArticle({
-        title: state.title,
-        description: state.description,
-        body: state.body,
-      })
+      const response = await createArticle(state)
 
       if (!response) {
         return
@@ -92,6 +114,9 @@ export default defineComponent({
 
     return {
       ...toRefs(state),
+      inputTag,
+      onEnterTag,
+      removeTag,
       onCreateArticle,
     }
   },
