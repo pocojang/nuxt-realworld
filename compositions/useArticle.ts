@@ -73,7 +73,7 @@ export default function useArticle() {
     setFeedType(listType)
   }
 
-  const handlePostToggle = async (postType: PostType) => {
+  const handlePostToggle = async (postType: PostType = 'AUTHOR') => {
     await getArticleList({
       [postType.toLowerCase()]: user.value.username,
     })

@@ -71,11 +71,7 @@ export default defineComponent({
     const { params } = useContext()
     const { userName } = params.value
 
-    const {
-      state: articleState,
-      getArticleList,
-      handlePostToggle,
-    } = useArticle()
+    const { state: articleState, handlePostToggle } = useArticle()
     const {
       state: profileState,
       getProfile,
@@ -92,9 +88,7 @@ export default defineComponent({
     )
 
     const { fetchState } = useFetch(async () => {
-      await getArticleList({
-        author: userName,
-      })
+      await handlePostToggle(articleState.postType)
       await getProfile(userName)
     })
 
