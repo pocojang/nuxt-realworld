@@ -1,7 +1,13 @@
-import { computed, reactive, useContext, toRef } from '@nuxtjs/composition-api'
+import { reactive, useContext, toRef } from '@nuxtjs/composition-api'
 import { AuthLoginRequest } from '~/api'
+import { User } from '~/types'
 
-const state = reactive({
+type State = {
+  user: User
+  isLogin: boolean
+}
+
+const state = reactive<State>({
   user: {
     bio: '',
     email: '',
@@ -9,6 +15,7 @@ const state = reactive({
     token: '',
     username: '',
   },
+  isLogin: false,
 })
 
 export default function useUser() {
@@ -27,13 +34,16 @@ export default function useUser() {
     if (response.user) {
       $axios.setToken(response.user.token, 'Token')
 
+      state.isLogin = true
       state.user = response.user
+
+      return true
     }
   }
 
   return {
     user: toRef(state, 'user'),
-    isLogin: computed(() => !!state.user.token),
+    isLogin: toRef(state, 'isLogin'),
     fetchAuthLogin,
   }
 }

@@ -56,7 +56,7 @@ export const articleRepository = (axios: NuxtAxiosInstance) => ({
       params: { ...defaultParam, limit, offset },
     })
   },
-  getFeedArticleList(params: FeedArticleListRequest): ArticleListResponse {
+  getFeedArticleList(params: FeedArticleListRequest = {}): ArticleListResponse {
     // Can also take limit and offset query parameters like List Articles
     // Authentication required, will return multiple articles created by followed users, ordered by most recent first.
     return axios.$get('/articles/feed', { params })
