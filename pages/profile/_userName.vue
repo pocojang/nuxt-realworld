@@ -33,7 +33,7 @@
           <tab-navigation
             :tab-type="postType"
             :tab-items="tabItems"
-            @on-click-tab="handlePostToggle"
+            @on-click-tab="onChangeTab"
           />
           <div>
             <article-preview-list :article-list="articleList" />
@@ -52,11 +52,12 @@ import {
   useContext,
   useFetch,
 } from '@nuxtjs/composition-api'
-import useArticle from '~/compositions/useArticle'
+import useArticle, { PostType } from '~/compositions/useArticle'
 
 import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
 import TabNavigation from '~/components/TabNavigation.vue'
 import ProfileBanner from '~/components/ProfileBanner.vue'
+
 import useUser from '~/compositions/useUser'
 import useProfile from '~/compositions/useProfile'
 
@@ -88,7 +89,7 @@ export default defineComponent({
     )
 
     const { fetchState } = useFetch(async () => {
-      await handlePostToggle(articleState.postType)
+      await handlePostToggle({ userName, postType: articleState.postType })
       await getProfile(userName)
     })
 
@@ -100,13 +101,17 @@ export default defineComponent({
       }
     }
 
+    const onChangeTab = async (postType: PostType) => {
+      await handlePostToggle({ userName, postType })
+    }
+
     return {
       articleList: toRef(articleState, 'articleList'),
       profile: toRef(profileState, 'profile'),
       postType: toRef(articleState, 'postType'),
       tabItems,
       fetchState,
-      handlePostToggle,
+      onChangeTab,
       isLogin,
       isFollowing,
       isMyProfile,

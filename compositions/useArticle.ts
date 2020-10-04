@@ -1,10 +1,10 @@
 import { reactive, useContext } from '@nuxtjs/composition-api'
 import useUser from './useUser'
 import { ArticleListRequest } from '~/api/articleRepository'
-import { Article, Tag } from '~/types'
+import { Article, Tag, User } from '~/types'
 
 type FeedType = 'GLOBAL' | 'YOUR'
-type PostType = 'AUTHOR' | 'FAVORITED'
+export type PostType = 'AUTHOR' | 'FAVORITED'
 
 type State = {
   articleList: Article[]
@@ -30,7 +30,7 @@ const setPostType = (type: PostType) => {
 
 export default function useArticle() {
   const { $repository, redirect } = useContext()
-  const { user, isLogin } = useUser()
+  const { isLogin } = useUser()
 
   const getArticleList = async (payload: ArticleListRequest = {}) => {
     const {
@@ -73,9 +73,15 @@ export default function useArticle() {
     setFeedType(listType)
   }
 
-  const handlePostToggle = async (postType: PostType = 'AUTHOR') => {
+  const handlePostToggle = async ({
+    userName,
+    postType = 'AUTHOR',
+  }: {
+    userName: User['username']
+    postType: PostType
+  }) => {
     await getArticleList({
-      [postType.toLowerCase()]: user.value.username,
+      [postType.toLowerCase()]: userName,
     })
 
     setPostType(postType)
