@@ -4,10 +4,10 @@
     <div class="container">
       <div class="row">
         <div class="col-md-9">
-          <feed-tab-navigation
-            :is-login="isLogin"
-            :feed-type="feedType"
-            @handle-feed-toggle="handleFeedToggle"
+          <tab-navigation
+            :tab-type="feedType"
+            :tab-items="tabItems"
+            @on-click-tab="handleFeedToggle"
           />
           <article-preview-list :article-list="articleList" />
           <pagination />
@@ -28,7 +28,7 @@ import { defineComponent, toRef, useFetch } from '@nuxtjs/composition-api'
 
 import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
 import Banner from '~/components/Banner.vue'
-import FeedTabNavigation from '~/components/FeedTabNavigation.vue'
+import TabNavigation from '~/components/TabNavigation.vue'
 import Pagination from '~/components/Pagination.vue'
 import PopularTagList from '~/components/PopularTagList.vue'
 import useArticle from '~/compositions/useArticle'
@@ -40,7 +40,7 @@ export default defineComponent({
   components: {
     ArticlePreviewList,
     Banner,
-    FeedTabNavigation,
+    TabNavigation,
     Pagination,
     PopularTagList,
   },
@@ -69,10 +69,26 @@ export default defineComponent({
       articleList: toRef(articleState, 'articleList'),
       tagList: toRef(tagState, 'tagList'),
       feedType: toRef(articleState, 'feedType'),
+      tabItems: isLogin.value
+        ? [
+            {
+              type: 'YOUR',
+              name: 'Your Feed',
+            },
+            ...tabItems,
+          ]
+        : tabItems,
       getArticleListByTag,
       isLogin,
       handleFeedToggle,
     }
   },
 })
+
+const tabItems = [
+  {
+    type: 'GLOBAL',
+    name: 'Global Feed',
+  },
+]
 </script>

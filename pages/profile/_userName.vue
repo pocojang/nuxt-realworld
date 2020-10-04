@@ -30,7 +30,11 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-md-10 offset-md-1">
-          <feed-tab-navigation />
+          <tab-navigation
+            :tab-type="postType"
+            :tab-items="tabItems"
+            @on-click-tab="handlePostToggle"
+          />
           <div>
             <article-preview-list :article-list="articleList" />
           </div>
@@ -51,7 +55,7 @@ import {
 import useArticle from '~/compositions/useArticle'
 
 import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
-import FeedTabNavigation from '~/components/FeedTabNavigation.vue'
+import TabNavigation from '~/components/TabNavigation.vue'
 import ProfileBanner from '~/components/ProfileBanner.vue'
 import useUser from '~/compositions/useUser'
 import useProfile from '~/compositions/useProfile'
@@ -60,14 +64,18 @@ export default defineComponent({
   name: 'ProfilePage',
   components: {
     ArticlePreviewList,
-    FeedTabNavigation,
+    TabNavigation,
     ProfileBanner,
   },
   setup() {
     const { params } = useContext()
     const { userName } = params.value
 
-    const { state: articleState, getArticleList } = useArticle()
+    const {
+      state: articleState,
+      getArticleList,
+      handlePostToggle,
+    } = useArticle()
     const {
       state: profileState,
       getProfile,
@@ -101,7 +109,10 @@ export default defineComponent({
     return {
       articleList: toRef(articleState, 'articleList'),
       profile: toRef(profileState, 'profile'),
+      postType: toRef(articleState, 'postType'),
+      tabItems,
       fetchState,
+      handlePostToggle,
       isLogin,
       isFollowing,
       isMyProfile,
@@ -109,4 +120,15 @@ export default defineComponent({
     }
   },
 })
+
+const tabItems = [
+  {
+    type: 'AUTHOR',
+    name: 'My Posts',
+  },
+  {
+    type: 'FAVORITED',
+    name: 'Favorited Posts',
+  },
+]
 </script>

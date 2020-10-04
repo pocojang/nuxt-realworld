@@ -1,25 +1,36 @@
 import { reactive, useContext } from '@nuxtjs/composition-api'
+import useUser from './useUser'
 import { ArticleListRequest } from '~/api/articleRepository'
 import { Article, Tag } from '~/types'
+
+type FeedType = 'GLOBAL' | 'YOUR'
+type PostType = 'AUTHOR' | 'FAVORITED'
 
 type State = {
   articleList: Article[]
   articleCount: number
-  feedType: 'GLOBAL' | 'YOUR'
+  feedType: FeedType
+  postType: PostType
 }
 
 const state = reactive<State>({
   articleList: [],
   articleCount: 0,
   feedType: 'GLOBAL',
+  postType: 'AUTHOR',
 })
 
-const setFeedType = (type: State['feedType']) => {
+const setFeedType = (type: FeedType) => {
   state.feedType = type
+}
+
+const setPostType = (type: PostType) => {
+  state.postType = type
 }
 
 export default function useArticle() {
   const { $repository } = useContext()
+  const { user } = useUser()
 
   const getArticleList = async (payload: ArticleListRequest = {}) => {
     const {
@@ -51,15 +62,23 @@ export default function useArticle() {
     state.articleCount = articlesCount
   }
 
-  const handleFeedToggle = async (feedType: 'GLOBAL' | 'YOUR') => {
+  const handleFeedToggle = async (listType: FeedType) => {
     const fetchArticleBy = {
       GLOBAL: getArticleList,
       YOUR: getFeedArticleList,
     }
 
-    await fetchArticleBy[feedType]()
+    await fetchArticleBy[listType]()
 
-    setFeedType(feedType)
+    setFeedType(listType)
+  }
+
+  const handlePostToggle = async (postType: PostType) => {
+    await getArticleList({
+      [postType.toLowerCase()]: user.value.username,
+    })
+
+    setPostType(postType)
   }
 
   return {
@@ -68,6 +87,8 @@ export default function useArticle() {
     getFeedArticleList,
     getArticleListByTag,
     handleFeedToggle,
+    handlePostToggle,
     setFeedType,
+    setPostType,
   }
 }
