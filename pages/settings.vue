@@ -50,7 +50,7 @@
             </fieldset>
           </form>
           <hr />
-          <button class="btn btn-outline-danger">
+          <button class="btn btn-outline-danger" @click="onLogout">
             Or click here to logout.
           </button>
         </div>
@@ -60,7 +60,23 @@
 </template>
 
 <script lang="ts">
-export default {
-  name: 'Settings',
-}
+import { defineComponent, useContext } from '@nuxtjs/composition-api'
+import useUser from '~/compositions/useUser'
+
+export default defineComponent({
+  name: 'SettingsPage',
+  setup() {
+    const { redirect } = useContext()
+    const { authLogout } = useUser()
+
+    const onLogout = () => {
+      authLogout()
+      redirect('/')
+    }
+
+    return {
+      onLogout,
+    }
+  },
+})
 </script>

@@ -70,10 +70,24 @@ export default function useUser() {
     return false
   }
 
+  const authLogout = () => {
+    $axios.setToken(false)
+
+    state.isLogin = false
+    state.user = {
+      bio: '',
+      email: '',
+      image: '',
+      token: '',
+      username: '',
+    }
+  }
+
   return {
     user: toRef(state, 'user'),
     isLogin: toRef(state, 'isLogin'),
     fetchAuthLogin,
     fetchAuthRegister,
+    authLogout,
   }
 }
