@@ -50,8 +50,6 @@ import useArticle from '~/compositions/useArticle'
 import useUser from '~/compositions/useUser'
 
 /**
- * TODO: WIP
- *
  * 1. Validation
  * 2. Fail => View
  * 3. Success => Redirect to login before page & Persist Storage & User Info
