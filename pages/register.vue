@@ -7,10 +7,11 @@
           <p class="text-xs-center">
             <nuxt-link to="/login"> Have an account?</nuxt-link>
           </p>
-          <form>
+          <form @submit.prevent="handleRegister">
             <fieldset>
               <fieldset class="form-group">
                 <input
+                  v-model="userName"
                   type="text"
                   class="form-control form-control-lg"
                   placeholder="Username"
@@ -18,6 +19,7 @@
               </fieldset>
               <fieldset class="form-group">
                 <input
+                  v-model="email"
                   type="email"
                   class="form-control form-control-lg"
                   placeholder="Email"
@@ -25,6 +27,7 @@
               </fieldset>
               <fieldset class="form-group">
                 <input
+                  v-model="password"
                   type="password"
                   class="form-control form-control-lg"
                   placeholder="Password"
@@ -45,7 +48,53 @@
 </template>
 
 <script lang="ts">
-export default {
-  name: 'Register',
-}
+import {
+  defineComponent,
+  reactive,
+  useContext,
+  toRefs,
+} from '@nuxtjs/composition-api'
+import useArticle from '~/compositions/useArticle'
+import useUser from '~/compositions/useUser'
+
+/**
+ * TODO: WIP
+ *
+ * 1. Validation
+ * 2. Fail => View
+ * 3. Success => ??
+ * 4. Duplicated
+ */
+export default defineComponent({
+  name: 'RegisterPage',
+  setup() {
+    const { redirect } = useContext()
+    const { setFeedType } = useArticle()
+    const { fetchAuthRegister } = useUser()
+
+    const state = reactive({
+      userName: '',
+      email: '',
+      password: '',
+    })
+
+    // TODO: Always Success
+    const handleRegister = async () => {
+      const isOK = await fetchAuthRegister({
+        ...state,
+        username: state.userName,
+      })
+
+      if (isOK) {
+        setFeedType('YOUR')
+        await redirect('/')
+      }
+    }
+
+    return {
+      ...toRefs(state),
+      handleRegister,
+    }
+  },
+})
 </script>

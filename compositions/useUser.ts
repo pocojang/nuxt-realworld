@@ -1,5 +1,6 @@
+import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import { reactive, useContext, toRef } from '@nuxtjs/composition-api'
-import { AuthLoginRequest } from '~/api'
+import { AuthLoginRequest, AuthRegisterRequest } from '~/api'
 import { User } from '~/types'
 
 type State = {
@@ -18,8 +19,15 @@ const state = reactive<State>({
   isLogin: false,
 })
 
+const setLogin = (axios: NuxtAxiosInstance, user: User) => {
+  axios.setToken(user.token, 'Token')
+
+  state.isLogin = true
+  state.user = user
+}
+
 export default function useUser() {
-  const { $repository, $axios } = useContext()
+  const { $axios, $repository } = useContext()
 
   const fetchAuthLogin = async ({ email, password }: AuthLoginRequest) => {
     if (!email || !password) {
@@ -32,18 +40,40 @@ export default function useUser() {
     })
 
     if (response.user) {
-      $axios.setToken(response.user.token, 'Token')
-
-      state.isLogin = true
-      state.user = response.user
+      setLogin($axios, response.user)
 
       return true
     }
+  }
+
+  const fetchAuthRegister = async ({
+    username,
+    email,
+    password,
+  }: AuthRegisterRequest) => {
+    if (!email || !password) {
+      return
+    }
+
+    const response = await $repository.user.authRegister({
+      username,
+      email,
+      password,
+    })
+
+    if (response.user) {
+      setLogin($axios, response.user)
+
+      return true
+    }
+
+    return false
   }
 
   return {
     user: toRef(state, 'user'),
     isLogin: toRef(state, 'isLogin'),
     fetchAuthLogin,
+    fetchAuthRegister,
   }
 }
