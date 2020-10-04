@@ -52,6 +52,12 @@ import {
 import ArticleBanner from '~/components/ArticleBanner.vue'
 import CommentCardList from '~/components/CommentCardList.vue'
 import CommentEditor from '~/components/CommentEditor.vue'
+import { Article, Comment } from '~/types'
+
+type State = {
+  article?: Article
+  commentList: Comment[]
+}
 
 /**
  *
@@ -70,20 +76,29 @@ export default defineComponent({
     CommentCardList,
   },
   setup() {
-    const state = reactive({
-      article: {},
+    const state = reactive<State>({
+      article: undefined,
       commentList: [],
     })
 
-    const { $repository, params } = useContext()
+    const { $repository, params, query } = useContext()
     const { slug } = params.value
+    const { option } = query.value
 
     const { fetchState } = useFetch(async () => {
       const { article } = await $repository.article.getArticle(slug)
-      const { comments } = await $repository.comment.getCommentList(slug)
 
       state.article = article
-      state.commentList = comments
+
+      if (option === 'withOutComment') {
+        return
+      }
+
+      const { comments } = await $repository.comment.getCommentList(slug)
+
+      if (comments?.length) {
+        state.commentList = comments
+      }
     })
 
     return {
