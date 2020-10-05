@@ -152,7 +152,7 @@
   - [ ] Edit Article 클릭시 `아티클 수정` (아티클 작성자에게만 노출) (선택사항)
   - [ ] Delete Article 클릭시 `아티클 삭제` (아티클 작성자에게만 노출) (선택사항)
   - 댓글
-    - [ ] 유저 영역 클릭시 댓글 작성한 **유저 정보 페이지**로 이동
+    - [x] 유저 영역 클릭시 댓글 작성한 **유저 정보 페이지**로 이동
     - [ ] 작성 후 에러 발생시 인풋 상단에 오류 정보 표기
     - [ ] 작성 후 Post Comment 클릭시 `댓글 등록`
     - [ ] 작성한 댓글의 휴지통 아이콘 클릭시 `댓글 삭제` (댓글 작성자에게만 노출)
@@ -173,5 +173,5 @@
   - Settings page (URL: /settings )
   - Editor page to create/edit articles (URL: /editor, /editor/article-slug-here )
   - Article page (URL: /article/{article-slug-here} )
-  - Profile page (URL: /{username}, /{username}/favorites )
+  - Profile page (URL: /profile/{username}, /profile/{username}/favorites )
 
