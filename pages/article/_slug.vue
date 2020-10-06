@@ -28,16 +28,23 @@
         <div class="article-actions"></div>
         <div class="row">
           <div class="col-xs-12 col-md-8 offset-md-2">
-            <comment-editor
-              :login-user="loginUser"
-              @on-create-comment="onCreateComment"
-            />
-            <comment-card-list
-              v-if="commentList.length"
-              :comment-list="commentList"
-              :login-user="loginUser"
-              @on-delete-comment="onDeleteComment"
-            />
+            <template v-if="isLogin">
+              <comment-editor
+                :login-user="loginUser"
+                @on-create-comment="onCreateComment"
+              />
+              <comment-card-list
+                v-if="commentList.length"
+                :comment-list="commentList"
+                :login-user="loginUser"
+                @on-delete-comment="onDeleteComment"
+              />
+            </template>
+            <p v-else>
+              <nuxt-link to="/login">Sign in</nuxt-link> or
+              <nuxt-link to="/register">sign up</nuxt-link> to add comments on
+              this article.
+            </p>
           </div>
         </div>
       </div>
@@ -87,7 +94,7 @@ export default defineComponent({
       createComment,
       deleteComment,
     } = useComment()
-    const { user: userState } = useUser()
+    const { user: userState, isLogin } = useUser()
 
     const { slug } = params.value
     const { option } = query.value
@@ -113,6 +120,7 @@ export default defineComponent({
     return {
       article: toRef(articleState, 'article'),
       commentList: toRef(commentState, 'commentList'),
+      isLogin,
       loginUser: userState,
       fetchState,
       onCreateComment,
