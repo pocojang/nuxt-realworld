@@ -16,10 +16,13 @@
         </div>
         <span>
           <nuxt-link to="/editor/slug" class="btn btn-outline-secondary btn-sm">
-            <i class="ion-edit"></i>
+            <i class="ion-edit" /> Edit Article
           </nuxt-link>
-          <button class="btn btn-outline-danger btn-sm">
-            <i class="ion-trash-a"></i>
+          <button
+            class="btn btn-outline-danger btn-sm"
+            @click="$emit('on-delete-article')"
+          >
+            <i class="ion-trash-a" /> Delete Article
           </button>
         </span>
       </div>

@@ -83,6 +83,10 @@ export default function useArticle() {
     return false
   }
 
+  const deleteArticle = async (slug: Article['slug']) => {
+    await $repository.article.deleteArticle(slug)
+  }
+
   const handleFeedToggle = async (listType: FeedType) => {
     const fetchArticleBy = {
       GLOBAL: getArticleList,
@@ -136,6 +140,7 @@ export default function useArticle() {
     getFeedArticleList,
     getArticleListByTag,
     createArticle,
+    deleteArticle,
     handleFeedToggle,
     handlePostToggle,
     fetchToggleFavorite,

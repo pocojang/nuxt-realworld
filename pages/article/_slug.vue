@@ -1,7 +1,11 @@
 <template>
   <div v-if="!fetchState.pending && !fetchState.error">
     <div class="article-page">
-      <article-banner :author="article.author" :created-at="article.createdAt">
+      <article-banner
+        :author="article.author"
+        :created-at="article.createdAt"
+        @on-delete-article="onDeleteArticle"
+      >
         <template v-slot:title>
           {{ article.title }}
         </template>
@@ -85,9 +89,11 @@ export default defineComponent({
     CommentCardList,
   },
   setup() {
-    const { params, query } = useContext()
+    const { app, params, query } = useContext()
+    const { slug } = params.value
+    const { option } = query.value
 
-    const { state: articleState, getArticle } = useArticle()
+    const { state: articleState, getArticle, deleteArticle } = useArticle()
     const {
       state: commentState,
       getCommentList,
@@ -95,9 +101,6 @@ export default defineComponent({
       deleteComment,
     } = useComment()
     const { user: userState, isLogin } = useUser()
-
-    const { slug } = params.value
-    const { option } = query.value
 
     const { fetchState } = useFetch(async () => {
       await getArticle(slug)
@@ -108,6 +111,14 @@ export default defineComponent({
 
       await getCommentList(slug)
     })
+
+    const onDeleteArticle = () => {
+      deleteArticle(slug)
+
+      if (app?.router) {
+        app.router.back()
+      }
+    }
 
     const onDeleteComment = (id: Comment['id']) => {
       deleteComment({ slug, id })
@@ -123,6 +134,7 @@ export default defineComponent({
       isLogin,
       loginUser: userState,
       fetchState,
+      onDeleteArticle,
       onCreateComment,
       onDeleteComment,
     }
