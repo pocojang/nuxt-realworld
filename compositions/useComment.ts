@@ -1,5 +1,8 @@
 import { reactive, useContext } from '@nuxtjs/composition-api'
-import { DeleteCommentRequest } from '~/api/commentRepository'
+import {
+  CreateCommentRequest,
+  DeleteCommentRequest,
+} from '~/api/commentRepository'
 import { Article, Comment } from '~/types'
 
 type State = {
@@ -19,6 +22,12 @@ export default function useComment() {
     state.commentList = comments
   }
 
+  const createComment = async (payload: CreateCommentRequest) => {
+    const { comment } = await $repository.comment.createComment(payload)
+
+    state.commentList = [comment, ...state.commentList]
+  }
+
   const deleteComment = async ({ slug, id }: DeleteCommentRequest) => {
     await $repository.comment.deleteComment({ slug, id })
     await getCommentList(slug)
@@ -27,6 +36,7 @@ export default function useComment() {
   return {
     state,
     getCommentList,
+    createComment,
     deleteComment,
   }
 }

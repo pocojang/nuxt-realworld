@@ -28,7 +28,10 @@
         <div class="article-actions"></div>
         <div class="row">
           <div class="col-xs-12 col-md-8 offset-md-2">
-            <comment-editor />
+            <comment-editor
+              :login-user="loginUser"
+              @on-create-comment="onCreateComment"
+            />
             <comment-card-list
               v-if="commentList.length"
               :comment-list="commentList"
@@ -78,7 +81,12 @@ export default defineComponent({
     const { params, query } = useContext()
 
     const { state: articleState, getArticle } = useArticle()
-    const { state: commentState, getCommentList, deleteComment } = useComment()
+    const {
+      state: commentState,
+      getCommentList,
+      createComment,
+      deleteComment,
+    } = useComment()
     const { user: userState } = useUser()
 
     const { slug } = params.value
@@ -98,11 +106,16 @@ export default defineComponent({
       deleteComment({ slug, id })
     }
 
+    const onCreateComment = (body: string) => {
+      createComment({ slug, body })
+    }
+
     return {
       article: toRef(articleState, 'article'),
       commentList: toRef(commentState, 'commentList'),
       loginUser: userState,
       fetchState,
+      onCreateComment,
       onDeleteComment,
     }
   },
