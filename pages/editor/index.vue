@@ -73,7 +73,7 @@ import {
 import { CreateArticleRequest } from '~/api/articleRepository'
 import useArticle from '~/compositions/useArticle'
 
-type CreateArticle = Required<CreateArticleRequest>
+type State = Required<CreateArticleRequest>
 
 export default defineComponent({
   name: 'CreateEditorPage',
@@ -81,7 +81,7 @@ export default defineComponent({
     const { redirect } = useContext()
     const { createArticle } = useArticle()
 
-    const state = reactive<CreateArticle>({
+    const state = reactive<State>({
       title: '',
       description: '',
       body: '',
