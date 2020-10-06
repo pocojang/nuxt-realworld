@@ -10,6 +10,7 @@ type FeedType = 'GLOBAL' | 'YOUR'
 export type PostType = 'AUTHOR' | 'FAVORITED'
 
 type State = {
+  article?: Article
   articleList: Article[]
   articleCount: number
   feedType: FeedType
@@ -17,6 +18,7 @@ type State = {
 }
 
 const state = reactive<State>({
+  article: undefined,
   articleList: [],
   articleCount: 0,
   feedType: 'GLOBAL',
@@ -34,6 +36,12 @@ const setPostType = (type: PostType) => {
 export default function useArticle() {
   const { $repository, redirect } = useContext()
   const { isLogin } = useUser()
+
+  const getArticle = async (slug: Article['slug']) => {
+    const { article } = await $repository.article.getArticle(slug)
+
+    state.article = article
+  }
 
   const getArticleList = async (payload: ArticleListRequest = {}) => {
     const {
@@ -123,6 +131,7 @@ export default function useArticle() {
 
   return {
     state,
+    getArticle,
     getArticleList,
     getFeedArticleList,
     getArticleListByTag,

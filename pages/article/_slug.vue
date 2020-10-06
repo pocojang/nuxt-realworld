@@ -44,7 +44,6 @@
 import {
   defineComponent,
   useContext,
-  reactive,
   toRef,
   useFetch,
 } from '@nuxtjs/composition-api'
@@ -52,12 +51,8 @@ import {
 import ArticleBanner from '~/components/ArticleBanner.vue'
 import CommentCardList from '~/components/CommentCardList.vue'
 import CommentEditor from '~/components/CommentEditor.vue'
-import { Article, Comment } from '~/types'
-
-type State = {
-  article?: Article
-  commentList: Comment[]
-}
+import useArticle from '~/compositions/useArticle'
+import useComment from '~/compositions/useComment'
 
 /**
  *
@@ -76,34 +71,26 @@ export default defineComponent({
     CommentCardList,
   },
   setup() {
-    const state = reactive<State>({
-      article: undefined,
-      commentList: [],
-    })
+    const { params, query } = useContext()
 
-    const { $repository, params, query } = useContext()
+    const { state: articleState, getArticle } = useArticle()
+    const { state: commentState, getCommentList } = useComment()
     const { slug } = params.value
     const { option } = query.value
 
     const { fetchState } = useFetch(async () => {
-      const { article } = await $repository.article.getArticle(slug)
-
-      state.article = article
+      await getArticle(slug)
 
       if (option === 'withOutComment') {
         return
       }
 
-      const { comments } = await $repository.comment.getCommentList(slug)
-
-      if (comments?.length) {
-        state.commentList = comments
-      }
+      await getCommentList(slug)
     })
 
     return {
-      article: toRef(state, 'article'),
-      commentList: toRef(state, 'commentList'),
+      article: toRef(articleState, 'article'),
+      commentList: toRef(commentState, 'commentList'),
       fetchState,
     }
   },
