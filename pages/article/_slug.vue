@@ -32,6 +32,8 @@
             <comment-card-list
               v-if="commentList.length"
               :comment-list="commentList"
+              :login-user="loginUser"
+              @on-delete-comment="onDeleteComment"
             />
           </div>
         </div>
@@ -53,6 +55,8 @@ import CommentCardList from '~/components/CommentCardList.vue'
 import CommentEditor from '~/components/CommentEditor.vue'
 import useArticle from '~/compositions/useArticle'
 import useComment from '~/compositions/useComment'
+import useUser from '~/compositions/useUser'
+import { Comment } from '~/types'
 
 /**
  *
@@ -74,7 +78,9 @@ export default defineComponent({
     const { params, query } = useContext()
 
     const { state: articleState, getArticle } = useArticle()
-    const { state: commentState, getCommentList } = useComment()
+    const { state: commentState, getCommentList, deleteComment } = useComment()
+    const { user: userState } = useUser()
+
     const { slug } = params.value
     const { option } = query.value
 
@@ -88,10 +94,16 @@ export default defineComponent({
       await getCommentList(slug)
     })
 
+    const onDeleteComment = (id: Comment['id']) => {
+      deleteComment({ slug, id })
+    }
+
     return {
       article: toRef(articleState, 'article'),
       commentList: toRef(commentState, 'commentList'),
+      loginUser: userState,
       fetchState,
+      onDeleteComment,
     }
   },
 })

@@ -3,7 +3,7 @@ import { Article, Comment, ResponseType } from '~/types'
 
 type Slug = Article['slug']
 type CreateCommentRequest = Pick<Comment, 'body'> & Pick<Article, 'slug'>
-type DeleteCommentRequest = Pick<Comment, 'id'> & Pick<Article, 'slug'>
+export type DeleteCommentRequest = Pick<Comment, 'id'> & Pick<Article, 'slug'>
 
 type CommentResponse = ResponseType<'comment', Comment>
 type CommentListResponse = ResponseType<'comments', Comment[]>
@@ -19,8 +19,7 @@ export const commentRepository = (axios: NuxtAxiosInstance) => ({
       data: { comment: body },
     })
   },
-  deleteComment({ slug, id }: DeleteCommentRequest): CommentListResponse {
-    // Authentication optional, returns multiple comments
+  deleteComment({ slug, id }: DeleteCommentRequest): Promise<void> {
     return axios.$delete(`/articles/${slug}/comments/${id}`)
   },
 })

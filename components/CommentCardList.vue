@@ -22,7 +22,11 @@
         >
         <span class="date-posted">{{ comment.createdAt }}</span>
         <span class="mod-options">
-          <i class="ion-trash-a"></i>
+          <i
+            v-if="loginUser.username === comment.author.username"
+            class="ion-trash-a"
+            @click="$emit('on-delete-comment', comment.id)"
+          ></i>
         </span>
       </div>
     </div>
@@ -31,7 +35,7 @@
 
 <script lang="ts">
 import Vue, { PropOptions } from 'vue'
-import { Comment } from '~/types'
+import { Comment, User } from '~/types'
 
 /**
  *
@@ -48,6 +52,10 @@ export default Vue.extend({
       required: false,
       default: () => [],
     } as PropOptions<Comment[]>,
+    loginUser: {
+      type: Object,
+      required: true,
+    } as PropOptions<User>,
   },
 })
 </script>
