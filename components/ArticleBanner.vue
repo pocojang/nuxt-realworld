@@ -12,10 +12,13 @@
           <nuxt-link :to="`/profile/${author.username}`" class="author">{{
             author.username
           }}</nuxt-link>
-          <span class="date">{{ new Date(createdAt) }}</span>
+          <span class="date">{{ new Date(article.createdAt) }}</span>
         </div>
-        <span>
-          <nuxt-link to="/editor/slug" class="btn btn-outline-secondary btn-sm">
+        <span v-if="isMyArticle">
+          <nuxt-link
+            :to="`/editor/${article.slug}`"
+            class="btn btn-outline-secondary btn-sm"
+          >
             <i class="ion-edit" /> Edit Article
           </nuxt-link>
           <button
@@ -37,16 +40,20 @@ import { Article, Author } from '~/types'
 export default Vue.extend({
   name: 'ArticleBanner',
   props: {
+    article: {
+      type: Object,
+      required: true,
+      default: () => {},
+    } as PropOptions<Article>,
     author: {
       type: Object,
       required: true,
       default: () => {},
     } as PropOptions<Author>,
-    createdAt: {
-      type: String,
+    isMyArticle: {
+      type: Boolean,
       required: true,
-      default: '',
-    } as PropOptions<Article['createdAt']>,
+    },
   },
 })
 </script>

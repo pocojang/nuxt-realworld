@@ -75,6 +75,13 @@ import useArticle from '~/compositions/useArticle'
 
 type State = Required<CreateArticleRequest>
 
+/**
+ *
+ * TODO:
+ * 1. always success
+ * 2. Duplicated Update
+ *
+ */
 export default defineComponent({
   name: 'CreateEditorPage',
   setup() {
@@ -101,7 +108,6 @@ export default defineComponent({
       state.tagList = state.tagList.filter((_, i) => i !== index)
     }
 
-    // TODO: always success
     const onCreateArticle = async () => {
       const response = await createArticle(state)
 

@@ -3,6 +3,7 @@ import useUser from './useUser'
 import {
   ArticleListRequest,
   CreateArticleRequest,
+  UpdateArticleRequest,
 } from '~/api/articleRepository'
 import { Article, Tag, User } from '~/types'
 
@@ -83,6 +84,16 @@ export default function useArticle() {
     return false
   }
 
+  const updateArticle = async (payload: UpdateArticleRequest) => {
+    const response = await $repository.article.updateArticle(payload)
+
+    if (response) {
+      return response.article.slug
+    }
+
+    return false
+  }
+
   const deleteArticle = async (slug: Article['slug']) => {
     await $repository.article.deleteArticle(slug)
   }
@@ -140,6 +151,7 @@ export default function useArticle() {
     getFeedArticleList,
     getArticleListByTag,
     createArticle,
+    updateArticle,
     deleteArticle,
     handleFeedToggle,
     handlePostToggle,

@@ -2,8 +2,9 @@
   <div v-if="!fetchState.pending && !fetchState.error">
     <div class="article-page">
       <article-banner
+        :article="article"
         :author="article.author"
-        :created-at="article.createdAt"
+        :is-my-article="article.author.username === loginUser.username"
         @on-delete-article="onDeleteArticle"
       >
         <template v-slot:title>

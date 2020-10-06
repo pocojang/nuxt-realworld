@@ -19,10 +19,11 @@ export type CreateArticleRequest = Pick<
   'title' | 'description' | 'body'
 > &
   OptionalPick<Article, 'tagList'>
-type UpdateArticleRequest = OptionalPick<
-  Article,
-  'title' | 'description' | 'body'
->
+export type UpdateArticlePayload = Partial<CreateArticleRequest>
+export type UpdateArticleRequest = {
+  payload: UpdateArticlePayload
+  slug: Slug
+}
 
 export interface ArticleListRequest extends FeedArticleListRequest {
   tag?: Tag
@@ -67,12 +68,10 @@ export const articleRepository = (axios: NuxtAxiosInstance) => ({
   createArticle(payload: CreateArticleRequest): ArticleResponse {
     return axios.$post('/articles', { article: payload })
   },
-  updateArticle(payload: UpdateArticleRequest): ArticleResponse {
-    // Authentication required, returns the updated Article
-    return axios.$put('/articles', payload)
+  updateArticle(request: UpdateArticleRequest): ArticleResponse {
+    return axios.$put(`/articles/${request.slug}`, { article: request.payload })
   },
   deleteArticle(slug: Slug) {
-    // Authentication required
     return axios.$delete(`/articles/${slug}`)
   },
   favoriteArticle(slug: Slug): ArticleResponse {
