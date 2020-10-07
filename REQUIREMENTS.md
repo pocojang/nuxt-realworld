@@ -38,6 +38,9 @@
 
 - [ ] 배포 버전 확인
 
+- [ ] Authentication State Persistence
+- [ ] Suspense with Skeleton
+
 - Header
   - [x] 좌측 conduit 클릭시 **홈 페이지** 이동
   - [x] 우측 Home 클릭시 **홈 페이지** 이동
@@ -124,6 +127,7 @@
     - [x] 태그 클릭시 **아티클 상세 페이지**로 이동
     - [x] 유저 영역 클릭시 아티클 작성한 **유저 정보 페이지**로 이동
     - [x] 페이지 버튼 클릭시 `페이지별 아티클 목록 불러오기`
+    - [ ] 페이지 네이션
     - 좋아요
       - [x] Outline 좋아요 클릭시 `좋아요`
       - [x] Fill 좋아요 클릭시 `좋아요 취소`
@@ -147,8 +151,8 @@
   - [x] 유저 영역 클릭시 아티클 작성한 **유저 정보 페이지**로 이동
   - [x] Follow {유저} 클릭시 `팔로우`
   - [x] Unfollow {유저} 클릭시 `팔로우 취소`
-  - [ ] Favorite Article 클릭시 `좋아요` (선택사항)
-  - [ ] Unavorite Article 클릭시 `좋아요 취소` (선택사항)
+  - [x] Favorite Article 클릭시 `좋아요` (선택사항)
+  - [x] Unavorite Article 클릭시 `좋아요 취소` (선택사항)
   - [x] Edit Article 클릭시 `아티클 수정` (아티클 작성자에게만 노출) (선택사항)
   - [x] Delete Article 클릭시 `아티클 삭제` (아티클 작성자에게만 노출) (선택사항)
   - 댓글

@@ -61,10 +61,6 @@ export const articleRepository = (axios: NuxtAxiosInstance) => ({
   getFeedArticleList(params: FeedArticleListRequest = {}): ArticleListResponse {
     return axios.$get('/articles/feed', { params })
   },
-  getSlugArticleList(slug: Slug): ArticleResponse {
-    // No authentication required, will return single article
-    return axios.$get(`/articles/feed/${slug}`)
-  },
   createArticle(payload: CreateArticleRequest): ArticleResponse {
     return axios.$post('/articles', { article: payload })
   },

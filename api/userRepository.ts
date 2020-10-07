@@ -17,7 +17,6 @@ export const userRepository = (axios: NuxtAxiosInstance) => ({
     return axios.$post(`/users`, { user: payload })
   },
   getCurrentUser(): UserResponse {
-    // Authentication required, returns a User that's the current user
     return axios.$get('/user')
   },
   updateUser(payload: UpdateUserRequest): UserResponse {
