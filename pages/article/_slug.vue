@@ -116,9 +116,7 @@ export default defineComponent({
     const onDeleteArticle = () => {
       deleteArticle(slug)
 
-      if (app?.router) {
-        app.router.back()
-      }
+      app?.router?.back()
     }
 
     const onDeleteComment = (id: Comment['id']) => {
