@@ -3489,6 +3489,7 @@ input[type='button'].btn-block {
   list-style: none;
 }
 .nav-link {
+  cursor: pointer;
   display: inline-block;
 }
 .nav-link:focus,

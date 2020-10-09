@@ -27,3 +27,9 @@ export default Vue.extend({
   },
 })
 </script>
+
+<style scoped>
+.tag-default {
+  cursor: pointer;
+}
+</style>
