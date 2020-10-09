@@ -66,9 +66,8 @@ import {
 import ArticleBanner from '~/components/ArticleBanner.vue'
 import CommentCardList from '~/components/CommentCardList.vue'
 import CommentEditor from '~/components/CommentEditor.vue'
-import useArticle from '~/compositions/useArticle'
-import useComment from '~/compositions/useComment'
-import useUser from '~/compositions/useUser'
+
+import { useArticle, useComment, useUser } from '~/compositions'
 import { Comment } from '~/types'
 
 /**

@@ -36,9 +36,8 @@ import Banner from '~/components/Banner.vue'
 import TabNavigation from '~/components/TabNavigation.vue'
 import Pagination from '~/components/Pagination.vue'
 import PopularTagList from '~/components/PopularTagList.vue'
-import useArticle from '~/compositions/useArticle'
-import useTag from '~/compositions/useTag'
-import useUser from '~/compositions/useUser'
+
+import { useArticle, useTag, useUser } from '~/compositions'
 
 export default defineComponent({
   name: 'IndexPage',
@@ -66,7 +65,9 @@ export default defineComponent({
       } else {
         await getArticleList()
       }
+    })
 
+    useFetch(async () => {
       await getTagList()
     })
 

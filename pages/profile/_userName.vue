@@ -53,9 +53,8 @@ import {
   useFetch,
 } from '@nuxtjs/composition-api'
 
-import useArticle, { PostType } from '~/compositions/useArticle'
-import useUser from '~/compositions/useUser'
-import useProfile from '~/compositions/useProfile'
+import { useArticle, useProfile, useUser } from '~/compositions'
+import { PostType } from '~/compositions/useArticle'
 
 import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
 import TabNavigation from '~/components/TabNavigation.vue'
