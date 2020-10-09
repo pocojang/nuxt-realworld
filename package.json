@@ -25,6 +25,7 @@
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/composition-api": "^0.12.5",
+    "@nuxtjs/markdownit": "^1.2.10",
     "core-js": "^3.6.5",
     "nuxt": "^2.14.6"
   },

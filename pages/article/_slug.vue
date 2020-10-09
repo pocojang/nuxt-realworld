@@ -14,9 +14,7 @@
       <div class="container page">
         <div class="row article-content">
           <div class="col-xs-12">
-            <div>
-              <h1 id="world">{{ article.body }}</h1>
-            </div>
+            <div v-html="$md.render(article.body)" />
 
             <ul v-if="article.tagList.length" class="tag-list">
               <li
@@ -79,7 +77,6 @@ import { Comment } from '~/types'
  *
  * 1. route.params Handle Error
  * 2. Tag List Duplicated
- * 3. Body Parser
  *
  */
 export default defineComponent({

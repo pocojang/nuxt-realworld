@@ -46,7 +46,7 @@ export default {
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: ['@nuxtjs/axios'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/markdownit'],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
@@ -54,5 +54,9 @@ export default {
   axios: {
     // Axios Configuration (https://github.com/nuxt-community/axios-module#options)
     baseURL: 'https://conduit.productionready.io/api/',
+  },
+  markdownit: {
+    // https://github.com/nuxt-community/modules/tree/master/packages/markdownit
+    injected: true,
   },
 }
