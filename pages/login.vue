@@ -46,7 +46,6 @@ import {
   useContext,
   toRefs,
 } from '@nuxtjs/composition-api'
-import useArticle from '~/compositions/useArticle'
 import useUser from '~/compositions/useUser'
 
 /**
@@ -58,7 +57,6 @@ import useUser from '~/compositions/useUser'
 export default defineComponent({
   name: 'LoginPage',
   setup() {
-    const { setFeedType } = useArticle()
     const { fetchAuthLogin } = useUser()
     const { redirect } = useContext()
 
@@ -72,7 +70,6 @@ export default defineComponent({
       const isOK = await fetchAuthLogin(state)
 
       if (isOK) {
-        setFeedType('YOUR')
         await redirect('/')
       }
     }

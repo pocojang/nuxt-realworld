@@ -1,4 +1,4 @@
-import { reactive, useContext } from '@nuxtjs/composition-api'
+import { reactive, useContext, watch } from '@nuxtjs/composition-api'
 import useUser from './useUser'
 import {
   ArticleListRequest,
@@ -143,6 +143,18 @@ export default function useArticle() {
       ]
     }
   }
+
+  watch(isLogin, (isLogin, prevIsLogin) => {
+    if (!prevIsLogin && isLogin) {
+      setFeedType('YOUR')
+
+      return
+    }
+
+    if (!isLogin && prevIsLogin) {
+      setFeedType('GLOBAL')
+    }
+  })
 
   return {
     state,

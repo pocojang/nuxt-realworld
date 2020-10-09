@@ -54,7 +54,6 @@ import {
   useContext,
   toRefs,
 } from '@nuxtjs/composition-api'
-import useArticle from '~/compositions/useArticle'
 import useUser from '~/compositions/useUser'
 
 /**
@@ -69,7 +68,6 @@ export default defineComponent({
   name: 'RegisterPage',
   setup() {
     const { redirect } = useContext()
-    const { setFeedType } = useArticle()
     const { fetchAuthRegister } = useUser()
 
     const state = reactive({
@@ -86,7 +84,6 @@ export default defineComponent({
       })
 
       if (isOK) {
-        setFeedType('YOUR')
         await redirect('/')
       }
     }

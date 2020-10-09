@@ -73,14 +73,12 @@ import {
   toRefs,
   useFetch,
 } from '@nuxtjs/composition-api'
-import useArticle from '~/compositions/useArticle'
 import useUser from '~/compositions/useUser'
 
 export default defineComponent({
   name: 'SettingsPage',
   setup() {
     const { redirect } = useContext()
-    const { setFeedType } = useArticle()
     const { user, fetchUpdateUser, authLogout } = useUser()
 
     const state = reactive({
@@ -104,14 +102,12 @@ export default defineComponent({
       const isOK = await fetchUpdateUser({ ...state, username: state.userName })
 
       if (isOK) {
-        setFeedType('YOUR')
         await redirect('/')
       }
     }
 
     const onLogout = () => {
       authLogout()
-      setFeedType('GLOBAL')
       redirect('/')
     }
 
