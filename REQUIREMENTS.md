@@ -38,7 +38,7 @@
 
 - [ ] 배포 버전 확인
 
-- [ ] Authentication State Persistence
+- [x] Authentication State Persistence
 - [ ] Suspense with Skeleton
 
 - Header

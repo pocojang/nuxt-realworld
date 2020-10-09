@@ -24,7 +24,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRef, useFetch } from '@nuxtjs/composition-api'
+import {
+  computed,
+  defineComponent,
+  toRef,
+  useFetch,
+} from '@nuxtjs/composition-api'
 
 import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
 import Banner from '~/components/Banner.vue'
@@ -69,15 +74,17 @@ export default defineComponent({
       articleList: toRef(articleState, 'articleList'),
       tagList: toRef(tagState, 'tagList'),
       feedType: toRef(articleState, 'feedType'),
-      tabItems: isLogin.value
-        ? [
-            {
-              type: 'YOUR',
-              name: 'Your Feed',
-            },
-            ...tabItems,
-          ]
-        : tabItems,
+      tabItems: computed(() =>
+        isLogin.value
+          ? [
+              {
+                type: 'YOUR',
+                name: 'Your Feed',
+              },
+              ...tabItems,
+            ]
+          : tabItems
+      ),
       getArticleListByTag,
       isLogin,
       handleFeedToggle,
