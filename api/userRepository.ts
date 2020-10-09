@@ -16,8 +16,12 @@ export const userRepository = (axios: NuxtAxiosInstance) => ({
   authRegister(payload: AuthRegisterRequest): UserResponse {
     return axios.$post(`/users`, { user: payload })
   },
-  getCurrentUser(): UserResponse {
-    return axios.$get('/user')
+  getCurrentUser(token: User['token']): UserResponse {
+    return axios.$get('/user', {
+      headers: {
+        authorization: 'Token ' + token,
+      },
+    })
   },
   updateUser(payload: UpdateUserRequest): UserResponse {
     return axios.$put('/user', payload)

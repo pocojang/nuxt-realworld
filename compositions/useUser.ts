@@ -19,15 +19,33 @@ const state = reactive<State>({
   isLogin: false,
 })
 
-const setLogin = (axios: NuxtAxiosInstance, user: User) => {
-  axios.setToken(user.token, 'Token')
-
+const setLogin = ({
+  axios,
+  user,
+}: {
+  axios: NuxtAxiosInstance
+  user: User
+}) => {
   state.isLogin = true
   state.user = user
+
+  axios.setToken(user.token, 'Token')
+  window.localStorage.setItem('token', user.token)
 }
 
 export default function useUser() {
   const { $axios, $repository } = useContext()
+
+  const retryLogin = async (token: User['token']) => {
+    const response = await $repository.user.getCurrentUser(token)
+
+    if (response.user) {
+      setLogin({
+        axios: $axios,
+        user: response.user,
+      })
+    }
+  }
 
   const fetchAuthLogin = async ({ email, password }: AuthLoginRequest) => {
     if (!email || !password) {
@@ -40,7 +58,10 @@ export default function useUser() {
     })
 
     if (response.user) {
-      setLogin($axios, response.user)
+      setLogin({
+        axios: $axios,
+        user: response.user,
+      })
 
       return true
     }
@@ -62,7 +83,10 @@ export default function useUser() {
     })
 
     if (response.user) {
-      setLogin($axios, response.user)
+      setLogin({
+        axios: $axios,
+        user: response.user,
+      })
 
       return true
     }
@@ -102,5 +126,6 @@ export default function useUser() {
     fetchAuthRegister,
     fetchUpdateUser,
     authLogout,
+    retryLogin,
   }
 }
