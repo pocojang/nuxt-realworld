@@ -6,8 +6,9 @@
           class="nav-link"
           :class="{ active: tabType === item.type }"
           @click="$emit('on-click-tab', item.type)"
-          >{{ item.name }}</a
         >
+          {{ item.name }}
+        </a>
       </li>
     </ul>
   </div>
@@ -25,3 +26,9 @@ export default defineComponent({
   },
 })
 </script>
+
+<style scoped>
+.nav-link.active {
+  pointer-events: none;
+}
+</style>
