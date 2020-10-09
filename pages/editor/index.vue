@@ -71,7 +71,7 @@ import {
   useContext,
 } from '@nuxtjs/composition-api'
 import { CreateArticleRequest } from '~/api/articleRepository'
-import useArticle from '~/compositions/useArticle'
+import useArticleSlug from '~/compositions/useArticleSlug'
 
 type State = Required<CreateArticleRequest>
 
@@ -86,7 +86,7 @@ export default defineComponent({
   name: 'CreateEditorPage',
   setup() {
     const { redirect } = useContext()
-    const { createArticle } = useArticle()
+    const { createArticle } = useArticleSlug()
 
     const state = reactive<State>({
       title: '',

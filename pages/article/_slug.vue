@@ -67,7 +67,7 @@ import ArticleBanner from '~/components/ArticleBanner.vue'
 import CommentCardList from '~/components/CommentCardList.vue'
 import CommentEditor from '~/components/CommentEditor.vue'
 
-import { useArticle, useComment, useUser } from '~/compositions'
+import { useArticleSlug, useComment, useUser } from '~/compositions'
 import { Comment } from '~/types'
 
 /**
@@ -90,7 +90,7 @@ export default defineComponent({
     const { slug } = params.value
     const { option } = query.value
 
-    const { state: articleState, getArticle, deleteArticle } = useArticle()
+    const { state: articleState, getArticle, deleteArticle } = useArticleSlug()
     const {
       state: commentState,
       getCommentList,

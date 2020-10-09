@@ -50,7 +50,7 @@
 import { PropType } from 'vue'
 import { defineComponent } from '@nuxtjs/composition-api'
 import { Article } from '~/types'
-import useArticle from '~/compositions/useArticle'
+import useArticleList from '~/compositions/useArticleList'
 
 /**
  * TODO:
@@ -67,7 +67,7 @@ export default defineComponent({
     },
   },
   setup() {
-    const { fetchToggleFavorite } = useArticle()
+    const { fetchToggleFavorite } = useArticleList()
 
     return { fetchToggleFavorite }
   },

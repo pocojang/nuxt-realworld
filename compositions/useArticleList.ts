@@ -28,7 +28,7 @@ const setPostType = (type: PostType) => {
   state.postType = type
 }
 
-export default function useArticle() {
+export default function useArticleList() {
   const { $repository, redirect } = useContext()
   const { isLogin } = useUser()
 

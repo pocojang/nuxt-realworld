@@ -37,7 +37,7 @@ import TabNavigation from '~/components/TabNavigation.vue'
 import Pagination from '~/components/Pagination.vue'
 import PopularTagList from '~/components/PopularTagList.vue'
 
-import { useArticle, useTag, useUser } from '~/compositions'
+import { useArticleList, useTag, useUser } from '~/compositions'
 
 export default defineComponent({
   name: 'IndexPage',
@@ -56,7 +56,7 @@ export default defineComponent({
       getFeedArticleList,
       getArticleListByTag,
       handleFeedToggle,
-    } = useArticle()
+    } = useArticleList()
     const { state: tagState, getTagList } = useTag()
 
     useFetch(async () => {

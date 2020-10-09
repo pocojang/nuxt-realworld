@@ -53,8 +53,8 @@ import {
   useFetch,
 } from '@nuxtjs/composition-api'
 
-import { useArticle, useProfile, useUser } from '~/compositions'
-import { PostType } from '~/compositions/useArticle'
+import { useArticleList, useProfile, useUser } from '~/compositions'
+import { PostType } from '~/compositions/useArticleList'
 
 import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
 import TabNavigation from '~/components/TabNavigation.vue'
@@ -71,7 +71,7 @@ export default defineComponent({
     const { params } = useContext()
     const { userName } = params.value
 
-    const { state: articleState, handlePostToggle } = useArticle()
+    const { state: articleState, handlePostToggle } = useArticleList()
     const {
       state: profileState,
       getProfile,

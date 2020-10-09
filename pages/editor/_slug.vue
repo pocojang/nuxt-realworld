@@ -72,7 +72,7 @@ import {
   useFetch,
 } from '@nuxtjs/composition-api'
 import { UpdateArticlePayload } from '~/api/articleRepository'
-import useArticle from '~/compositions/useArticle'
+import useArticleSlug from '~/compositions/useArticleSlug'
 
 type State = Required<UpdateArticlePayload>
 
@@ -88,7 +88,7 @@ export default defineComponent({
   setup() {
     const { params, redirect } = useContext()
     const { slug } = params.value
-    const { state: initState, getArticle, updateArticle } = useArticle()
+    const { state: initState, getArticle, updateArticle } = useArticleSlug()
 
     const state = reactive<State>({
       title: '',
