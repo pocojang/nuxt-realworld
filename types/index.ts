@@ -17,7 +17,7 @@ export interface Author {
   username: string
   bio: string
   image: string
-  following: false
+  following: boolean
 }
 
 export type Tag = string
