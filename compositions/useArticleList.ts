@@ -13,24 +13,24 @@ type State = {
   postType: PostType
 }
 
-const state = reactive<State>({
-  articleList: [],
-  articleCount: 0,
-  feedType: 'GLOBAL',
-  postType: 'AUTHOR',
-})
-
-const setFeedType = (type: FeedType) => {
-  state.feedType = type
-}
-
-const setPostType = (type: PostType) => {
-  state.postType = type
-}
-
 export default function useArticleList() {
   const { $repository, redirect } = useContext()
   const { isLogin } = useUser()
+
+  const state = reactive<State>({
+    articleList: [],
+    articleCount: 0,
+    feedType: 'GLOBAL',
+    postType: 'AUTHOR',
+  })
+
+  const setFeedType = (type: FeedType) => {
+    state.feedType = type
+  }
+
+  const setPostType = (type: PostType) => {
+    state.postType = type
+  }
 
   const getArticleList = async (payload: ArticleListRequest = {}) => {
     const {

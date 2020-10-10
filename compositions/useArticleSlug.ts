@@ -29,10 +29,10 @@ const initState = {
   },
 }
 
-const state = reactive<State>(initState)
-
 export default function useArticleSlug() {
   const { $repository } = useContext()
+
+  const state = reactive<State>(initState)
 
   const getArticle = async (slug: Article['slug']) => {
     const { article } = await $repository.article.getArticle(slug)

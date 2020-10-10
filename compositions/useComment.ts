@@ -9,12 +9,12 @@ type State = {
   commentList: Comment[]
 }
 
-const state = reactive<State>({
-  commentList: [],
-})
-
 export default function useComment() {
   const { $repository } = useContext()
+
+  const state = reactive<State>({
+    commentList: [],
+  })
 
   const getCommentList = async (slug: Article['slug']) => {
     const { comments } = await $repository.comment.getCommentList(slug)

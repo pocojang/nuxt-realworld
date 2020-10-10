@@ -14,10 +14,10 @@ const initState = {
   },
 }
 
-const state = reactive<State>(initState)
-
 export default function useProfile() {
   const { $repository } = useContext()
+
+  const state = reactive<State>(initState)
 
   const getProfile = async (userName: User['username']) => {
     const { profile } = await $repository.profile.getProfile(userName)
