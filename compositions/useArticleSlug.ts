@@ -44,7 +44,7 @@ export default function useArticleSlug() {
     const response = await $repository.article.createArticle(payload)
 
     if (response) {
-      return response.article.slug
+      return response.article
     }
 
     return false
@@ -54,7 +54,7 @@ export default function useArticleSlug() {
     const response = await $repository.article.updateArticle(payload)
 
     if (response) {
-      return response.article.slug
+      return response.article
     }
 
     return false
