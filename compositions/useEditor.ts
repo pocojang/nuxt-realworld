@@ -1,4 +1,4 @@
-import { reactive, useContext } from '@nuxtjs/composition-api'
+import { markRaw, reactive, useContext } from '@nuxtjs/composition-api'
 import useArticleSlug from './useArticleSlug'
 
 import {
@@ -12,24 +12,23 @@ type State = ArticlePayload & {
   inputTag: ''
 }
 
-const state = reactive<State>({
-  title: '',
-  description: '',
-  body: '',
-  tagList: [],
-  inputTag: '',
-})
-
 export default function useEditor() {
   const { redirect } = useContext()
   const { createArticle, updateArticle } = useArticleSlug()
-
   const setInitState = (article: ArticlePayload) => {
     state.title = article.title
     state.description = article.description
     state.body = article.body
     state.tagList = article.tagList
   }
+
+  const state = reactive<State>({
+    title: '',
+    description: '',
+    body: '',
+    tagList: [],
+    inputTag: '',
+  })
 
   const onEnterTag = () => {
     if (state.inputTag) {
@@ -68,7 +67,7 @@ export default function useEditor() {
   }
 
   return {
-    state,
+    state: markRaw(state),
     setInitState,
     onEnterTag,
     removeTag,

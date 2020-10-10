@@ -64,10 +64,7 @@
 
 <script lang="ts">
 import { defineComponent, toRefs } from '@nuxtjs/composition-api'
-import { CreateArticleRequest } from '~/api/articleRepository'
 import useEditor from '~/compositions/useEditor'
-
-type State = Required<CreateArticleRequest>
 
 /**
  *

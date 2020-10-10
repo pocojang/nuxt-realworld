@@ -69,10 +69,7 @@ import {
   useContext,
   useFetch,
 } from '@nuxtjs/composition-api'
-import { UpdateArticlePayload } from '~/api/articleRepository'
 import { useArticleSlug, useEditor } from '~/compositions'
-
-type State = Required<UpdateArticlePayload>
 
 /**
  *
