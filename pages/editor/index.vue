@@ -63,15 +63,9 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  reactive,
-  ref,
-  toRefs,
-  useContext,
-} from '@nuxtjs/composition-api'
+import { defineComponent, toRefs } from '@nuxtjs/composition-api'
 import { CreateArticleRequest } from '~/api/articleRepository'
-import useArticleSlug from '~/compositions/useArticleSlug'
+import useEditor from '~/compositions/useEditor'
 
 type State = Required<CreateArticleRequest>
 
@@ -85,42 +79,20 @@ type State = Required<CreateArticleRequest>
 export default defineComponent({
   name: 'CreateEditorPage',
   setup() {
-    const { redirect } = useContext()
-    const { createArticle } = useArticleSlug()
+    const {
+      state: editorState,
+      onEnterTag,
+      removeTag,
+      handleCreateArticle,
+    } = useEditor()
 
-    const state = reactive<State>({
-      title: '',
-      description: '',
-      body: '',
-      tagList: [],
-    })
-    const inputTag = ref('')
-
-    const onEnterTag = () => {
-      if (inputTag.value) {
-        state.tagList.push(inputTag.value)
-
-        inputTag.value = ''
-      }
-    }
-
-    const removeTag = (index: number) => {
-      state.tagList = state.tagList.filter((_, i) => i !== index)
-    }
-
-    const onCreateArticle = async () => {
-      const response = await createArticle(state)
-
-      if (!response) {
-        return
-      }
-
-      await redirect(`/article/${response}`, { option: 'withOutComment' })
+    // TODO: always success
+    const onCreateArticle = () => {
+      handleCreateArticle(editorState)
     }
 
     return {
-      ...toRefs(state),
-      inputTag,
+      ...toRefs(editorState),
       onEnterTag,
       removeTag,
       onCreateArticle,
