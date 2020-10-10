@@ -8,7 +8,7 @@ type State = {
   isLogin: boolean
 }
 
-const state = reactive<State>({
+const initState = {
   user: {
     bio: '',
     email: '',
@@ -17,7 +17,9 @@ const state = reactive<State>({
     username: '',
   },
   isLogin: false,
-})
+}
+
+const state = reactive<State>(initState)
 
 const setLogin = ({
   axios,
@@ -110,13 +112,7 @@ export default function useUser() {
     $axios.setToken(false)
 
     state.isLogin = false
-    state.user = {
-      bio: '',
-      email: '',
-      image: '',
-      token: '',
-      username: '',
-    }
+    state.user = initState.user
   }
 
   return {

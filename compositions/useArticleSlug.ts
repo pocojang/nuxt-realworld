@@ -9,7 +9,7 @@ type State = {
   article: Article
 }
 
-const state = reactive<State>({
+const initState = {
   article: {
     slug: '',
     title: '',
@@ -27,7 +27,9 @@ const state = reactive<State>({
       following: false,
     },
   },
-})
+}
+
+const state = reactive<State>(initState)
 
 export default function useArticleSlug() {
   const { $repository } = useContext()

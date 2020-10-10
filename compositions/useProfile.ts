@@ -5,14 +5,16 @@ type State = {
   profile: Profile
 }
 
-const state = reactive<State>({
+const initState = {
   profile: {
     username: '',
     bio: '',
     image: '',
     following: false,
   },
-})
+}
+
+const state = reactive<State>(initState)
 
 export default function useProfile() {
   const { $repository } = useContext()
