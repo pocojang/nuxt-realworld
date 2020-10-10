@@ -65,14 +65,12 @@
 <script lang="ts">
 import {
   defineComponent,
-  reactive,
-  ref,
   toRefs,
   useContext,
   useFetch,
 } from '@nuxtjs/composition-api'
 import { UpdateArticlePayload } from '~/api/articleRepository'
-import useArticleSlug from '~/compositions/useArticleSlug'
+import { useArticleSlug, useEditor } from '~/compositions'
 
 type State = Required<UpdateArticlePayload>
 
@@ -86,60 +84,36 @@ type State = Required<UpdateArticlePayload>
 export default defineComponent({
   name: 'UpdateEditorPage',
   setup() {
-    const { params, redirect } = useContext()
+    const {
+      state: editorState,
+      setInitState,
+      onEnterTag,
+      removeTag,
+      handleUpdateArticle,
+    } = useEditor()
+    const { params } = useContext()
     const { slug } = params.value
-    const { state: initState, getArticle, updateArticle } = useArticleSlug()
-
-    const state = reactive<State>({
-      title: '',
-      description: '',
-      body: '',
-      tagList: [],
-    })
+    const { state: initState, getArticle } = useArticleSlug()
 
     const { fetchState } = useFetch(async () => {
       await getArticle(slug)
 
       if (initState?.article) {
-        state.title = initState.article.title
-        state.description = initState.article.description
-        state.body = initState.article.body
-        state.tagList = initState.article.tagList
+        setInitState(initState.article)
       }
     })
 
-    const inputTag = ref('')
-
-    const onEnterTag = () => {
-      if (inputTag.value) {
-        state.tagList.push(inputTag.value)
-
-        inputTag.value = ''
-      }
-    }
-
-    const removeTag = (index: number) => {
-      state.tagList = state.tagList.filter((_, i) => i !== index)
-    }
-
     // TODO: always success
-    const onUpdateArticle = async () => {
-      const response = await updateArticle({
+    const onUpdateArticle = () => {
+      handleUpdateArticle({
         slug,
-        payload: state,
+        payload: editorState,
       })
-
-      if (!response) {
-        return
-      }
-
-      await redirect(`/article/${response}`, { option: 'withOutComment' })
     }
 
     return {
-      ...toRefs(state),
+      ...toRefs(editorState),
       fetchState,
-      inputTag,
       onEnterTag,
       removeTag,
       onUpdateArticle,
