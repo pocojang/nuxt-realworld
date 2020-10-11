@@ -15,6 +15,7 @@ type State = ArticlePayload & {
 export default function useEditor() {
   const { redirect } = useContext()
   const { createArticle, updateArticle } = useArticleSlug()
+
   const setInitState = (article: ArticlePayload) => {
     state.title = article.title
     state.description = article.description

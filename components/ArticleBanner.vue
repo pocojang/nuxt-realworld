@@ -9,9 +9,9 @@
           <img :src="author.image" alt="author profile image" />
         </nuxt-link>
         <div class="info">
-          <nuxt-link :to="`/profile/${author.username}`" class="author">{{
-            author.username
-          }}</nuxt-link>
+          <nuxt-link :to="`/profile/${author.username}`" class="author">
+            {{ author.username }}
+          </nuxt-link>
           <span class="date">{{ new Date(article.createdAt) }}</span>
         </div>
         <span v-if="isMyArticle">

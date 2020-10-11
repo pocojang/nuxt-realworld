@@ -5,12 +5,12 @@
     </li>
     <li class="nav-item">
       <nuxt-link to="/editor" class="nav-link">
-        <i class="ion-compose"></i> New Post
+        <i class="ion-compose" /> New Post
       </nuxt-link>
     </li>
     <li class="nav-item">
       <nuxt-link to="/settings" class="nav-link">
-        <i class="ion-gear-a"></i> Settings
+        <i class="ion-gear-a" /> Settings
       </nuxt-link>
     </li>
     <li class="nav-item">

@@ -7,8 +7,9 @@
         :key="index"
         class="tag-default tag-pill"
         @click="$emit('on-click-tag', tag)"
-        >{{ tag }}</a
       >
+        {{ tag }}
+      </a>
     </div>
   </div>
 </template>
