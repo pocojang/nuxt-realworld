@@ -1,8 +1,18 @@
 <template>
-  <div class="banner">
-    <div class="container">
-      <h1 class="logo-font">conduit</h1>
-      <p>A place to share your knowledge.</p>
-    </div>
-  </div>
+  <BannerContainer>
+    <h1 class="logo-font">conduit</h1>
+    <p>A place to share your knowledge.</p>
+  </BannerContainer>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+import BannerContainer from './BannerContainer.vue'
+
+export default Vue.extend({
+  name: 'Banner',
+  components: {
+    BannerContainer,
+  },
+})
+</script>
