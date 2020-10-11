@@ -32,15 +32,10 @@
         <p>{{ article.description }}</p>
         <span>Read more...</span>
 
-        <ul v-if="article.tagList.length" class="tag-list">
-          <li
-            v-for="(value, tagIndex) in article.tagList"
-            :key="tagIndex"
-            class="tag-default tag-pill tag-outline"
-          >
-            {{ value }}
-          </li>
-        </ul>
+        <ArticleTagList
+          v-if="article.tagList.length"
+          :tag-list="article.tagList"
+        />
       </nuxt-link>
     </div>
   </div>
@@ -49,6 +44,7 @@
 <script lang="ts">
 import { PropType } from 'vue'
 import { defineComponent } from '@nuxtjs/composition-api'
+import ArticleTagList from './ArticleTagList.vue'
 import { Article } from '~/types'
 import useArticleList from '~/compositions/useArticleList'
 
@@ -60,6 +56,9 @@ import useArticleList from '~/compositions/useArticleList'
  */
 export default defineComponent({
   name: 'ArticlePreviewList',
+  components: {
+    ArticleTagList,
+  },
   props: {
     articleList: {
       type: Array as () => PropType<Article[]>,

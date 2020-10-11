@@ -16,15 +16,10 @@
           <div class="col-xs-12">
             <div v-html="$md.render(article.body)" />
 
-            <ul v-if="article.tagList.length" class="tag-list">
-              <li
-                v-for="(tag, index) in article.tagList"
-                :key="index"
-                class="tag-default tag-pill tag-outline"
-              >
-                {{ tag }}
-              </li>
-            </ul>
+            <ArticleTagList
+              v-if="article.tagList.length"
+              :tag-list="article.tagList"
+            />
           </div>
         </div>
         <hr />
@@ -64,6 +59,7 @@ import {
 } from '@nuxtjs/composition-api'
 
 import ArticleBanner from '~/components/ArticleBanner.vue'
+import ArticleTagList from '~/components/ArticleTagList.vue'
 import CommentCardList from '~/components/CommentCardList.vue'
 import CommentEditor from '~/components/CommentEditor.vue'
 
@@ -82,6 +78,7 @@ export default defineComponent({
   name: 'AritclePage',
   components: {
     ArticleBanner,
+    ArticleTagList,
     CommentEditor,
     CommentCardList,
   },
