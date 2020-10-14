@@ -35,9 +35,7 @@
             :tab-items="tabItems"
             @on-click-tab="onChangeTab"
           />
-          <div>
-            <article-preview-list :article-list="articleList" />
-          </div>
+          <article-preview-list :article-list="articleList" />
         </div>
       </div>
     </div>
@@ -68,7 +66,7 @@ export default defineComponent({
     ProfileBanner,
   },
   setup() {
-    const { params } = useContext()
+    const { params, route, redirect } = useContext()
     const { userName } = params.value
 
     const { state: articleState, handlePostToggle } = useArticleList()
@@ -88,7 +86,17 @@ export default defineComponent({
     )
 
     const { fetchState } = useFetch(async () => {
-      await handlePostToggle({ userName, postType: articleState.postType })
+      const postTypeBy: { [P: string]: PostType } = {
+        'profile-userName': 'AUTHOR',
+        'profile-userName-favorites': 'FAVORITED',
+      }
+
+      if (route.value.name) {
+        const postType = postTypeBy[route.value.name]
+
+        await handlePostToggle({ userName, postType })
+      }
+
       await getProfile(userName)
     })
 
@@ -100,8 +108,14 @@ export default defineComponent({
       }
     }
 
-    const onChangeTab = async (postType: PostType) => {
-      await handlePostToggle({ userName, postType })
+    const onChangeTab = (postType: PostType) => {
+      const urlBy = {
+        AUTHOR: (userName: string) => '/profile/' + userName,
+        FAVORITED: (userName: string) => `/profile/${userName}/favorites`,
+      }
+      const newURL = urlBy[postType](userName)
+
+      redirect(newURL)
     }
 
     return {
