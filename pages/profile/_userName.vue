@@ -69,7 +69,7 @@ export default defineComponent({
     const { params, route, redirect } = useContext()
     const { userName } = params.value
 
-    const { state: articleState, handlePostToggle } = useArticleList()
+    const { state: articleState, getArticleListByPost } = useArticleList()
     const {
       state: profileState,
       getProfile,
@@ -94,7 +94,7 @@ export default defineComponent({
       if (route.value.name) {
         const postType = postTypeBy[route.value.name]
 
-        await handlePostToggle({ userName, postType })
+        await getArticleListByPost({ userName, postType })
       }
 
       await getProfile(userName)

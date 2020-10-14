@@ -62,7 +62,7 @@ export default function useArticleList() {
     state.articleCount = articlesCount
   }
 
-  const handleFeedToggle = async (listType: FeedType) => {
+  const getArticleListByFeed = async (listType: FeedType) => {
     const fetchArticleBy = {
       GLOBAL: getArticleList,
       YOUR: getFeedArticleList,
@@ -73,7 +73,7 @@ export default function useArticleList() {
     setFeedType(listType)
   }
 
-  const handlePostToggle = async ({
+  const getArticleListByPost = async ({
     userName,
     postType = 'AUTHOR',
   }: {
@@ -125,8 +125,8 @@ export default function useArticleList() {
     getArticleList,
     getFeedArticleList,
     getArticleListByTag,
-    handleFeedToggle,
-    handlePostToggle,
+    getArticleListByFeed,
+    getArticleListByPost,
     fetchToggleFavorite,
     setFeedType,
     setPostType,

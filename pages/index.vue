@@ -7,7 +7,7 @@
           <tab-navigation
             :tab-type="feedType"
             :tab-items="tabItems"
-            @on-click-tab="handleFeedToggle"
+            @on-click-tab="getArticleListByFeed"
           />
           <article-preview-list :article-list="articleList" />
           <pagination />
@@ -55,7 +55,7 @@ export default defineComponent({
       getArticleList,
       getFeedArticleList,
       getArticleListByTag,
-      handleFeedToggle,
+      getArticleListByFeed,
     } = useArticleList()
     const { state: tagState, getTagList } = useTag()
 
@@ -88,7 +88,7 @@ export default defineComponent({
       ),
       getArticleListByTag,
       isLogin,
-      handleFeedToggle,
+      getArticleListByFeed,
     }
   },
 })
