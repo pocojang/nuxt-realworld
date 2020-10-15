@@ -80,15 +80,11 @@ export default function useArticleList() {
     userName: User['username']
     postType: PostType
   }) => {
-    console.warn(postType)
-
     await getArticleList({
       [postType.toLowerCase()]: userName,
     })
 
     setPostType(postType)
-
-    console.warn(state.postType)
   }
 
   const fetchToggleFavorite = async (articleIndex: number) => {
@@ -97,8 +93,6 @@ export default function useArticleList() {
 
       return
     }
-
-    console.log(state)
 
     const selectedArticle = state.articleList[articleIndex]
     const response = selectedArticle?.favorited
