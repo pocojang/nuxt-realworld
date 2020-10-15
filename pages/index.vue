@@ -9,8 +9,11 @@
             :tab-items="tabItems"
             @on-click-tab="getArticleListByFeed"
           />
-          <article-preview-list :article-list="articleList" />
-          <pagination />
+
+          <template v-if="!fetchState.pending && !fetchState.error">
+            <article-preview-list :article-list="articleList" />
+            <pagination />
+          </template>
         </div>
         <div class="col-md-3">
           <popular-tag-list
@@ -59,7 +62,7 @@ export default defineComponent({
     } = useArticleList()
     const { state: tagState, getTagList } = useTag()
 
-    useFetch(async () => {
+    const { fetchState } = useFetch(async () => {
       if (articleState.feedType === 'YOUR') {
         await getFeedArticleList()
       } else {
@@ -72,6 +75,7 @@ export default defineComponent({
     })
 
     return {
+      fetchState,
       articleList: toRef(articleState, 'articleList'),
       tagList: toRef(tagState, 'tagList'),
       feedType: toRef(articleState, 'feedType'),
