@@ -13,16 +13,16 @@ type State = {
   postType: PostType
 }
 
+const state = reactive<State>({
+  articleList: [],
+  articleCount: 0,
+  feedType: 'GLOBAL',
+  postType: 'AUTHOR',
+})
+
 export default function useArticleList() {
   const { $repository, redirect } = useContext()
   const { isLogin } = useUser()
-
-  const state = reactive<State>({
-    articleList: [],
-    articleCount: 0,
-    feedType: 'GLOBAL',
-    postType: 'AUTHOR',
-  })
 
   const setFeedType = (type: FeedType) => {
     state.feedType = type
@@ -80,11 +80,15 @@ export default function useArticleList() {
     userName: User['username']
     postType: PostType
   }) => {
+    console.warn(postType)
+
     await getArticleList({
       [postType.toLowerCase()]: userName,
     })
 
     setPostType(postType)
+
+    console.warn(state.postType)
   }
 
   const fetchToggleFavorite = async (articleIndex: number) => {
@@ -93,6 +97,8 @@ export default function useArticleList() {
 
       return
     }
+
+    console.log(state)
 
     const selectedArticle = state.articleList[articleIndex]
     const response = selectedArticle?.favorited
