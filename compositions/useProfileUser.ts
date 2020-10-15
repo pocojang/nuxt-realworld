@@ -14,7 +14,7 @@ const initState = {
   },
 }
 
-export default function useProfile() {
+export default function useProfileUser() {
   const { $repository } = useContext()
 
   const state = reactive<State>(initState)
