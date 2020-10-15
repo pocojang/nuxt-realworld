@@ -1,36 +1,29 @@
 import { reactive, useContext, watch } from '@nuxtjs/composition-api'
 import useUser from './useUser'
 import { ArticleListRequest } from '~/api/articleRepository'
-import { Article, Tag, User } from '~/types'
+import { Article, Tag } from '~/types'
 
 type FeedType = 'GLOBAL' | 'YOUR'
-export type PostType = 'AUTHOR' | 'FAVORITED'
 
 type State = {
   articleList: Article[]
   articleCount: number
   feedType: FeedType
-  postType: PostType
 }
 
 const state = reactive<State>({
   articleList: [],
   articleCount: 0,
   feedType: 'GLOBAL',
-  postType: 'AUTHOR',
 })
+
+const setFeedType = (type: FeedType) => {
+  state.feedType = type
+}
 
 export default function useArticleList() {
   const { $repository, redirect } = useContext()
   const { isLogin } = useUser()
-
-  const setFeedType = (type: FeedType) => {
-    state.feedType = type
-  }
-
-  const setPostType = (type: PostType) => {
-    state.postType = type
-  }
 
   const getArticleList = async (payload: ArticleListRequest = {}) => {
     const {
@@ -73,20 +66,6 @@ export default function useArticleList() {
     setFeedType(listType)
   }
 
-  const getArticleListByPost = async ({
-    userName,
-    postType = 'AUTHOR',
-  }: {
-    userName: User['username']
-    postType: PostType
-  }) => {
-    await getArticleList({
-      [postType.toLowerCase()]: userName,
-    })
-
-    setPostType(postType)
-  }
-
   const fetchToggleFavorite = async (articleIndex: number) => {
     if (!isLogin.value) {
       redirect('/login')
@@ -126,9 +105,7 @@ export default function useArticleList() {
     getFeedArticleList,
     getArticleListByTag,
     getArticleListByFeed,
-    getArticleListByPost,
     fetchToggleFavorite,
     setFeedType,
-    setPostType,
   }
 }
