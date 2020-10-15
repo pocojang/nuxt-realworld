@@ -51,16 +51,6 @@ export default {
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
 
-  router: {
-    extendRoutes(routes, resolve) {
-      routes.push({
-        name: 'profile-userName-favorites',
-        path: '/profile/:userName/favorites',
-        component: resolve(__dirname, 'pages/profile/_userName.vue'),
-      })
-    },
-  },
-
   axios: {
     // Axios Configuration (https://github.com/nuxt-community/axios-module#options)
     baseURL: 'https://conduit.productionready.io/api/',

@@ -35,7 +35,7 @@
             :tab-items="tabItems"
             @on-click-tab="onChangeTab"
           />
-          <article-preview-list :article-list="articleList" />
+          <nuxt-child :key="$route.params.userName" />
         </div>
       </div>
     </div>
@@ -51,8 +51,8 @@ import {
   useFetch,
 } from '@nuxtjs/composition-api'
 
-import { useArticleList, useProfile, useUser } from '~/compositions'
-import { PostType } from '~/compositions/useArticleList'
+import { useProfileUser, useProfileList, useUser } from '~/compositions'
+import { PostType } from '~/compositions/useProfileList'
 
 import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
 import TabNavigation from '~/components/TabNavigation.vue'
@@ -66,16 +66,16 @@ export default defineComponent({
     ProfileBanner,
   },
   setup() {
-    const { params, route, redirect } = useContext()
+    const { params, redirect } = useContext()
     const { userName } = params.value
 
-    const { state: articleState, getArticleListByPost } = useArticleList()
+    const { postType } = useProfileList()
     const {
       state: profileState,
       getProfile,
       followUser,
       unFollowUser,
-    } = useProfile()
+    } = useProfileUser()
     const { user: userState, isLogin } = useUser()
 
     const isMyProfile = computed(
@@ -86,17 +86,6 @@ export default defineComponent({
     )
 
     const { fetchState } = useFetch(async () => {
-      const postTypeBy: { [P: string]: PostType } = {
-        'profile-userName': 'AUTHOR',
-        'profile-userName-favorites': 'FAVORITED',
-      }
-
-      if (route.value.name) {
-        const postType = postTypeBy[route.value.name]
-
-        await getArticleListByPost({ userName, postType })
-      }
-
       await getProfile(userName)
     })
 
@@ -119,9 +108,8 @@ export default defineComponent({
     }
 
     return {
-      articleList: toRef(articleState, 'articleList'),
       profile: toRef(profileState, 'profile'),
-      postType: toRef(articleState, 'postType'),
+      postType,
       tabItems,
       fetchState,
       onChangeTab,
