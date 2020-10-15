@@ -19,7 +19,31 @@ For more information on how to this works with other frontends/backends, head ov
 
 # How it works
 
-> Describe the general architecture of your app here
+```bash
+|____types
+|____plugins
+| |____repository.ts
+|____compositions
+| |____useArticleList.ts
+| |____useArticleSlug.ts
+| |____useComment.ts
+| |____useEditor.ts
+| |____useProfile.ts
+| |____useTag.ts
+| |____useUser.ts
+|____pages
+  |____index.vue
+  |____settings.vue
+  |____login.vue
+  |____register.vue
+  |____profile
+  | |_____userName.vue
+  |____article
+  | |_____slug.vue
+  |____editor
+    |____index.vue
+    |_____slug.vue
+```
 
 # Getting started
 
@@ -37,7 +61,7 @@ $ yarn dev
 # build for production and launch server
 $ npm run build
 $ npm start
-of
+or
 $ yarn build
 $ yarn start
 
