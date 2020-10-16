@@ -1,68 +1,56 @@
 <template>
-  <div class="settings-page">
-    <div class="container page">
-      <div class="row">
-        <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Your Settings</h1>
-          <form @submit.prevent="onSubmitUpdate">
-            <fieldset>
-              <fieldset class="form-group">
-                <input
-                  v-model="image"
-                  type="text"
-                  class="form-control"
-                  placeholder="URL of profile picture"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <input
-                  v-model="userName"
-                  type="text"
-                  class="form-control form-control-lg"
-                  placeholder="Username"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <textarea
-                  v-model="bio"
-                  class="form-control form-control-lg"
-                  rows="8"
-                  placeholder="Short bio about you"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <input
-                  v-model="email"
-                  type="email"
-                  class="form-control form-control-lg"
-                  placeholder="Email"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <input
-                  v-model="password"
-                  type="password"
-                  class="form-control form-control-lg"
-                  placeholder="New Password"
-                />
-              </fieldset>
-              <button
-                class="btn btn-lg btn-primary pull-xs-right"
-                type="submit"
-                @click.prevent="onSubmitUpdate"
-              >
-                Update Settings
-              </button>
-            </fieldset>
-          </form>
-          <hr />
-          <button class="btn btn-outline-danger" @click="onLogout">
-            Or click here to logout.
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <FormContainer name="settings-page" @on-submit="onSubmitUpdate">
+    <template v-slot:title>Your Settings</template>
+    <template v-slot:form-group>
+      <fieldset class="form-group">
+        <input
+          v-model="image"
+          type="text"
+          class="form-control"
+          placeholder="URL of profile picture"
+        />
+      </fieldset>
+      <fieldset class="form-group">
+        <input
+          v-model="userName"
+          type="text"
+          class="form-control form-control-lg"
+          placeholder="Username"
+        />
+      </fieldset>
+      <fieldset class="form-group">
+        <textarea
+          v-model="bio"
+          class="form-control form-control-lg"
+          rows="8"
+          placeholder="Short bio about you"
+        />
+      </fieldset>
+      <fieldset class="form-group">
+        <input
+          v-model="email"
+          type="email"
+          class="form-control form-control-lg"
+          placeholder="Email"
+        />
+      </fieldset>
+      <fieldset class="form-group">
+        <input
+          v-model="password"
+          type="password"
+          class="form-control form-control-lg"
+          placeholder="New Password"
+        />
+      </fieldset>
+    </template>
+    <template v-slot:submit-button>Update Settings</template>
+    <template v-slot:sub-contents>
+      <hr />
+      <button class="btn btn-outline-danger" @click="onLogout">
+        Or click here to logout.
+      </button>
+    </template>
+  </FormContainer>
 </template>
 
 <script lang="ts">
