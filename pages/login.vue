@@ -1,42 +1,29 @@
 <template>
-  <div class="auth-page">
-    <div class="container page">
-      <div class="row">
-        <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Sign In</h1>
-          <p class="text-xs-center">
-            <nuxt-link to="/register">Need an account?</nuxt-link>
-          </p>
-
-          <ul class="error-messages">
-            <li>That email is already taken</li>
-          </ul>
-
-          <form @submit.prevent="handleLogin">
-            <fieldset class="form-group">
-              <input
-                v-model="email"
-                type="email"
-                class="form-control form-control-lg"
-                placeholder="Email"
-              />
-            </fieldset>
-            <fieldset class="form-group">
-              <input
-                v-model="password"
-                type="password"
-                class="form-control form-control-lg"
-                placeholder="Password"
-              />
-            </fieldset>
-            <button class="btn btn-lg btn-primary pull-xs-right" type="submit">
-              Sign in
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+  <FormContainer @on-submit="handleLogin">
+    <template v-slot:title>Sign In</template>
+    <template v-slot:link>
+      <nuxt-link to="/register">Need an account?</nuxt-link>
+    </template>
+    <template v-slot:form-group>
+      <fieldset class="form-group">
+        <input
+          v-model="email"
+          type="email"
+          class="form-control form-control-lg"
+          placeholder="Email"
+        />
+      </fieldset>
+      <fieldset class="form-group">
+        <input
+          v-model="password"
+          type="password"
+          class="form-control form-control-lg"
+          placeholder="Password"
+        />
+      </fieldset>
+    </template>
+    <template v-slot:submit-button>Sign in</template>
+  </FormContainer>
 </template>
 
 <script lang="ts">
@@ -46,6 +33,7 @@ import {
   useContext,
   toRefs,
 } from '@nuxtjs/composition-api'
+import FormContainer from '@/components/FormContainer.vue'
 import useUser from '~/compositions/useUser'
 
 /**
@@ -56,6 +44,9 @@ import useUser from '~/compositions/useUser'
  */
 export default defineComponent({
   name: 'LoginPage',
+  components: {
+    FormContainer,
+  },
   setup() {
     const { fetchAuthLogin } = useUser()
     const { redirect } = useContext()
