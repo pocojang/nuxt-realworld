@@ -109,10 +109,11 @@ export default function useUser() {
   }
 
   const authLogout = () => {
-    $axios.setToken(false)
-
     state.isLogin = false
     state.user = initState.user
+
+    $axios.setToken(false)
+    window.localStorage.removeItem('token')
   }
 
   return {
