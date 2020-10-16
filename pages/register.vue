@@ -1,50 +1,37 @@
 <template>
-  <div class="auth-page">
-    <div class="container page">
-      <div class="row">
-        <div class="col-md-6 offset-md-3 col-xs-12">
-          <h1 class="text-xs-center">Sign Up</h1>
-          <p class="text-xs-center">
-            <nuxt-link to="/login"> Have an account?</nuxt-link>
-          </p>
-          <form @submit.prevent="handleRegister">
-            <fieldset>
-              <fieldset class="form-group">
-                <input
-                  v-model="userName"
-                  type="text"
-                  class="form-control form-control-lg"
-                  placeholder="Username"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <input
-                  v-model="email"
-                  type="email"
-                  class="form-control form-control-lg"
-                  placeholder="Email"
-                />
-              </fieldset>
-              <fieldset class="form-group">
-                <input
-                  v-model="password"
-                  type="password"
-                  class="form-control form-control-lg"
-                  placeholder="Password"
-                />
-              </fieldset>
-              <button
-                class="btn btn-lg btn-primary pull-xs-right"
-                type="submit"
-              >
-                Sign Up
-              </button>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+  <FormContainer @on-submit="handleRegister">
+    <template v-slot:title>Sign Up</template>
+    <template v-slot:link>
+      <nuxt-link to="/login"> Have an account?</nuxt-link>
+    </template>
+    <template v-slot:form-group>
+      <fieldset class="form-group">
+        <input
+          v-model="userName"
+          type="text"
+          class="form-control form-control-lg"
+          placeholder="Username"
+        />
+      </fieldset>
+      <fieldset class="form-group">
+        <input
+          v-model="email"
+          type="email"
+          class="form-control form-control-lg"
+          placeholder="Email"
+        />
+      </fieldset>
+      <fieldset class="form-group">
+        <input
+          v-model="password"
+          type="password"
+          class="form-control form-control-lg"
+          placeholder="Password"
+        />
+      </fieldset>
+    </template>
+    <template v-slot:submit-button>Sign Up</template>
+  </FormContainer>
 </template>
 
 <script lang="ts">
