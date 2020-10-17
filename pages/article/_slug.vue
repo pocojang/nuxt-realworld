@@ -14,7 +14,7 @@
       <div class="container page">
         <div class="row article-content">
           <div class="col-xs-12">
-            // eslint-disable-next-line vue/no-v-html
+            <!-- eslint-disable-next-line vue/no-v-html -->
             <div v-html="$md.render(article.body)" />
 
             <ArticleTagList
