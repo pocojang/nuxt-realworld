@@ -1,5 +1,5 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-import { Tag, ResponseType } from '~/types'
+import { Tag, ResponseType } from '@/types'
 
 export const tagRepository = (axios: NuxtAxiosInstance) => ({
   getTagList(): ResponseType<'tags', Tag[]> {

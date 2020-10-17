@@ -42,8 +42,8 @@
 
 <script lang="ts">
 import { defineComponent, toRefs } from '@nuxtjs/composition-api'
-import useEditor from '~/compositions/useEditor'
-import Editor from '~/components/Editor.vue'
+import useEditor from '@/compositions/useEditor'
+import Editor from '@/components/Editor.vue'
 
 /**
  *

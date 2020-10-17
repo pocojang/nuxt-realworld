@@ -1,7 +1,7 @@
 import { reactive, useContext, watch } from '@nuxtjs/composition-api'
 import useUser from './useUser'
-import { ArticleListRequest } from '~/api/articleRepository'
-import { Article, Tag } from '~/types'
+import { ArticleListRequest } from '@/api/articleRepository'
+import { Article, Tag } from '@/types'
 
 type FeedType = 'GLOBAL' | 'YOUR'
 

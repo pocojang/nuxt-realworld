@@ -61,7 +61,7 @@ import {
   toRefs,
   useFetch,
 } from '@nuxtjs/composition-api'
-import useUser from '~/compositions/useUser'
+import useUser from '@/compositions/useUser'
 
 export default defineComponent({
   name: 'SettingsPage',

@@ -1,5 +1,5 @@
 import { reactive, useContext } from '@nuxtjs/composition-api'
-import { Profile, User } from '~/types'
+import { Profile, User } from '@/types'
 
 type State = {
   profile: Profile

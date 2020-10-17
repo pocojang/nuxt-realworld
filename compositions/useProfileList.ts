@@ -1,5 +1,5 @@
 import { reactive, toRef, useContext, useFetch } from '@nuxtjs/composition-api'
-import { Article, User } from '~/types'
+import { Article, User } from '@/types'
 
 export type PostType = 'AUTHOR' | 'FAVORITED'
 

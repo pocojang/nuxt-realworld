@@ -52,7 +52,7 @@
 
 <script lang="ts">
 import Vue, { PropOptions } from 'vue'
-import { Article } from '~/types'
+import { Article } from '@/types'
 
 export default Vue.extend({
   name: 'Editor',

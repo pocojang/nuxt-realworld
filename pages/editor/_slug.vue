@@ -47,8 +47,8 @@ import {
   useContext,
   useFetch,
 } from '@nuxtjs/composition-api'
-import { useArticleSlug, useEditor } from '~/compositions'
-import Editor from '~/components/Editor.vue'
+import { useArticleSlug, useEditor } from '@/compositions'
+import Editor from '@/components/Editor.vue'
 
 /**
  *

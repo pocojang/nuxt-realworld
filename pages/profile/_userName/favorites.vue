@@ -8,8 +8,8 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 
-import useProfileList from '~/compositions/useProfileList'
-import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
+import useProfileList from '@/compositions/useProfileList'
+import ArticlePreviewList from '@/components/ArticlePreviewList.vue'
 
 export default defineComponent({
   name: 'ProfileFavoritePage',

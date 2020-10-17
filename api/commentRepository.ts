@@ -1,5 +1,5 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-import { Article, Comment, ResponseType } from '~/types'
+import { Article, Comment, ResponseType } from '@/types'
 
 type Slug = Article['slug']
 export type CreateCommentRequest = Pick<Comment, 'body'> & Pick<Article, 'slug'>

@@ -34,7 +34,7 @@ import {
   toRefs,
 } from '@nuxtjs/composition-api'
 import FormContainer from '@/components/FormContainer.vue'
-import useUser from '~/compositions/useUser'
+import useUser from '@/compositions/useUser'
 
 /**
  * 1. Validation

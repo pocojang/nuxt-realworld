@@ -2,8 +2,8 @@ import { reactive, useContext } from '@nuxtjs/composition-api'
 import {
   CreateArticleRequest,
   UpdateArticleRequest,
-} from '~/api/articleRepository'
-import { Article } from '~/types'
+} from '@/api/articleRepository'
+import { Article } from '@/types'
 
 type State = {
   article: Article

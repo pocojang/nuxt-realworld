@@ -1,5 +1,5 @@
 import { reactive, useContext } from '@nuxtjs/composition-api'
-import { Tag } from '~/types'
+import { Tag } from '@/types'
 
 type State = {
   tagList: Tag[]

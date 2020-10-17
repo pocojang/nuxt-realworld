@@ -8,11 +8,9 @@
 
 <script lang="ts">
 import { defineComponent, useAsync } from '@nuxtjs/composition-api'
-
+import useUser from '@/compositions/useUser'
 import appFooter from './appFooter.vue'
 import appHeader from './appHeader.vue'
-
-import useUser from '~/compositions/useUser'
 
 export default defineComponent({
   name: 'Default',

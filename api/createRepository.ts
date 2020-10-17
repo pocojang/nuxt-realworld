@@ -10,7 +10,7 @@ import {
   ProfileRepository,
   TagRepository,
   UserRepository,
-} from '~/api'
+} from '@/api'
 
 export type Repository = {
   article: ArticleRepository

@@ -14,6 +14,7 @@
       <div class="container page">
         <div class="row article-content">
           <div class="col-xs-12">
+            // eslint-disable-next-line vue/no-v-html
             <div v-html="$md.render(article.body)" />
 
             <ArticleTagList
@@ -58,13 +59,13 @@ import {
   useFetch,
 } from '@nuxtjs/composition-api'
 
-import ArticleBanner from '~/components/ArticleBanner.vue'
-import ArticleTagList from '~/components/ArticleTagList.vue'
-import CommentCardList from '~/components/CommentCardList.vue'
-import CommentEditor from '~/components/CommentEditor.vue'
+import ArticleBanner from '@/components/ArticleBanner.vue'
+import ArticleTagList from '@/components/ArticleTagList.vue'
+import CommentCardList from '@/components/CommentCardList.vue'
+import CommentEditor from '@/components/CommentEditor.vue'
 
-import { useArticleSlug, useComment, useUser } from '~/compositions'
-import { Comment } from '~/types'
+import { useArticleSlug, useComment, useUser } from '@/compositions'
+import { Comment } from '@/types'
 
 /**
  *

@@ -6,7 +6,7 @@ import {
   ResponseType,
   OptionalPick,
   ResponseTypes,
-} from '~/types'
+} from '@/types'
 
 type Slug = Article['slug']
 type UserName = Author['username']

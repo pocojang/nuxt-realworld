@@ -17,7 +17,7 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 import AuthNavigationBar from '@/components/AuthNavigationBar.vue'
 import NavigationBar from '@/components/NavigationBar.vue'
-import useUser from '~/compositions/useUser'
+import useUser from '@/compositions/useUser'
 
 export default defineComponent({
   name: 'AppHeader',

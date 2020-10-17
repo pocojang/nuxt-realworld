@@ -51,12 +51,12 @@ import {
   useFetch,
 } from '@nuxtjs/composition-api'
 
-import { useProfileUser, useProfileList, useUser } from '~/compositions'
-import { PostType } from '~/compositions/useProfileList'
+import { useProfileUser, useProfileList, useUser } from '@/compositions'
+import { PostType } from '@/compositions/useProfileList'
 
-import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
-import TabNavigation from '~/components/TabNavigation.vue'
-import ProfileBanner from '~/components/ProfileBanner.vue'
+import ArticlePreviewList from '@/components/ArticlePreviewList.vue'
+import TabNavigation from '@/components/TabNavigation.vue'
+import ProfileBanner from '@/components/ProfileBanner.vue'
 
 export default defineComponent({
   name: 'ProfilePage',

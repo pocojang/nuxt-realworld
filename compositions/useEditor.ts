@@ -4,8 +4,8 @@ import useArticleSlug from './useArticleSlug'
 import {
   CreateArticleRequest,
   UpdateArticleRequest,
-} from '~/api/articleRepository'
-import { Article } from '~/types'
+} from '@/api/articleRepository'
+import { Article } from '@/types'
 
 type ArticlePayload = Required<CreateArticleRequest>
 type State = ArticlePayload & {

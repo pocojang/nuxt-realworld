@@ -1,5 +1,4 @@
-import Vue from 'vue'
-import { Repository } from '~/api'
+import { Repository } from '@/api'
 
 declare module 'vue/types/vue' {
   interface Vue {

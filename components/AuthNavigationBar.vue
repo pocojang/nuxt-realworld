@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import Vue, { PropType } from 'vue'
-import { User } from '~/types'
+import { User } from '@/types'
 
 export default Vue.extend({
   name: 'AuthNavigationBar',

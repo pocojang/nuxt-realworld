@@ -1,7 +1,7 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
 import { reactive, useContext, toRef } from '@nuxtjs/composition-api'
-import { AuthLoginRequest, AuthRegisterRequest, UpdateUserRequest } from '~/api'
-import { User } from '~/types'
+import { AuthLoginRequest, AuthRegisterRequest, UpdateUserRequest } from '@/api'
+import { User } from '@/types'
 
 type State = {
   user: User

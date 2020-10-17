@@ -30,7 +30,7 @@
 <script lang="ts">
 import { defineComponent, ref } from '@nuxtjs/composition-api'
 import { PropType } from 'vue'
-import { User } from '~/types'
+import { User } from '@/types'
 
 export default defineComponent({
   name: 'CommentEditor',

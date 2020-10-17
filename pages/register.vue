@@ -41,7 +41,7 @@ import {
   useContext,
   toRefs,
 } from '@nuxtjs/composition-api'
-import useUser from '~/compositions/useUser'
+import useUser from '@/compositions/useUser'
 
 /**
  * TODO: WIP

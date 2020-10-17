@@ -44,9 +44,9 @@
 <script lang="ts">
 import { PropType } from 'vue'
 import { defineComponent } from '@nuxtjs/composition-api'
+import { Article } from '@/types'
+import useArticleList from '@/compositions/useArticleList'
 import ArticleTagList from './ArticleTagList.vue'
-import { Article } from '~/types'
-import useArticleList from '~/compositions/useArticleList'
 
 /**
  * TODO:

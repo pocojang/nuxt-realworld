@@ -36,7 +36,7 @@
 
 <script lang="ts">
 import Vue, { PropOptions } from 'vue'
-import { Comment, User } from '~/types'
+import { Comment, User } from '@/types'
 
 /**
  *

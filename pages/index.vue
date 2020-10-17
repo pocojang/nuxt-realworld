@@ -34,13 +34,13 @@ import {
   useFetch,
 } from '@nuxtjs/composition-api'
 
-import ArticlePreviewList from '~/components/ArticlePreviewList.vue'
-import Banner from '~/components/Banner.vue'
-import TabNavigation from '~/components/TabNavigation.vue'
-import Pagination from '~/components/Pagination.vue'
-import PopularTagList from '~/components/PopularTagList.vue'
+import ArticlePreviewList from '@/components/ArticlePreviewList.vue'
+import Banner from '@/components/Banner.vue'
+import TabNavigation from '@/components/TabNavigation.vue'
+import Pagination from '@/components/Pagination.vue'
+import PopularTagList from '@/components/PopularTagList.vue'
 
-import { useArticleList, useTag, useUser } from '~/compositions'
+import { useArticleList, useTag, useUser } from '@/compositions'
 
 export default defineComponent({
   name: 'IndexPage',

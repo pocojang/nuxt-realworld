@@ -2,8 +2,8 @@ import { reactive, useContext } from '@nuxtjs/composition-api'
 import {
   CreateCommentRequest,
   DeleteCommentRequest,
-} from '~/api/commentRepository'
-import { Article, Comment } from '~/types'
+} from '@/api/commentRepository'
+import { Article, Comment } from '@/types'
 
 type State = {
   commentList: Comment[]

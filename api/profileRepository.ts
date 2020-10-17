@@ -1,5 +1,5 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-import { Profile, User, ResponseType } from '~/types'
+import { Profile, User, ResponseType } from '@/types'
 
 type UserName = User['username']
 type ProfileResponse = ResponseType<'profile', Profile>
