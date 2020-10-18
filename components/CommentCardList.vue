@@ -21,7 +21,9 @@
         >
           {{ comment.author.username }}
         </nuxt-link>
-        <span class="date-posted">{{ comment.createdAt }}</span>
+        <span class="date-posted">{{
+          new Date(comment.createdAt).toDateString()
+        }}</span>
         <span class="mod-options">
           <i
             v-if="loginUser.username === comment.author.username"

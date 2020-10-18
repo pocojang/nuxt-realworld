@@ -13,7 +13,9 @@
           <nuxt-link :to="`/profile/${article.author.username}`" class="author">
             {{ article.author.username }}
           </nuxt-link>
-          <span class="date">{{ new Date(article.createdAt) }}</span>
+          <span class="date">{{
+            new Date(article.createdAt).toDateString()
+          }}</span>
         </div>
         <button
           class="btn btn-sm pull-xs-right"
@@ -50,12 +52,6 @@ import { Article } from '@/types'
 import useArticleList from '@/compositions/useArticleList'
 import ArticleTagList from './ArticleTagList.vue'
 
-/**
- * TODO:
- *
- * 1. createdAt? updatedAt?
- * 2. Date Format
- */
 export default defineComponent({
   name: 'ArticlePreviewList',
   components: {
