@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="articleList.length">
     <div
       v-for="(article, articleIndex) in articleList"
       :key="articleIndex"
@@ -39,6 +39,8 @@
       </nuxt-link>
     </div>
   </div>
+
+  <div v-else class="article-preview">No articles are here... yet.</div>
 </template>
 
 <script lang="ts">
