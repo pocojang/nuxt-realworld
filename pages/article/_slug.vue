@@ -7,7 +7,7 @@
         :is-my-article="article.author.username === loginUser.username"
         @on-delete-article="onDeleteArticle"
       >
-        <template v-slot:title>
+        <template #title>
           {{ article.title }}
         </template>
       </article-banner>

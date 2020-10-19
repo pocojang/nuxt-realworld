@@ -1,7 +1,7 @@
 <template>
   <FormContainer name="settings-page" @on-submit="onSubmitUpdate">
-    <template v-slot:title>Your Settings</template>
-    <template v-slot:form-group>
+    <template #title>Your Settings</template>
+    <template #form-group>
       <fieldset class="form-group">
         <input
           v-model="image"
@@ -43,8 +43,8 @@
         />
       </fieldset>
     </template>
-    <template v-slot:submit-button>Update Settings</template>
-    <template v-slot:sub-contents>
+    <template #submit-button>Update Settings</template>
+    <template #sub-contents>
       <hr />
       <button class="btn btn-outline-danger" @click="onLogout">
         Or click here to logout.

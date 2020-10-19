@@ -1,10 +1,10 @@
 <template>
   <FormContainer @on-submit="handleRegister">
-    <template v-slot:title>Sign Up</template>
-    <template v-slot:link>
+    <template #title>Sign Up</template>
+    <template #link>
       <nuxt-link to="/login"> Have an account?</nuxt-link>
     </template>
-    <template v-slot:form-group>
+    <template #form-group>
       <fieldset class="form-group">
         <input
           v-model="userName"
@@ -30,7 +30,7 @@
         />
       </fieldset>
     </template>
-    <template v-slot:submit-button>Sign Up</template>
+    <template #submit-button>Sign Up</template>
   </FormContainer>
 </template>
 

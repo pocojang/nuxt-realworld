@@ -4,7 +4,7 @@
     @remove-tag="removeTag"
     @on-submit="onCreateArticle"
   >
-    <template slot="title">
+    <template #title>
       <input
         v-model="title"
         type="text"
@@ -12,7 +12,7 @@
         placeholder="Article Title"
       />
     </template>
-    <template slot="description">
+    <template #description>
       <input
         v-model="description"
         type="text"
@@ -20,7 +20,7 @@
         placeholder="What's this article about?"
       />
     </template>
-    <template slot="body">
+    <template #body>
       <textarea
         v-model="body"
         class="form-control"
@@ -28,7 +28,7 @@
         placeholder="Write your article (in markdown)"
       />
     </template>
-    <template slot="input-tag">
+    <template #input-tag>
       <input
         v-model="inputTag"
         type="text"

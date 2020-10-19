@@ -1,7 +1,7 @@
 <template>
   <div v-if="!fetchState.pending && !fetchState.error" class="profile-page">
     <profile-banner :profile="profile">
-      <template v-slot:edit-button>
+      <template #edit-button>
         <nuxt-link
           v-if="isMyProfile"
           to="/settings"
