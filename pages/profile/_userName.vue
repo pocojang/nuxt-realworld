@@ -57,6 +57,7 @@ import { PostType } from '@/compositions/useProfileList'
 import ArticlePreviewList from '@/components/ArticlePreviewList.vue'
 import TabNavigation from '@/components/TabNavigation.vue'
 import ProfileBanner from '@/components/ProfileBanner.vue'
+import { postTypes } from '@/constants'
 
 export default defineComponent({
   name: 'ProfilePage',
@@ -110,7 +111,7 @@ export default defineComponent({
     return {
       profile: toRef(profileState, 'profile'),
       postType,
-      tabItems,
+      tabItems: postTypes,
       fetchState,
       onChangeTab,
       isLogin,
@@ -120,15 +121,4 @@ export default defineComponent({
     }
   },
 })
-
-const tabItems = [
-  {
-    type: 'AUTHOR',
-    name: 'My Posts',
-  },
-  {
-    type: 'FAVORITED',
-    name: 'Favorited Posts',
-  },
-]
 </script>

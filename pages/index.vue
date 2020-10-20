@@ -41,7 +41,9 @@ import Pagination from '@/components/Pagination.vue'
 import PopularTagList from '@/components/PopularTagList.vue'
 
 import { useArticleList, useTag, useUser } from '@/compositions'
+import { feedTypes } from '@/constants'
 
+// TODO: vue runtime warn: Write operation failed: computed value is readonly.
 export default defineComponent({
   name: 'IndexPage',
   components: {
@@ -79,28 +81,15 @@ export default defineComponent({
       articleList: toRef(articleState, 'articleList'),
       tagList: toRef(tagState, 'tagList'),
       feedType: toRef(articleState, 'feedType'),
-      tabItems: computed(() =>
-        isLogin.value
-          ? [
-              {
-                type: 'YOUR',
-                name: 'Your Feed',
-              },
-              ...tabItems,
-            ]
-          : tabItems
-      ),
+      tabItems: computed(() => {
+        const [, globalFeed] = feedTypes
+
+        return isLogin.value ? feedTypes : [globalFeed]
+      }),
       getArticleListByTag,
       isLogin,
       getArticleListByFeed,
     }
   },
 })
-
-const tabItems = [
-  {
-    type: 'GLOBAL',
-    name: 'Global Feed',
-  },
-]
 </script>

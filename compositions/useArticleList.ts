@@ -3,7 +3,7 @@ import { ArticleListRequest } from '@/api/articleRepository'
 import { Article, Tag } from '@/types'
 import useUser from './useUser'
 
-type FeedType = 'GLOBAL' | 'YOUR'
+export type FeedType = 'GLOBAL' | 'YOUR'
 
 type State = {
   articleList: Article[]
