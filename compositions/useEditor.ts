@@ -1,11 +1,12 @@
 import { markRaw, reactive, useContext } from '@nuxtjs/composition-api'
-import useArticleSlug from './useArticleSlug'
 
 import {
   CreateArticleRequest,
   UpdateArticleRequest,
 } from '@/api/articleRepository'
 import { Article } from '@/types'
+
+import useArticleSlug from './useArticleSlug'
 
 type ArticlePayload = Required<CreateArticleRequest>
 type State = ArticlePayload & {
