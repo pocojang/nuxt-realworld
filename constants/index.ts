@@ -29,3 +29,6 @@ export const postTypes: TabItems<PostType> = [
     name: 'Favorited Posts',
   },
 ]
+
+export const DEFAULT_PROFILE_IMG =
+  'https://static.productionready.io/images/smiley-cyrus.jpg'

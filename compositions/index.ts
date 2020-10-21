@@ -6,6 +6,7 @@ import useProfileList from './useProfileList'
 import useProfileUser from './useProfileUser'
 import useTag from './useTag'
 import useUser from './useUser'
+import useUtils from './useUtils'
 
 export {
   useArticleSlug,
@@ -16,4 +17,5 @@ export {
   useProfileUser,
   useTag,
   useUser,
+  useUtils,
 }
