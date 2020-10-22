@@ -26,7 +26,7 @@
             'btn-outline-primary': !article.favorited,
             'btn-primary': article.favorited,
           }"
-          @click="fetchToggleFavorite(articleIndex)"
+          @click="toggleFavorite(article, articleIndex)"
         >
           <i class="ion-heart" />
           {{ article.favoritesCount }}
@@ -69,9 +69,9 @@ export default defineComponent({
     },
   },
   setup() {
-    const { fetchToggleFavorite } = useArticleList()
+    const { toggleFavorite } = useArticleList()
 
-    return { fetchToggleFavorite }
+    return { toggleFavorite }
   },
 })
 </script>

@@ -66,17 +66,19 @@ export default function useArticleList() {
     setFeedType(listType)
   }
 
-  const fetchToggleFavorite = async (articleIndex: number) => {
+  const toggleFavorite = async (
+    { slug, favorited }: Article,
+    articleIndex: number
+  ) => {
     if (!isLogin.value) {
       redirect('/login')
 
       return
     }
 
-    const selectedArticle = state.articleList[articleIndex]
-    const response = selectedArticle?.favorited
-      ? await $repository.article.unFavoriteArticle(selectedArticle.slug)
-      : await $repository.article.favoriteArticle(selectedArticle.slug)
+    const response = favorited
+      ? await $repository.article.unFavoriteArticle(slug)
+      : await $repository.article.favoriteArticle(slug)
 
     if (response.article) {
       state.articleList = [
@@ -105,7 +107,7 @@ export default function useArticleList() {
     getFeedArticleList,
     getArticleListByTag,
     getArticleListByFeed,
-    fetchToggleFavorite,
+    toggleFavorite,
     setFeedType,
   }
 }
