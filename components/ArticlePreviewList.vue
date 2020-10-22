@@ -7,7 +7,10 @@
     >
       <div class="article-meta">
         <nuxt-link :to="`/profile/${article.author.username}`">
-          <img :src="article.author.image" alt="author profile image" />
+          <ProfileImage
+            :url="article.author.image"
+            :alt="'author profile image'"
+          />
         </nuxt-link>
         <div class="info">
           <nuxt-link :to="`/profile/${article.author.username}`" class="author">
@@ -51,11 +54,13 @@ import { defineComponent } from '@nuxtjs/composition-api'
 import { Article } from '@/types'
 import useArticleList from '@/compositions/useArticleList'
 import ArticleTagList from './ArticleTagList.vue'
+import ProfileImage from './ProfileImage.vue'
 
 export default defineComponent({
   name: 'ArticlePreviewList',
   components: {
     ArticleTagList,
+    ProfileImage,
   },
   props: {
     articleList: {

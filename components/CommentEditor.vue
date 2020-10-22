@@ -10,10 +10,10 @@
         />
       </div>
       <div class="card-footer">
-        <img
-          :src="loginUser.image"
-          class="comment-author-img"
-          alt="author profile image"
+        <ProfileImage
+          :url="loginUser.image"
+          :class-name="'comment-author-img'"
+          :alt="'author profile image'"
         />
         <button
           class="btn btn-sm btn-primary"
@@ -31,9 +31,13 @@
 import { defineComponent, ref } from '@nuxtjs/composition-api'
 import { PropType } from 'vue'
 import { User } from '@/types'
+import ProfileImage from './ProfileImage.vue'
 
 export default defineComponent({
   name: 'CommentEditor',
+  components: {
+    ProfileImage,
+  },
   props: {
     loginUser: {
       type: Object as () => PropType<User>,

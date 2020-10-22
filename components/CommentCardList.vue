@@ -9,10 +9,10 @@
           :to="`/profile/${comment.author.username}`"
           class="comment-author"
         >
-          <img
-            :src="comment.author.image"
-            class="comment-author-img"
-            alt="author profile image"
+          <ProfileImage
+            :url="comment.author.image"
+            :class-name="'comment-author-img'"
+            :alt="'author profile image'"
           />
         </nuxt-link>
         <nuxt-link
@@ -39,6 +39,7 @@
 <script lang="ts">
 import Vue, { PropOptions } from 'vue'
 import { Comment, User } from '@/types'
+import ProfileImage from './ProfileImage.vue'
 
 /**
  *
@@ -49,6 +50,9 @@ import { Comment, User } from '@/types'
  */
 export default Vue.extend({
   name: 'CommentCardList',
+  components: {
+    ProfileImage,
+  },
   props: {
     commentList: {
       type: Array,

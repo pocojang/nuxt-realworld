@@ -1,9 +1,5 @@
 <template>
-  <nuxt-link v-if="redirectUrl" :to="redirectUrl">
-    <img :src="url" :alt="alt" :class="className" @error="imageUrlAlt" />
-  </nuxt-link>
-
-  <img v-else :src="url" :alt="alt" :class="className" @error="imageUrlAlt" />
+  <img :src="url" :alt="alt" :class="className" @error="imageUrlAlt" />
 </template>
 
 <script lang="ts">
@@ -20,10 +16,6 @@ export default defineComponent({
     alt: {
       type: String,
       required: true,
-    },
-    redirectUrl: {
-      type: String,
-      required: false,
     },
     className: {
       type: String,

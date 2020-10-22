@@ -5,7 +5,7 @@
     </h1>
     <div class="article-meta">
       <nuxt-link :to="`/profile/${author.username}`">
-        <img :src="author.image" alt="author profile image" />
+        <ProfileImage :url="author.image" :alt="'author profile image'" />
       </nuxt-link>
 
       <div class="info">
@@ -71,11 +71,13 @@
 import Vue, { PropOptions } from 'vue'
 import { Article, Author } from '@/types'
 import BannerContainer from './BannerContainer.vue'
+import ProfileImage from './ProfileImage.vue'
 
 export default Vue.extend({
   name: 'ArticleBanner',
   components: {
     BannerContainer,
+    ProfileImage,
   },
   props: {
     article: {

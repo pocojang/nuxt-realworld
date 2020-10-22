@@ -15,7 +15,11 @@
     </li>
     <li class="nav-item">
       <nuxt-link :to="`/profile/${userName}`" class="nav-link">
-        <img :src="image" class="user-pic" alt="user profile image" />
+        <ProfileImage
+          :url="image"
+          :class-name="'user-pic'"
+          :alt="'user profile image'"
+        />
         {{ userName }}
       </nuxt-link>
     </li>
@@ -25,9 +29,13 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue'
 import { User } from '@/types'
+import ProfileImage from './ProfileImage.vue'
 
 export default Vue.extend({
   name: 'AuthNavigationBar',
+  components: {
+    ProfileImage,
+  },
   props: {
     userName: {
       type: String as PropType<User['username']>,
