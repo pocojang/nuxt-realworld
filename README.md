@@ -1,7 +1,5 @@
 # ![Nuxt RealWorld Example App](logo.png)
 
----
-
 [![RealWorld Frontend](https://img.shields.io/badge/realworld-frontend-%23783578.svg)](http://realworld.io)
 
 > ### Nuxt + Composition API RFC codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.

@@ -10,10 +10,6 @@
             <slot name="link" />
           </p>
 
-          <ul class="error-messages">
-            <li>This is Example Error Message</li>
-          </ul>
-
           <form @submit.prevent="$emit('on-submit')">
             <fieldset>
               <slot name="form-group" />
