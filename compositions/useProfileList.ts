@@ -9,19 +9,19 @@ type State = {
   postType: PostType
 }
 
-const state = reactive<State>({
-  articleList: [],
-  articleCount: 0,
-  postType: 'AUTHOR',
-})
-
-const setPostType = (type: PostType) => {
-  state.postType = type
-}
-
 export default function useProfileList() {
   const { $repository, params, route } = useContext()
   const { userName } = params.value
+
+  const state = reactive<State>({
+    articleList: [],
+    articleCount: 0,
+    postType: 'AUTHOR',
+  })
+
+  const setPostType = (type: PostType) => {
+    state.postType = type
+  }
 
   const getArticleListByPost = async ({
     userName,
@@ -39,8 +39,6 @@ export default function useProfileList() {
 
     state.articleList = articles
     state.articleCount = articlesCount
-
-    setPostType(postType)
   }
 
   const { fetchState } = useFetch(async () => {
@@ -60,5 +58,6 @@ export default function useProfileList() {
     fetchState,
     articleList: toRef(state, 'articleList'),
     postType: toRef(state, 'postType'),
+    setPostType,
   }
 }

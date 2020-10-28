@@ -70,7 +70,7 @@ export default defineComponent({
     const { params, redirect } = useContext()
     const { userName } = params.value
 
-    const { postType } = useProfileList()
+    const { postType, setPostType } = useProfileList()
     const {
       state: profileState,
       getProfile,
@@ -105,6 +105,7 @@ export default defineComponent({
       }
       const newURL = urlBy[postType](userName)
 
+      setPostType(postType)
       redirect(newURL)
     }
 
