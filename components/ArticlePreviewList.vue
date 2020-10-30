@@ -16,9 +16,9 @@
           <nuxt-link :to="`/profile/${article.author.username}`" class="author">
             {{ article.author.username }}
           </nuxt-link>
-          <span class="date">{{
-            new Date(article.createdAt).toDateString()
-          }}</span>
+          <span class="date">
+            {{ new Date(article.createdAt).toDateString() }}
+          </span>
         </div>
         <button
           class="btn btn-sm pull-xs-right"
@@ -50,9 +50,9 @@
 
 <script lang="ts">
 import { PropType } from 'vue'
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import { Article } from '@/types'
-import useArticleList from '@/compositions/useArticleList'
+import useUser from '@/compositions/useUser'
 import ArticleTagList from './ArticleTagList.vue'
 import ProfileImage from './ProfileImage.vue'
 
@@ -68,8 +68,19 @@ export default defineComponent({
       required: false,
     },
   },
-  setup() {
-    const { toggleFavorite } = useArticleList()
+  setup(_, { emit }) {
+    const { redirect } = useContext()
+    const { isLogin } = useUser()
+
+    const toggleFavorite = (article: Article, articleIndex: number) => {
+      if (!isLogin.value) {
+        redirect('/login')
+
+        return
+      }
+
+      emit('toggle-favorite-article', article, articleIndex)
+    }
 
     return { toggleFavorite }
   },

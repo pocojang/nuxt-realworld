@@ -9,15 +9,15 @@ type State = {
   postType: PostType
 }
 
+const state = reactive<State>({
+  articleList: [],
+  articleCount: 0,
+  postType: 'AUTHOR',
+})
+
 export default function useProfileList() {
   const { $repository, params, route } = useContext()
   const { userName } = params.value
-
-  const state = reactive<State>({
-    articleList: [],
-    articleCount: 0,
-    postType: 'AUTHOR',
-  })
 
   const setPostType = (type: PostType) => {
     state.postType = type
@@ -41,6 +41,23 @@ export default function useProfileList() {
     state.articleCount = articlesCount
   }
 
+  const toggleFavoriteArticle = async (
+    { slug, favorited }: Article,
+    articleIndex: number
+  ) => {
+    const response = favorited
+      ? await $repository.article.unFavoriteArticle(slug)
+      : await $repository.article.favoriteArticle(slug)
+
+    if (response.article) {
+      state.articleList = [
+        ...state.articleList.slice(0, articleIndex),
+        response.article,
+        ...state.articleList.slice(articleIndex + 1),
+      ]
+    }
+  }
+
   const { fetchState } = useFetch(async () => {
     const postTypeBy: { [P: string]: PostType } = {
       'profile-userName': 'AUTHOR',
@@ -59,5 +76,6 @@ export default function useProfileList() {
     articleList: toRef(state, 'articleList'),
     postType: toRef(state, 'postType'),
     setPostType,
+    toggleFavoriteArticle,
   }
 }

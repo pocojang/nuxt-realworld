@@ -17,13 +17,13 @@ const state = reactive<State>({
   feedType: 'GLOBAL',
 })
 
-const setFeedType = (type: FeedType) => {
-  state.feedType = type
-}
-
 export default function useArticleList() {
-  const { $repository, redirect } = useContext()
+  const { $repository } = useContext()
   const { isLogin } = useUser()
+
+  const setFeedType = (type: FeedType) => {
+    state.feedType = type
+  }
 
   const getArticleList = async (payload: ArticleListRequest = {}) => {
     const {
@@ -66,16 +66,10 @@ export default function useArticleList() {
     setFeedType(listType)
   }
 
-  const toggleFavorite = async (
+  const toggleFavoriteArticle = async (
     { slug, favorited }: Article,
     articleIndex: number
   ) => {
-    if (!isLogin.value) {
-      redirect('/login')
-
-      return
-    }
-
     const response = favorited
       ? await $repository.article.unFavoriteArticle(slug)
       : await $repository.article.favoriteArticle(slug)
@@ -107,7 +101,7 @@ export default function useArticleList() {
     getFeedArticleList,
     getArticleListByTag,
     getArticleListByFeed,
-    toggleFavorite,
+    toggleFavoriteArticle,
     setFeedType,
   }
 }
