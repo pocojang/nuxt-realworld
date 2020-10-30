@@ -1,7 +1,7 @@
 {
   "name": "nuxt-realworld",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "nuxt-ts",
     "build": "nuxt-ts build",
