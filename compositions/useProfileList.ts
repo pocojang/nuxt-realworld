@@ -49,13 +49,25 @@ export default function useProfileList() {
       ? await $repository.article.unFavoriteArticle(slug)
       : await $repository.article.favoriteArticle(slug)
 
-    if (response.article) {
-      state.articleList = [
-        ...state.articleList.slice(0, articleIndex),
-        response.article,
-        ...state.articleList.slice(articleIndex + 1),
-      ]
+    if (!response.article) {
+      return
     }
+
+    const isRemoveArticle = favorited && state.postType === 'FAVORITED'
+
+    if (isRemoveArticle) {
+      state.articleList = state.articleList.filter(
+        (_, prevArticleIndex) => prevArticleIndex !== articleIndex
+      )
+
+      return
+    }
+
+    state.articleList = [
+      ...state.articleList.slice(0, articleIndex),
+      response.article,
+      ...state.articleList.slice(articleIndex + 1),
+    ]
   }
 
   const { fetchState } = useFetch(async () => {
