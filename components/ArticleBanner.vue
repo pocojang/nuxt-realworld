@@ -12,9 +12,9 @@
         <nuxt-link :to="`/profile/${author.username}`" class="author">
           {{ author.username }}
         </nuxt-link>
-        <span class="date">{{
-          new Date(article.createdAt).toDateString()
-        }}</span>
+        <span class="date">
+          {{ new Date(article.createdAt).toDateString() }}
+        </span>
       </div>
 
       <span v-if="isMyArticle">

@@ -15,14 +15,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import Vue, { PropType } from 'vue'
+import { FeedTabItems, PostTabItems } from '@/constants'
 
-// TODO: Add Typing
-export default defineComponent({
+export default Vue.extend({
   name: 'TabNavigation',
   props: {
-    tabType: String,
-    tabItems: Array,
+    tabType: {
+      type: String,
+      required: true,
+    },
+    tabItems: {
+      type: Array as PropType<FeedTabItems> | PropType<PostTabItems>,
+      required: true,
+    },
   },
 })
 </script>

@@ -8,7 +8,10 @@ type TabItems<T> = Readonly<
   }[]
 >
 
-export const feedTypes: TabItems<FeedType> = [
+export type FeedTabItems = TabItems<FeedType>
+export type PostTabItems = TabItems<PostType>
+
+export const feedTypes: FeedTabItems = [
   {
     type: 'YOUR',
     name: 'Your Feed',
@@ -19,7 +22,7 @@ export const feedTypes: TabItems<FeedType> = [
   },
 ]
 
-export const postTypes: TabItems<PostType> = [
+export const postTypes: PostTabItems = [
   {
     type: 'AUTHOR',
     name: 'My Posts',
