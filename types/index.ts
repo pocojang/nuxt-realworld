@@ -50,3 +50,9 @@ export type ResponseTypes<ObjT> = Promise<ObjT>
 export type OptionalPick<T, K extends keyof T> = Pick<Partial<T>, K>
 
 export type Optional<T, K extends keyof T> = OptionalPick<T, K> & Omit<T, K>
+
+export type CustomErrors = {
+  errors: {
+    errorName: string[]
+  }
+}
