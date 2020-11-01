@@ -50,16 +50,12 @@ export default function useUser() {
   }
 
   const fetchAuthLogin = async ({ email, password }: AuthLoginRequest) => {
-    if (!email || !password) {
-      return
-    }
-
     const response = await $repository.user.authLogin({
       email,
       password,
     })
 
-    if (response.user) {
+    if ('user' in response) {
       setLogin({
         axios: $axios,
         user: response.user,
@@ -67,6 +63,8 @@ export default function useUser() {
 
       return true
     }
+
+    return false
   }
 
   const fetchAuthRegister = async ({

@@ -9,7 +9,7 @@
           <p v-if="$slots.link" class="text-xs-center">
             <slot name="link" />
           </p>
-
+          <error-list v-if="errors" :errors="errors" />
           <form @submit.prevent="$emit('on-submit')">
             <fieldset>
               <slot name="form-group" />
@@ -31,14 +31,23 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import ErrorList from './ErrorList.vue'
 
 export default Vue.extend({
   name: 'FormContainer',
+  components: {
+    ErrorList,
+  },
   props: {
     name: {
       type: String,
       required: false,
       default: 'auth-page',
+    },
+    errors: {
+      type: Object,
+      required: false,
+      default: undefined,
     },
   },
 })

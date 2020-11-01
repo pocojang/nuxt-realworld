@@ -1,5 +1,5 @@
 <template>
-  <FormContainer @on-submit="handleLogin">
+  <FormContainer :errors="errors" @on-submit="handleLogin">
     <template #title>Sign In</template>
     <template #link>
       <nuxt-link to="/register">Need an account?</nuxt-link>
@@ -31,10 +31,12 @@ import {
   defineComponent,
   reactive,
   useContext,
+  toRef,
   toRefs,
 } from '@nuxtjs/composition-api'
 import FormContainer from '@/components/FormContainer.vue'
 import useUser from '@/compositions/useUser'
+import useError from '@/compositions/useError'
 
 /**
  * 1. Validation
@@ -49,6 +51,7 @@ export default defineComponent({
   },
   setup() {
     const { fetchAuthLogin } = useUser()
+    const { state: errorState, setError } = useError()
     const { redirect } = useContext()
 
     const state = reactive({
@@ -56,17 +59,25 @@ export default defineComponent({
       password: '',
     })
 
-    // TODO: Always Success
     const handleLogin = async () => {
-      const isOK = await fetchAuthLogin(state)
+      try {
+        if (!state.email || !state.password) {
+          return
+        }
 
-      if (isOK) {
-        await redirect('/')
+        const isOK = await fetchAuthLogin(state)
+
+        if (isOK) {
+          await redirect('/')
+        }
+      } catch (error) {
+        setError(error)
       }
     }
 
     return {
       ...toRefs(state),
+      errors: toRef(errorState, 'errors'),
       handleLogin,
     }
   },
