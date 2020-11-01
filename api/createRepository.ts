@@ -30,8 +30,11 @@ const createRepository = ({ app, $axios, redirect }: Context): Repository => {
       return
     }
 
-    // TODO: 422 & constants
     const code = error.response.status
+
+    if (code === 422) {
+      return Promise.reject(error.response.data.errors)
+    }
 
     // Unauthorized requests
     if (code === 401) {
