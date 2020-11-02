@@ -12,7 +12,7 @@ export const userRepository = (axios: NuxtAxiosInstance) => ({
   authLogin(payload: AuthLoginRequest): UserResponse | CustomErrors {
     return axios.$post('/users/login', { user: payload })
   },
-  authRegister(payload: AuthRegisterRequest): UserResponse {
+  authRegister(payload: AuthRegisterRequest): UserResponse | CustomErrors {
     return axios.$post(`/users`, { user: payload })
   },
   getCurrentUser(token: User['token']): UserResponse {
