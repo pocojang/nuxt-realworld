@@ -43,7 +43,7 @@ export default function useArticleSlug() {
   const createArticle = async (payload: CreateArticleRequest) => {
     const response = await $repository.article.createArticle(payload)
 
-    if (response) {
+    if ('article' in response) {
       return response.article
     }
 
@@ -53,7 +53,7 @@ export default function useArticleSlug() {
   const updateArticle = async (payload: UpdateArticleRequest) => {
     const response = await $repository.article.updateArticle(payload)
 
-    if (response) {
+    if ('article' in response) {
       return response.article
     }
 

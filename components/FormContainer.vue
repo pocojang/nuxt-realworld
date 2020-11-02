@@ -30,7 +30,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { CustomErrors } from '@/types'
+import Vue, { PropOptions } from 'vue'
 import ErrorList from './ErrorList.vue'
 
 export default Vue.extend({
@@ -48,7 +49,7 @@ export default Vue.extend({
       type: Object,
       required: false,
       default: undefined,
-    },
+    } as PropOptions<CustomErrors>,
   },
 })
 </script>

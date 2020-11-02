@@ -53,10 +53,14 @@
 
 <script lang="ts">
 import Vue, { PropOptions } from 'vue'
-import { Article } from '@/types'
+import { Article, CustomErrors } from '@/types'
+import ErrorList from './ErrorList.vue'
 
 export default Vue.extend({
   name: 'Editor',
+  components: {
+    ErrorList,
+  },
   props: {
     tagList: {
       type: Array,
@@ -67,7 +71,7 @@ export default Vue.extend({
       type: Object,
       required: false,
       default: undefined,
-    },
+    } as PropOptions<CustomErrors>,
   },
 })
 </script>

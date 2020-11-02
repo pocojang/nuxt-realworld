@@ -6,6 +6,7 @@ import {
   ResponseType,
   OptionalPick,
   ResponseTypes,
+  CustomErrors,
 } from '@/types'
 
 type Slug = Article['slug']
@@ -61,10 +62,10 @@ export const articleRepository = (axios: NuxtAxiosInstance) => ({
   getFeedArticleList(params: FeedArticleListRequest = {}): ArticleListResponse {
     return axios.$get('/articles/feed', { params })
   },
-  createArticle(payload: CreateArticleRequest): ArticleResponse {
+  createArticle(payload: CreateArticleRequest): ArticleResponse | CustomErrors {
     return axios.$post('/articles', { article: payload })
   },
-  updateArticle(request: UpdateArticleRequest): ArticleResponse {
+  updateArticle(request: UpdateArticleRequest): ArticleResponse | CustomErrors {
     return axios.$put(`/articles/${request.slug}`, { article: request.payload })
   },
   deleteArticle(slug: Slug) {

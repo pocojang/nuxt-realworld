@@ -7,7 +7,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { CustomErrors } from '@/types'
+import Vue, { PropOptions } from 'vue'
 
 export default Vue.extend({
   name: 'ErrorList',
@@ -15,7 +16,7 @@ export default Vue.extend({
     errors: {
       type: Object,
       required: true,
-    },
+    } as PropOptions<CustomErrors>,
   },
 })
 </script>

@@ -82,7 +82,7 @@ export default function useUser() {
       password,
     })
 
-    if (response.user) {
+    if ('user' in response) {
       setLogin({
         axios: $axios,
         user: response.user,
