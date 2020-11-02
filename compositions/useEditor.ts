@@ -1,12 +1,7 @@
 import { markRaw, reactive, useContext } from '@nuxtjs/composition-api'
 
-import {
-  CreateArticleRequest,
-  UpdateArticleRequest,
-} from '@/api/articleRepository'
+import { CreateArticleRequest } from '@/api/articleRepository'
 import { Article } from '@/types'
-
-import useArticleSlug from './useArticleSlug'
 
 type ArticlePayload = Required<CreateArticleRequest>
 type State = ArticlePayload & {
@@ -15,7 +10,6 @@ type State = ArticlePayload & {
 
 export default function useEditor() {
   const { redirect } = useContext()
-  const { createArticle, updateArticle } = useArticleSlug()
 
   const setInitState = (article: ArticlePayload) => {
     state.title = article.title
@@ -48,32 +42,11 @@ export default function useEditor() {
     redirect(`/article/${newArticle.slug}`, { option: 'withOutComment' })
   }
 
-  const handleCreateArticle = async (payload: CreateArticleRequest) => {
-    const resNewArticle = await createArticle(payload)
-
-    if (!resNewArticle) {
-      return
-    }
-
-    redirectBySuccess(resNewArticle)
-  }
-
-  const handleUpdateArticle = async (payload: UpdateArticleRequest) => {
-    const resNewArticle = await updateArticle(payload)
-
-    if (!resNewArticle) {
-      return
-    }
-
-    redirectBySuccess(resNewArticle)
-  }
-
   return {
     state: markRaw(state),
     setInitState,
     onEnterTag,
     removeTag,
-    handleCreateArticle,
-    handleUpdateArticle,
+    redirectBySuccess,
   }
 }

@@ -3,6 +3,7 @@
     <div class="container page">
       <div class="row">
         <div class="col-md-10 offset-md-1 col-xs-12">
+          <error-list v-if="errors" :errors="errors" />
           <form @submit.prevent="$emit('on-submit')">
             <fieldset>
               <fieldset class="form-group">
@@ -62,6 +63,11 @@ export default Vue.extend({
       required: true,
       default: () => [],
     } as PropOptions<Article['tagList']>,
+    errors: {
+      type: Object,
+      required: false,
+      default: undefined,
+    },
   },
 })
 </script>

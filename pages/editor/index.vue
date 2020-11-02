@@ -1,8 +1,9 @@
 <template>
   <Editor
+    :errors="errors"
     :tag-list="tagList"
     @remove-tag="removeTag"
-    @on-submit="onCreateArticle"
+    @on-submit="handleCreateArticle"
   >
     <template #title>
       <input
@@ -41,9 +42,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs } from '@nuxtjs/composition-api'
+import { defineComponent, toRef, toRefs } from '@nuxtjs/composition-api'
 import useEditor from '@/compositions/useEditor'
 import Editor from '@/components/Editor.vue'
+import { useArticleSlug, useError } from '@/compositions'
 
 /**
  *
@@ -62,19 +64,32 @@ export default defineComponent({
       state: editorState,
       onEnterTag,
       removeTag,
-      handleCreateArticle,
+      redirectBySuccess,
     } = useEditor()
+    const { state: errorState, setError } = useError()
+    const { createArticle } = useArticleSlug()
 
     // TODO: always success
-    const onCreateArticle = () => {
-      handleCreateArticle(editorState)
+    const handleCreateArticle = async () => {
+      try {
+        const newArticle = await createArticle(editorState)
+
+        if (!newArticle) {
+          return
+        }
+
+        redirectBySuccess(newArticle)
+      } catch (error) {
+        setError(error)
+      }
     }
 
     return {
       ...toRefs(editorState),
+      errors: toRef(errorState, 'errors'),
       onEnterTag,
       removeTag,
-      onCreateArticle,
+      handleCreateArticle,
     }
   },
 })

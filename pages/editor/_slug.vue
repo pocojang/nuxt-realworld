@@ -1,8 +1,9 @@
 <template>
   <Editor
+    :errors="errors"
     :tag-list="tagList"
     @remove-tag="removeTag"
-    @on-submit="onUpdateArticle"
+    @on-submit="handleUpdateArticle"
   >
     <template #title>
       <input
@@ -43,11 +44,12 @@
 <script lang="ts">
 import {
   defineComponent,
+  toRef,
   toRefs,
   useContext,
   useFetch,
 } from '@nuxtjs/composition-api'
-import { useArticleSlug, useEditor } from '@/compositions'
+import { useArticleSlug, useEditor, useError } from '@/compositions'
 import Editor from '@/components/Editor.vue'
 
 /**
@@ -68,11 +70,12 @@ export default defineComponent({
       setInitState,
       onEnterTag,
       removeTag,
-      handleUpdateArticle,
+      redirectBySuccess,
     } = useEditor()
+    const { state: errorState, setError } = useError()
     const { params } = useContext()
     const { slug } = params.value
-    const { state: initState, getArticle } = useArticleSlug()
+    const { state: initState, getArticle, updateArticle } = useArticleSlug()
 
     const { fetchState } = useFetch(async () => {
       await getArticle(slug)
@@ -83,19 +86,30 @@ export default defineComponent({
     })
 
     // TODO: always success
-    const onUpdateArticle = () => {
-      handleUpdateArticle({
-        slug,
-        payload: editorState,
-      })
+    const handleUpdateArticle = async () => {
+      try {
+        const newArticle = await updateArticle({
+          slug,
+          payload: editorState,
+        })
+
+        if (!newArticle) {
+          return
+        }
+
+        redirectBySuccess(newArticle)
+      } catch (error) {
+        setError(error)
+      }
     }
 
     return {
       ...toRefs(editorState),
+      errors: toRef(errorState, 'errors'),
       fetchState,
       onEnterTag,
       removeTag,
-      onUpdateArticle,
+      handleUpdateArticle,
     }
   },
 })
