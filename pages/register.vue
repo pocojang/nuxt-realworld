@@ -44,14 +44,6 @@ import {
 } from '@nuxtjs/composition-api'
 import { useError, useUser } from '@/compositions'
 
-/**
- * TODO: WIP
- *
- * 1. Validation
- * 2. Fail => View
- * 3. Success => ??
- * 4. Duplicated
- */
 export default defineComponent({
   name: 'RegisterPage',
   setup() {
@@ -65,7 +57,6 @@ export default defineComponent({
       password: '',
     })
 
-    // TODO: Always Success
     const handleRegister = async () => {
       try {
         const isOK = await fetchAuthRegister({

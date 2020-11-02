@@ -36,8 +36,6 @@
 
 ## Requirements By Page
 
-- [ ] 배포 버전 확인
-
 - [x] Authentication State Persistence
 - [ ] Suspense with Skeleton
 
@@ -59,12 +57,12 @@
   - [x] Thinkster 클릭시 **https://thinkster.io** 이동
 
 - Login Page
-  - [ ] 에러 발생시 인풋 상단에 오류 정보 표기
+  - [x] 에러 발생시 인풋 상단에 오류 정보 표기
   - [x] Need an account? 클릭시 **회원 가입 페이지** 이동
   - [x] 정보 입력 후 로그인시 **홈 페이지** 이동
 
 - Register Page
-  - [ ] 에러 발생시 인풋 상단에 오류 정보 표기
+  - [x] 에러 발생시 인풋 상단에 오류 정보 표기
   - [x] Have an account? 클릭시 **로그인 페이지** 이동
   - [x] 정보 입력 후 회원가입시 **홈 페이지** 이동
 
@@ -121,7 +119,7 @@
   - 피드
     - [x] Global Feed 클릭시 `전체 아티클 목록 불러오기`
     - [x] Your Feed 클릭시 `피드별 아티클 목록 불러오기`
-    - [ ] Your Feed 없을 시 "No articles are here... yet." 노출
+    - [x] Your Feed 없을 시 "No articles are here... yet." 노출
   - 전체 아티클 목록
     - [x] 컨텐츠 영역 클릭시 **아티클 상세 페이지**로 이동
     - [x] 태그 클릭시 **아티클 상세 페이지**로 이동
@@ -134,7 +132,7 @@
 
 - Editor 등록 & 수정 Page (인증)
   - [x] 수정시 기존 아티클 정보 불러온 후 노출
-  - [ ] 에러 발생시 인풋 상단에 오류 정보 표기
+  - [x] 에러 발생시 인풋 상단에 오류 정보 표기
   - [x] 제목 입력
   - [x] 정보 입력
   - [x] 내용 입력

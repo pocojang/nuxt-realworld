@@ -50,8 +50,7 @@ import { useArticleSlug, useError } from '@/compositions'
 /**
  *
  * TODO:
- * 1. always success
- * 2. Duplicated Update
+ * - Duplicated Update
  *
  */
 export default defineComponent({
@@ -69,7 +68,6 @@ export default defineComponent({
     const { state: errorState, setError } = useError()
     const { createArticle } = useArticleSlug()
 
-    // TODO: always success
     const handleCreateArticle = async () => {
       try {
         const newArticle = await createArticle(editorState)

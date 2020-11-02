@@ -55,8 +55,7 @@ import Editor from '@/components/Editor.vue'
 /**
  *
  * TODO:
- * 1. always success
- * 2. Duplicated Create
+ * - Duplicated Create
  *
  */
 export default defineComponent({
@@ -85,7 +84,6 @@ export default defineComponent({
       }
     })
 
-    // TODO: always success
     const handleUpdateArticle = async () => {
       try {
         const newArticle = await updateArticle({
