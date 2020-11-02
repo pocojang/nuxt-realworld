@@ -1,5 +1,5 @@
 <template>
-  <FormContainer @on-submit="handleRegister">
+  <FormContainer :errors="errors" @on-submit="handleRegister">
     <template #title>Sign Up</template>
     <template #link>
       <nuxt-link to="/login"> Have an account?</nuxt-link>
@@ -39,9 +39,10 @@ import {
   defineComponent,
   reactive,
   useContext,
+  toRef,
   toRefs,
 } from '@nuxtjs/composition-api'
-import useUser from '@/compositions/useUser'
+import { useError, useUser } from '@/compositions'
 
 /**
  * TODO: WIP
@@ -55,6 +56,7 @@ export default defineComponent({
   name: 'RegisterPage',
   setup() {
     const { redirect } = useContext()
+    const { state: errorState, setError } = useError()
     const { fetchAuthRegister } = useUser()
 
     const state = reactive({
@@ -65,18 +67,23 @@ export default defineComponent({
 
     // TODO: Always Success
     const handleRegister = async () => {
-      const isOK = await fetchAuthRegister({
-        ...state,
-        username: state.userName,
-      })
+      try {
+        const isOK = await fetchAuthRegister({
+          ...state,
+          username: state.userName,
+        })
 
-      if (isOK) {
-        await redirect('/')
+        if (isOK) {
+          await redirect('/')
+        }
+      } catch (error) {
+        setError(error)
       }
     }
 
     return {
       ...toRefs(state),
+      errors: toRef(errorState, 'errors'),
       handleRegister,
     }
   },
