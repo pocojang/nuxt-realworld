@@ -1,10 +1,7 @@
 import type { NuxtConfig } from '@nuxt/types'
 
 const config: NuxtConfig = {
-  // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
-
-  // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'Conduit',
     meta: [
@@ -27,39 +24,30 @@ const config: NuxtConfig = {
       },
     ],
   },
-
-  // Global CSS (https://go.nuxtjs.dev/config-css)
   css: ['@/assets/main.css'],
-
-  // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: ['@/plugins/repository'],
-
-  // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
-
-  // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
-    // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
-    // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
-    // https://composition-api.nuxtjs.org
     '@nuxtjs/composition-api',
   ],
-
-  // Modules (https://go.nuxtjs.dev/config-modules)
   modules: ['@nuxtjs/axios', '@nuxtjs/markdownit'],
-
-  // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
-
   axios: {
-    // Axios Configuration (https://github.com/nuxt-community/axios-module#options)
     baseURL: 'https://conduit.productionready.io/api/',
   },
+  // https://github.com/nuxt-community/modules/tree/master/packages/markdownit
   markdownit: {
-    // https://github.com/nuxt-community/modules/tree/master/packages/markdownit
     injected: true,
+  },
+  // https://typescript.nuxtjs.org/guide/lint.html#runtime-lint
+  typescript: {
+    typeCheck: {
+      eslint: {
+        files: './**/*.{ts,js,vue}',
+      },
+    },
   },
 }
 
