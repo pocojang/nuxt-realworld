@@ -28,9 +28,11 @@
         <div class="row">
           <div class="col-xs-12 col-md-8 offset-md-2">
             <template v-if="isLogin">
+              <error-list v-if="errors" :errors="errors" />
+
               <comment-editor
                 :login-user="loginUser"
-                @on-create-comment="onCreateComment"
+                @on-create-comment="handleCreateComment"
               />
               <comment-card-list
                 v-if="commentList.length"
@@ -63,18 +65,11 @@ import ArticleBanner from '@/components/ArticleBanner.vue'
 import ArticleTagList from '@/components/ArticleTagList.vue'
 import CommentCardList from '@/components/CommentCardList.vue'
 import CommentEditor from '@/components/CommentEditor.vue'
+import ErrorList from '@/components/ErrorList.vue'
 
-import { useArticleSlug, useComment, useUser } from '@/compositions'
+import { useArticleSlug, useComment, useError, useUser } from '@/compositions'
 import { Comment } from '@/types'
 
-/**
- *
- * TODO
- *
- * 1. route.params Handle Error
- * 2. Tag List Duplicated
- *
- */
 export default defineComponent({
   name: 'AritclePage',
   components: {
@@ -82,12 +77,14 @@ export default defineComponent({
     ArticleTagList,
     CommentEditor,
     CommentCardList,
+    ErrorList,
   },
   setup() {
     const { app, params, query } = useContext()
     const { slug } = params.value
     const { option } = query.value
 
+    const { state: errorState, setError } = useError()
     const { state: articleState, getArticle, deleteArticle } = useArticleSlug()
     const {
       state: commentState,
@@ -117,18 +114,23 @@ export default defineComponent({
       deleteComment({ slug, id })
     }
 
-    const onCreateComment = (body: string) => {
-      createComment({ slug, body })
+    const handleCreateComment = async (body: string) => {
+      try {
+        await createComment({ slug, body })
+      } catch (error) {
+        setError(error)
+      }
     }
 
     return {
       article: toRef(articleState, 'article'),
       commentList: toRef(commentState, 'commentList'),
+      errors: toRef(errorState, 'errors'),
       isLogin,
       loginUser: userState,
       fetchState,
       onDeleteArticle,
-      onCreateComment,
+      handleCreateComment,
       onDeleteComment,
     }
   },

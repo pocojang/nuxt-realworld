@@ -23,9 +23,11 @@ export default function useComment() {
   }
 
   const createComment = async (payload: CreateCommentRequest) => {
-    const { comment } = await $repository.comment.createComment(payload)
+    const response = await $repository.comment.createComment(payload)
 
-    state.commentList = [comment, ...state.commentList]
+    if ('comment' in response) {
+      state.commentList = [response.comment, ...state.commentList]
+    }
   }
 
   const deleteComment = async ({ slug, id }: DeleteCommentRequest) => {

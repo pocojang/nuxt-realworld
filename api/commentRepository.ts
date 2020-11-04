@@ -1,5 +1,5 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-import { Article, Comment, ResponseType } from '@/types'
+import { Article, Comment, CustomErrors, ResponseType } from '@/types'
 
 type Slug = Article['slug']
 export type CreateCommentRequest = Pick<Comment, 'body'> & Pick<Article, 'slug'>
@@ -12,7 +12,10 @@ export const commentRepository = (axios: NuxtAxiosInstance) => ({
   getCommentList(slug: Slug): CommentListResponse {
     return axios.$get(`/articles/${slug}/comments`)
   },
-  createComment({ body, slug }: CreateCommentRequest): CommentResponse {
+  createComment({
+    body,
+    slug,
+  }: CreateCommentRequest): CommentResponse | CustomErrors {
     return axios.$post(`/articles/${slug}/comments`, {
       comment: { body },
     })
