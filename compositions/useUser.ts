@@ -97,7 +97,7 @@ export default function useUser() {
   const fetchUpdateUser = async (payload: UpdateUserRequest) => {
     const response = await $repository.user.updateUser(payload)
 
-    if (response.user) {
+    if ('user' in response) {
       state.user = response.user
 
       return true

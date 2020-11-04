@@ -1,5 +1,9 @@
 <template>
-  <FormContainer name="settings-page" @on-submit="onSubmitUpdate">
+  <FormContainer
+    name="settings-page"
+    :errors="errors"
+    @on-submit="handleUpdate"
+  >
     <template #title>Your Settings</template>
     <template #form-group>
       <fieldset class="form-group">
@@ -60,13 +64,16 @@ import {
   useContext,
   toRefs,
   useFetch,
+  toRef,
 } from '@nuxtjs/composition-api'
 import useUser from '@/compositions/useUser'
+import { useError } from '@/compositions'
 
 export default defineComponent({
   name: 'SettingsPage',
   setup() {
     const { redirect } = useContext()
+    const { state: errorState, setError } = useError()
     const { user, fetchUpdateUser, authLogout } = useUser()
 
     const state = reactive({
@@ -86,11 +93,18 @@ export default defineComponent({
       state.image = userInfo.image
     })
 
-    const onSubmitUpdate = async () => {
-      const isOK = await fetchUpdateUser({ ...state, username: state.userName })
+    const handleUpdate = async () => {
+      try {
+        const isOK = await fetchUpdateUser({
+          ...state,
+          username: state.userName,
+        })
 
-      if (isOK) {
-        await redirect('/')
+        if (isOK) {
+          redirect('/')
+        }
+      } catch (error) {
+        setError(error)
       }
     }
 
@@ -99,7 +113,12 @@ export default defineComponent({
       redirect('/')
     }
 
-    return { ...toRefs(state), onSubmitUpdate, onLogout }
+    return {
+      ...toRefs(state),
+      errors: toRef(errorState, 'errors'),
+      handleUpdate,
+      onLogout,
+    }
   },
 })
 </script>

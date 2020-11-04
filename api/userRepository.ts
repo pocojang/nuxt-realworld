@@ -22,7 +22,7 @@ export const userRepository = (axios: NuxtAxiosInstance) => ({
       },
     })
   },
-  updateUser(payload: UpdateUserRequest): UserResponse {
+  updateUser(payload: UpdateUserRequest): UserResponse | CustomErrors {
     return axios.$put('/user', payload)
   },
 })
