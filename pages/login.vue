@@ -38,12 +38,6 @@ import FormContainer from '@/components/FormContainer.vue'
 import useUser from '@/compositions/useUser'
 import useError from '@/compositions/useError'
 
-/**
- * 1. Validation
- * 2. Fail => View
- * 3. Success => Redirect to login before page & Persist Storage & User Info
- * 4. Duplicated
- */
 export default defineComponent({
   name: 'LoginPage',
   components: {
