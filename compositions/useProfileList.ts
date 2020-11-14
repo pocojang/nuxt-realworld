@@ -1,4 +1,10 @@
-import { reactive, toRef, useContext, useFetch } from '@nuxtjs/composition-api'
+import {
+  reactive,
+  ref,
+  toRef,
+  useContext,
+  useFetch,
+} from '@nuxtjs/composition-api'
 import { Article, User } from '@/types'
 
 export type PostType = 'AUTHOR' | 'FAVORITED'
@@ -6,22 +12,22 @@ export type PostType = 'AUTHOR' | 'FAVORITED'
 type State = {
   articleList: Article[]
   articleCount: number
-  postType: PostType
 }
 
-const state = reactive<State>({
-  articleList: [],
-  articleCount: 0,
-  postType: 'AUTHOR',
-})
+const postType = ref<PostType>('AUTHOR')
+
+const setPostType = (type: PostType) => {
+  postType.value = type
+}
 
 export default function useProfileList() {
   const { $repository, params, route } = useContext()
   const { userName } = params.value
 
-  const setPostType = (type: PostType) => {
-    state.postType = type
-  }
+  const state = reactive<State>({
+    articleList: [],
+    articleCount: 0,
+  })
 
   const getArticleListByPost = async ({
     userName,
@@ -53,7 +59,7 @@ export default function useProfileList() {
       return
     }
 
-    const isRemoveArticle = favorited && state.postType === 'FAVORITED'
+    const isRemoveArticle = favorited && postType.value === 'FAVORITED'
 
     if (isRemoveArticle) {
       state.articleList = state.articleList.filter(
@@ -85,8 +91,8 @@ export default function useProfileList() {
 
   return {
     fetchState,
+    postType,
     articleList: toRef(state, 'articleList'),
-    postType: toRef(state, 'postType'),
     setPostType,
     toggleFavoriteArticle,
   }
