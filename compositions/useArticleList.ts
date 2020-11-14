@@ -1,4 +1,10 @@
-import { reactive, useContext, watch } from '@nuxtjs/composition-api'
+import {
+  reactive,
+  ref,
+  toRef,
+  useContext,
+  watch,
+} from '@nuxtjs/composition-api'
 import { ArticleListRequest } from '@/api/articleRepository'
 import { Article, Tag } from '@/types'
 import useUser from './useUser'
@@ -8,22 +14,22 @@ export type FeedType = 'GLOBAL' | 'YOUR'
 type State = {
   articleList: Article[]
   articleCount: number
-  feedType: FeedType
 }
 
-const state = reactive<State>({
-  articleList: [],
-  articleCount: 0,
-  feedType: 'GLOBAL',
-})
+const feedType = ref<FeedType>('GLOBAL')
+
+const setFeedType = (type: FeedType) => {
+  feedType.value = type
+}
 
 export default function useArticleList() {
   const { $repository } = useContext()
   const { isLogin } = useUser()
 
-  const setFeedType = (type: FeedType) => {
-    state.feedType = type
-  }
+  const state = reactive<State>({
+    articleList: [],
+    articleCount: 0,
+  })
 
   const getArticleList = async (payload: ArticleListRequest = {}) => {
     const {
@@ -96,7 +102,8 @@ export default function useArticleList() {
   })
 
   return {
-    state,
+    articleList: toRef(state, 'articleList'),
+    feedType,
     getArticleList,
     getFeedArticleList,
     getArticleListByTag,

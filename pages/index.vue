@@ -46,7 +46,7 @@ import PopularTagList from '@/components/PopularTagList.vue'
 import { useArticleList, useTag, useUser } from '@/compositions'
 import { feedTypes } from '@/constants'
 
-// TODO: vue runtime warn: Write operation failed: computed value is readonly.
+// TODO: [Vue warn]: Write operation failed: computed value is readonly.
 export default defineComponent({
   name: 'IndexPage',
   components: {
@@ -59,7 +59,8 @@ export default defineComponent({
   setup() {
     const { isLogin } = useUser()
     const {
-      state: articleState,
+      articleList,
+      feedType,
       getArticleList,
       getFeedArticleList,
       getArticleListByTag,
@@ -69,7 +70,7 @@ export default defineComponent({
     const { state: tagState, getTagList } = useTag()
 
     const { fetchState } = useFetch(async () => {
-      if (articleState.feedType === 'YOUR') {
+      if (feedType.value === 'YOUR') {
         await getFeedArticleList()
       } else {
         await getArticleList()
@@ -82,9 +83,9 @@ export default defineComponent({
 
     return {
       fetchState,
-      articleList: toRef(articleState, 'articleList'),
+      articleList,
+      feedType,
       tagList: toRef(tagState, 'tagList'),
-      feedType: toRef(articleState, 'feedType'),
       tabItems: computed(() => {
         const [, globalFeed] = feedTypes
 
