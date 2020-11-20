@@ -18,12 +18,15 @@
             <pagination />
           </template>
         </div>
-        <div class="col-md-3">
-          <popular-tag-list
-            :tag-list="tagList"
-            @on-click-tag="getArticleListByTag"
-          />
-        </div>
+
+        <template v-if="!fetchState.pending && !fetchState.error">
+          <div class="col-md-3">
+            <popular-tag-list
+              :tag-list="tagList"
+              @on-click-tag="getArticleListByTag"
+            />
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -75,9 +78,7 @@ export default defineComponent({
       } else {
         await getArticleList()
       }
-    })
 
-    useFetch(async () => {
       await getTagList()
     })
 
