@@ -1,13 +1,6 @@
-import {
-  reactive,
-  ref,
-  toRef,
-  useContext,
-  watch,
-} from '@nuxtjs/composition-api'
+import { reactive, ref, toRef, useContext } from '@nuxtjs/composition-api'
 import { ArticleListRequest } from '@/api/articleRepository'
 import { Article, Tag } from '@/types'
-import useUser from './useUser'
 
 export type FeedType = 'GLOBAL' | 'YOUR'
 
@@ -24,7 +17,6 @@ const setFeedType = (type: FeedType) => {
 
 export default function useArticleList() {
   const { $repository } = useContext()
-  const { isLogin } = useUser()
 
   const state = reactive<State>({
     articleList: [],
@@ -88,18 +80,6 @@ export default function useArticleList() {
       ]
     }
   }
-
-  watch(isLogin, (isLogin, prevIsLogin) => {
-    if (!prevIsLogin && isLogin) {
-      setFeedType('YOUR')
-
-      return
-    }
-
-    if (!isLogin && prevIsLogin) {
-      setFeedType('GLOBAL')
-    }
-  })
 
   return {
     articleList: toRef(state, 'articleList'),
