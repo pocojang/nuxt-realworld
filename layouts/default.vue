@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { defineComponent, useAsync } from '@nuxtjs/composition-api'
-import { useArticleList, useUser } from '@/compositions'
+import useUser from '@/compositions/useUser'
 import appFooter from './appFooter.vue'
 import appHeader from './appHeader.vue'
 
@@ -20,7 +20,6 @@ export default defineComponent({
   },
   setup() {
     const { retryLogin } = useUser()
-    const { setFeedType } = useArticleList()
 
     useAsync(() => {
       if (process.server) {
@@ -31,12 +30,7 @@ export default defineComponent({
 
       if (token) {
         retryLogin(token)
-        setFeedType('YOUR')
-
-        return
       }
-
-      setFeedType('GLOBAL')
     })
   },
 })
