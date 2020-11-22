@@ -47,12 +47,7 @@ import useEditor from '@/compositions/useEditor'
 import Editor from '@/components/Editor.vue'
 import { useArticleSlug, useError } from '@/compositions'
 
-/**
- *
- * TODO:
- * - Duplicated Update
- *
- */
+// TODO: [Vue warn]: toRefs() expects a reactive object but received a plain one.
 export default defineComponent({
   name: 'CreateEditorPage',
   components: {

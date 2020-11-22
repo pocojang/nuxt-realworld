@@ -8,6 +8,7 @@ type State = ArticlePayload & {
   inputTag: ''
 }
 
+// TODO: [Vue warn]: toRefs() expects a reactive object but received a plain one.
 export default function useEditor() {
   const { redirect } = useContext()
 
