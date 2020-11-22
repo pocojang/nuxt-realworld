@@ -13,7 +13,7 @@
           <template v-if="!fetchState.pending && !fetchState.error">
             <article-preview-list
               :article-list="articleList"
-              @toggle-favorite-article="toggleFavoriteArticle"
+              @toggle-favorite-article="toggleFavoriteArticleByList"
             />
             <pagination />
           </template>
@@ -68,7 +68,7 @@ export default defineComponent({
       getFeedArticleList,
       getArticleListByTag,
       getArticleListByFeed,
-      toggleFavoriteArticle,
+      toggleFavoriteArticleByList,
     } = useArticleList()
     const { state: tagState, getTagList } = useTag()
 
@@ -82,20 +82,22 @@ export default defineComponent({
       await getTagList()
     })
 
+    const tabItems = computed(() => {
+      const [, globalFeed] = feedTypes
+
+      return isLogin.value ? feedTypes : [globalFeed]
+    })
+
     return {
       fetchState,
       articleList,
       feedType,
       tagList: toRef(tagState, 'tagList'),
-      tabItems: computed(() => {
-        const [, globalFeed] = feedTypes
-
-        return isLogin.value ? feedTypes : [globalFeed]
-      }),
+      tabItems,
       getArticleListByTag,
       isLogin,
       getArticleListByFeed,
-      toggleFavoriteArticle,
+      toggleFavoriteArticleByList,
     }
   },
 })

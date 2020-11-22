@@ -4,7 +4,7 @@
       <article-banner
         :article="article"
         :author="article.author"
-        :is-my-article="article.author.username === loginUser.username"
+        :is-my-article="isMyArticle"
         @on-delete-article="onDeleteArticle"
       >
         <template #title>
@@ -59,9 +59,11 @@ import {
   useContext,
   toRef,
   useFetch,
+  computed,
 } from '@nuxtjs/composition-api'
 
 import ArticleBanner from '@/components/ArticleBanner.vue'
+import ArticleMeta from '@/components/ArticleMeta.vue'
 import ArticleTagList from '@/components/ArticleTagList.vue'
 import CommentCardList from '@/components/CommentCardList.vue'
 import CommentEditor from '@/components/CommentEditor.vue'
@@ -74,6 +76,7 @@ export default defineComponent({
   name: 'AritclePage',
   components: {
     ArticleBanner,
+    ArticleMeta,
     ArticleTagList,
     CommentEditor,
     CommentCardList,
@@ -104,6 +107,10 @@ export default defineComponent({
       await getCommentList(slug)
     })
 
+    const isMyArticle = computed(
+      () => articleState.article.author.username === userState.value.username
+    )
+
     const onDeleteArticle = () => {
       deleteArticle(slug)
 
@@ -132,6 +139,7 @@ export default defineComponent({
       onDeleteArticle,
       handleCreateComment,
       onDeleteComment,
+      isMyArticle,
     }
   },
 })
