@@ -64,11 +64,23 @@ export default function useArticleSlug() {
     await $repository.article.deleteArticle(slug)
   }
 
+  const toggleFavoriteArticle = ({
+    slug,
+    favorited,
+  }: Pick<Article, 'slug' | 'favorited'>) => {
+    if (favorited) {
+      return $repository.article.unFavoriteArticle(slug)
+    }
+
+    return $repository.article.favoriteArticle(slug)
+  }
+
   return {
     state,
     getArticle,
     createArticle,
     updateArticle,
     deleteArticle,
+    toggleFavoriteArticle,
   }
 }

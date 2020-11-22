@@ -1,6 +1,7 @@
 import { reactive, ref, toRef, useContext } from '@nuxtjs/composition-api'
 import { ArticleListRequest } from '@/api/articleRepository'
 import { Article, Tag } from '@/types'
+import useArticleSlug from './useArticleSlug'
 
 export type FeedType = 'GLOBAL' | 'YOUR'
 
@@ -17,6 +18,7 @@ const setFeedType = (type: FeedType) => {
 
 export default function useArticleList() {
   const { $repository } = useContext()
+  const { toggleFavoriteArticle } = useArticleSlug()
 
   const state = reactive<State>({
     articleList: [],
@@ -65,12 +67,10 @@ export default function useArticleList() {
   }
 
   const toggleFavoriteArticleByList = async (
-    { slug, favorited }: Article,
+    { slug, favorited }: Pick<Article, 'slug' | 'favorited'>,
     articleIndex: number
   ) => {
-    const response = favorited
-      ? await $repository.article.unFavoriteArticle(slug)
-      : await $repository.article.favoriteArticle(slug)
+    const response = await toggleFavoriteArticle({ slug, favorited })
 
     if (response.article) {
       state.articleList = [
