@@ -2,7 +2,7 @@
   <article-preview-list
     v-if="!fetchState.pending && !fetchState.error"
     :article-list="articleList"
-    @toggle-favorite-article="toggleFavoriteArticle"
+    @toggle-favorite-article="toggleFavoriteArticleByList"
   />
 </template>
 

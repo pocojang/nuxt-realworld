@@ -47,7 +47,7 @@ export default function useProfileList() {
     state.articleCount = articlesCount
   }
 
-  const toggleFavoriteArticle = async (
+  const toggleFavoriteArticleByList = async (
     { slug, favorited }: Article,
     articleIndex: number
   ) => {
@@ -94,6 +94,6 @@ export default function useProfileList() {
     postType,
     articleList: toRef(state, 'articleList'),
     setPostType,
-    toggleFavoriteArticle,
+    toggleFavoriteArticleByList,
   }
 }

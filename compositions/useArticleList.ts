@@ -64,7 +64,7 @@ export default function useArticleList() {
     setFeedType(listType)
   }
 
-  const toggleFavoriteArticle = async (
+  const toggleFavoriteArticleByList = async (
     { slug, favorited }: Article,
     articleIndex: number
   ) => {
@@ -88,7 +88,7 @@ export default function useArticleList() {
     getFeedArticleList,
     getArticleListByTag,
     getArticleListByFeed,
-    toggleFavoriteArticle,
+    toggleFavoriteArticleByList,
     setFeedType,
   }
 }
