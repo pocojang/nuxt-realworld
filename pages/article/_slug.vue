@@ -1,14 +1,19 @@
 <template>
   <div v-if="!fetchState.pending && !fetchState.error">
     <div class="article-page">
-      <article-banner
-        :article="article"
-        :author="article.author"
-        :is-my-article="isMyArticle"
-        @on-delete-article="onDeleteArticle"
-      >
+      <article-banner>
         <template #title>
           {{ article.title }}
+        </template>
+        >
+        <template #article-meta>
+          <ArticleMeta
+            :article="article"
+            :author="article.author"
+            :is-my-article="isMyArticle"
+            @on-toggle-follow-user="fetchToggleFollowUser"
+            @on-toggle-favorite-article="fetchToggleFavoriteArticle"
+          />
         </template>
       </article-banner>
       <div class="container page">
@@ -24,7 +29,15 @@
           </div>
         </div>
         <hr />
-        <div class="article-actions"></div>
+        <div class="article-actions">
+          <ArticleMeta
+            :article="article"
+            :author="article.author"
+            :is-my-article="isMyArticle"
+            @on-toggle-follow-user="fetchToggleFollowUser"
+            @on-toggle-favorite-article="fetchToggleFavoriteArticle"
+          />
+        </div>
         <div class="row">
           <div class="col-xs-12 col-md-8 offset-md-2">
             <template v-if="isLogin">
@@ -69,7 +82,13 @@ import CommentCardList from '@/components/CommentCardList.vue'
 import CommentEditor from '@/components/CommentEditor.vue'
 import ErrorList from '@/components/ErrorList.vue'
 
-import { useArticleSlug, useComment, useError, useUser } from '@/compositions'
+import {
+  useArticleSlug,
+  useComment,
+  useError,
+  useProfileUser,
+  useUser,
+} from '@/compositions'
 import { Comment } from '@/types'
 
 export default defineComponent({
@@ -88,7 +107,12 @@ export default defineComponent({
     const { option } = query.value
 
     const { state: errorState, setError } = useError()
-    const { state: articleState, getArticle, deleteArticle } = useArticleSlug()
+    const {
+      state: articleState,
+      getArticle,
+      deleteArticle,
+      toggleFavoriteArticle,
+    } = useArticleSlug()
     const {
       state: commentState,
       getCommentList,
@@ -96,6 +120,7 @@ export default defineComponent({
       deleteComment,
     } = useComment()
     const { user: userState, isLogin } = useUser()
+    const { followUser, unFollowUser } = useProfileUser()
 
     const { fetchState } = useFetch(async () => {
       await getArticle(slug)
@@ -129,6 +154,27 @@ export default defineComponent({
       }
     }
 
+    const fetchToggleFollowUser = async () => {
+      if (articleState.article.author.following) {
+        await unFollowUser(articleState.article.author.username)
+      } else {
+        await followUser(articleState.article.author.username)
+      }
+
+      await getArticle(slug)
+    }
+
+    const fetchToggleFavoriteArticle = async () => {
+      const response = await toggleFavoriteArticle({
+        slug,
+        favorited: articleState.article.favorited,
+      })
+
+      if (response) {
+        await getArticle(slug)
+      }
+    }
+
     return {
       article: toRef(articleState, 'article'),
       commentList: toRef(commentState, 'commentList'),
@@ -140,6 +186,8 @@ export default defineComponent({
       handleCreateComment,
       onDeleteComment,
       isMyArticle,
+      fetchToggleFollowUser,
+      fetchToggleFavoriteArticle,
     }
   },
 })
