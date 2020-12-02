@@ -2,6 +2,28 @@
   "name": "nuxt-realworld",
   "version": "1.0.0",
   "private": false,
+  "author": {
+    "name": "devJang",
+    "email": "devjang2016@gmail.com",
+    "url": "https://devjang.github.io"
+  },
+  "homepage": "https://nuxt-realworld.vercel.app",
+  "description": "Built a Example App of RealWorld with Nuxt & Composition API",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/devJang/nuxt-realworld.git"
+  },
+  "bugs": "https://github.com/devJang/nuxt-realworld/issues",
+  "keywords": [
+    "vue",
+    "nuxt",
+    "example-project",
+    "realworld",
+    "typescript",
+    "experimental",
+    "composition-api"
+  ],
   "scripts": {
     "dev": "nuxt-ts",
     "build": "nuxt-ts build",
