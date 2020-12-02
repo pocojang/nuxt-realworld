@@ -3,6 +3,7 @@ import useArticleList from './useArticleList'
 import useComment from './useComment'
 import useEditor from './useEditor'
 import useError from './useError'
+import usePagination from './usePagination'
 import useProfileList from './useProfileList'
 import useProfileUser from './useProfileUser'
 import useTag from './useTag'
@@ -15,6 +16,7 @@ export {
   useComment,
   useEditor,
   useError,
+  usePagination,
   useProfileList,
   useProfileUser,
   useTag,
