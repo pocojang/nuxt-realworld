@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav v-if="totalPageArr.length">
     <ul class="pagination">
       <li
         v-for="(_, index) in totalPageArr"
@@ -16,8 +16,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs, watch } from '@nuxtjs/composition-api'
+import {
+  computed,
+  defineComponent,
+  toRefs,
+  watch,
+} from '@nuxtjs/composition-api'
 import usePagination from '@/compositions/usePagination'
+import { LIMIT_LIST_ITEM } from '@/constants'
 
 export default defineComponent({
   name: 'Pagination',
@@ -28,11 +34,13 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const { state, setPage, getOffset, totalPageArr } = usePagination(
-      props.totalCount
-    )
+    const { state, setPage, getOffset } = usePagination()
 
-    console.log(props.totalCount)
+    const totalPageArr = computed(() => {
+      const length = props.totalCount / LIMIT_LIST_ITEM
+
+      return Array.from({ length }, (_, i) => state.currentPage + i)
+    })
 
     watch(
       () => state.currentPage,
