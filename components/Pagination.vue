@@ -32,6 +32,8 @@ export default defineComponent({
       props.totalCount
     )
 
+    console.log(props.totalCount)
+
     watch(
       () => state.currentPage,
       (currentPage) => {

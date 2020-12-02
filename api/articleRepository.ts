@@ -8,6 +8,7 @@ import {
   ResponseTypes,
   CustomErrors,
 } from '@/types'
+import { LIMIT_LIST_ITEM } from '@/constants'
 
 type Slug = Article['slug']
 type UserName = Author['username']
@@ -46,7 +47,7 @@ export const articleRepository = (axios: NuxtAxiosInstance) => ({
     tag,
     author,
     favorited,
-    limit = 20,
+    limit = LIMIT_LIST_ITEM,
     offset = 0,
   }: ArticleListRequest = {}): ArticleListResponse {
     const defaultParam = {
@@ -59,8 +60,16 @@ export const articleRepository = (axios: NuxtAxiosInstance) => ({
       params: { ...defaultParam, limit, offset },
     })
   },
-  getFeedArticleList(params: FeedArticleListRequest = {}): ArticleListResponse {
-    return axios.$get('/articles/feed', { params })
+  getFeedArticleList({
+    limit = LIMIT_LIST_ITEM,
+    offset = 0,
+  }: FeedArticleListRequest = {}): ArticleListResponse {
+    return axios.$get('/articles/feed', {
+      params: {
+        limit,
+        offset,
+      },
+    })
   },
   createArticle(payload: CreateArticleRequest): ArticleResponse | CustomErrors {
     return axios.$post('/articles', { article: payload })

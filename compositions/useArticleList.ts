@@ -1,4 +1,4 @@
-import { reactive, ref, toRef, useContext } from '@nuxtjs/composition-api'
+import { reactive, ref, useContext } from '@nuxtjs/composition-api'
 import { ArticleListRequest } from '@/api/articleRepository'
 import { Article, Tag } from '@/types'
 import useArticleSlug from './useArticleSlug'
@@ -35,11 +35,11 @@ export default function useArticleList() {
     state.articleCount = articlesCount
   }
 
-  const getFeedArticleList = async () => {
+  const getFeedArticleList = async (offset = 0) => {
     const {
       articles,
       articlesCount,
-    } = await $repository.article.getFeedArticleList()
+    } = await $repository.article.getFeedArticleList({ offset })
 
     state.articleList = articles
     state.articleCount = articlesCount
@@ -82,7 +82,7 @@ export default function useArticleList() {
   }
 
   return {
-    articleList: toRef(state, 'articleList'),
+    state,
     feedType,
     getArticleList,
     getFeedArticleList,

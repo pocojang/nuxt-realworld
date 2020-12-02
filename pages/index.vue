@@ -15,7 +15,7 @@
               :article-list="articleList"
               @toggle-favorite-article="toggleFavoriteArticleByList"
             />
-            <pagination />
+            <pagination :total-count="articleCount" @fetch-data="fetchData" />
           </template>
         </div>
 
@@ -37,6 +37,7 @@ import {
   computed,
   defineComponent,
   toRef,
+  toRefs,
   useFetch,
 } from '@nuxtjs/composition-api'
 
@@ -62,7 +63,7 @@ export default defineComponent({
   setup() {
     const { isLogin } = useUser()
     const {
-      articleList,
+      state: articleListState,
       feedType,
       getArticleList,
       getFeedArticleList,
@@ -72,15 +73,17 @@ export default defineComponent({
     } = useArticleList()
     const { state: tagState, getTagList } = useTag()
 
-    const { fetchState } = useFetch(async () => {
+    const fetchData = async (offset = 0) => {
       if (feedType.value === 'YOUR') {
-        await getFeedArticleList()
+        await getFeedArticleList(offset)
       } else {
-        await getArticleList()
+        await getArticleList({ offset })
       }
 
       await getTagList()
-    })
+    }
+
+    const { fetchState } = useFetch(() => fetchData())
 
     const tabItems = computed(() => {
       const [, globalFeed] = feedTypes
@@ -90,9 +93,10 @@ export default defineComponent({
 
     return {
       fetchState,
-      articleList,
-      feedType,
+      fetchData,
+      ...toRefs(articleListState),
       tagList: toRef(tagState, 'tagList'),
+      feedType,
       tabItems,
       getArticleListByTag,
       isLogin,
