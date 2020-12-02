@@ -35,3 +35,5 @@ export const postTypes: PostTabItems = [
 
 export const DEFAULT_PROFILE_IMG =
   'https://static.productionready.io/images/smiley-cyrus.jpg'
+
+export const LIMIT_LIST_ITEM = 20
