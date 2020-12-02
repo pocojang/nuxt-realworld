@@ -7,7 +7,7 @@
         class="page-item"
         :class="{ active: Number(index) === Number(currentPage) }"
       >
-        <button class="page-link" @click="setPage(index)">
+        <button class="page-link" @click="handleSetPage(index)">
           {{ index + 1 }}
         </button>
       </li>
@@ -16,12 +16,7 @@
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  toRefs,
-  watch,
-} from '@nuxtjs/composition-api'
+import { computed, defineComponent, toRefs } from '@nuxtjs/composition-api'
 import usePagination from '@/compositions/usePagination'
 import { LIMIT_LIST_ITEM } from '@/constants'
 
@@ -42,15 +37,14 @@ export default defineComponent({
       return Array.from({ length }, (_, i) => state.currentPage + i)
     })
 
-    watch(
-      () => state.currentPage,
-      (currentPage) => {
-        emit('fetch-data', getOffset(currentPage))
-      }
-    )
+    const handleSetPage = (pageIndex: number) => {
+      emit('fetch-data', getOffset(pageIndex))
+      setPage(pageIndex)
+    }
 
     return {
       ...toRefs(state),
+      handleSetPage,
       setPage,
       totalPageArr,
     }
