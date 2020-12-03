@@ -54,7 +54,6 @@ import {
 import { useProfileUser, useProfileList, useUser } from '@/compositions'
 import { PostType } from '@/compositions/useProfileList'
 
-import ArticlePreviewList from '@/components/ArticlePreviewList.vue'
 import TabNavigation from '@/components/TabNavigation.vue'
 import ProfileBanner from '@/components/ProfileBanner.vue'
 import { postTypes } from '@/constants'
@@ -62,7 +61,6 @@ import { postTypes } from '@/constants'
 export default defineComponent({
   name: 'ProfilePage',
   components: {
-    ArticlePreviewList,
     TabNavigation,
     ProfileBanner,
   },

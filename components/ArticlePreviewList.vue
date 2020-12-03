@@ -65,7 +65,7 @@ export default defineComponent({
   props: {
     articleList: {
       type: Array as () => PropType<Article[]>,
-      required: false,
+      required: true,
     },
   },
   setup(_, { emit }) {
