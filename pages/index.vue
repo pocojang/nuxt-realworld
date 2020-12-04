@@ -10,6 +10,8 @@
             @on-click-tab="getArticleListByFeed"
           />
 
+          <article-list-loading v-if="fetchState.pending" />
+
           <template v-if="!fetchState.pending && !fetchState.error">
             <article-preview-list
               :article-list="articleList"
@@ -42,6 +44,7 @@ import {
 } from '@nuxtjs/composition-api'
 
 import ArticlePreviewList from '@/components/ArticlePreviewList.vue'
+import ArticleListLoading from '@/components/ArticleListLoading.vue'
 import Banner from '@/components/Banner.vue'
 import TabNavigation from '@/components/TabNavigation.vue'
 import Pagination from '@/components/Pagination.vue'
@@ -59,6 +62,7 @@ export default defineComponent({
     TabNavigation,
     Pagination,
     PopularTagList,
+    ArticleListLoading,
   },
   setup() {
     const { isLogin } = useUser()

@@ -1,6 +1,8 @@
 <template>
+  <article-list-loading v-if="fetchState.pending" />
+
   <article-preview-list
-    v-if="!fetchState.pending && !fetchState.error"
+    v-else-if="!fetchState.error"
     :article-list="articleList"
     @toggle-favorite-article="toggleFavoriteArticleByList"
   />
@@ -11,11 +13,13 @@ import { defineComponent } from '@nuxtjs/composition-api'
 
 import useProfileList from '@/compositions/useProfileList'
 import ArticlePreviewList from '@/components/ArticlePreviewList.vue'
+import ArticleListLoading from '@/components/ArticleListLoading.vue'
 
 export default defineComponent({
   name: 'ProfileFavoritePage',
   components: {
     ArticlePreviewList,
+    ArticleListLoading,
   },
   setup() {
     return useProfileList()
