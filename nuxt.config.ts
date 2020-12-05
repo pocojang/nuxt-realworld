@@ -27,11 +27,7 @@ const config: NuxtConfig = {
   css: ['@/assets/main.css'],
   plugins: ['@/plugins/repository'],
   components: true,
-  buildModules: [
-    '@nuxt/typescript-build',
-    '@nuxtjs/stylelint-module',
-    '@nuxtjs/composition-api',
-  ],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/composition-api'],
   modules: ['@nuxtjs/axios', '@nuxtjs/markdownit'],
   build: {},
   axios: {
