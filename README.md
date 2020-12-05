@@ -18,29 +18,12 @@ For more information on how to this works with other frontends/backends, head ov
 # How it works
 
 ```bash
-|____types
-|____plugins
-| |____repository.ts
-|____compositions
-| |____useArticleList.ts
-| |____useArticleSlug.ts
-| |____useComment.ts
-| |____useEditor.ts
-| |____useProfile.ts
-| |____useTag.ts
-| |____useUser.ts
-|____pages
-  |____index.vue
-  |____settings.vue
-  |____login.vue
-  |____register.vue
-  |____profile
-  | |_____userName.vue
-  |____article
-  | |_____slug.vue
-  |____editor
-    |____index.vue
-    |_____slug.vue
+|____api           # api service
+|____components    # Single File Components of Vue
+|____compositions  # @composition-api base logic
+|____pages         # Page Components of Nuxt
+|____plugins       # inject to api service
+|____types         # declare to Vue & Next type & Real World Model Type
 ```
 
 # Getting started
