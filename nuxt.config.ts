@@ -24,11 +24,22 @@ const config: NuxtConfig = {
       },
     ],
   },
+  // https://github.com/gothinkster/realworld-starter-kit
   css: ['@/assets/main.css'],
   plugins: ['@/plugins/repository'],
   components: true,
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/composition-api'],
-  modules: ['@nuxtjs/axios', '@nuxtjs/markdownit'],
+  buildModules: [
+    // https://typescript.nuxtjs.org/guide/setup#configuration
+    '@nuxt/typescript-build',
+    // https://composition-api.nuxtjs.org
+    '@nuxtjs/composition-api',
+  ],
+  modules: [
+    // https://axios.nuxtjs.org
+    '@nuxtjs/axios',
+    // https://github.com/nuxt-community/community-modules/tree/master/packages/markdownit
+    '@nuxtjs/markdownit',
+  ],
   build: {},
   axios: {
     baseURL: 'https://conduit.productionready.io/api/',
