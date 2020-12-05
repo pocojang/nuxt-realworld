@@ -54,8 +54,8 @@ import {
 import { useProfileUser, useProfileList, useUser } from '@/compositions'
 import { PostType } from '@/compositions/useProfileList'
 
-import TabNavigation from '@/components/TabNavigation.vue'
-import ProfileBanner from '@/components/ProfileBanner.vue'
+import TabNavigation from '@/components/articleList/TabNavigation.vue'
+import ProfileBanner from '@/components/banner/ProfileBanner.vue'
 import { postTypes } from '@/constants'
 
 export default defineComponent({

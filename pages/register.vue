@@ -42,6 +42,7 @@ import {
   toRef,
   toRefs,
 } from '@nuxtjs/composition-api'
+
 import { useError, useUser } from '@/compositions'
 
 export default defineComponent({

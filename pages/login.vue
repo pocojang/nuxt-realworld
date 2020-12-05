@@ -34,9 +34,9 @@ import {
   toRef,
   toRefs,
 } from '@nuxtjs/composition-api'
-import FormContainer from '@/components/FormContainer.vue'
-import useUser from '@/compositions/useUser'
-import useError from '@/compositions/useError'
+
+import { useUser, useError } from '@/compositions'
+import FormContainer from '@/components/common/FormContainer.vue'
 
 export default defineComponent({
   name: 'LoginPage',

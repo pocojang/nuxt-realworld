@@ -12,8 +12,8 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 
 import useProfileList from '@/compositions/useProfileList'
-import ArticlePreviewList from '@/components/ArticlePreviewList.vue'
-import ArticleListLoading from '@/components/ArticleListLoading.vue'
+import ArticlePreviewList from '@/components/articleList/ArticlePreviewList.vue'
+import ArticleListLoading from '@/components/articleList/ArticleListLoading.vue'
 
 export default defineComponent({
   name: 'ProfileFavoritePage',

@@ -43,8 +43,9 @@
 
 <script lang="ts">
 import { defineComponent, toRef, toRefs } from '@nuxtjs/composition-api'
+
 import useEditor from '@/compositions/useEditor'
-import Editor from '@/components/Editor.vue'
+import Editor from '@/components/common/Editor.vue'
 import { useArticleSlug, useError } from '@/compositions'
 
 // TODO: [Vue warn]: toRefs() expects a reactive object but received a plain one.

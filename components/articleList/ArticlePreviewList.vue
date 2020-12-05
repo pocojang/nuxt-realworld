@@ -51,10 +51,11 @@
 <script lang="ts">
 import { PropType } from 'vue'
 import { defineComponent, useContext } from '@nuxtjs/composition-api'
+
 import { Article } from '@/types'
 import useUser from '@/compositions/useUser'
-import ArticleTagList from './ArticleTagList.vue'
-import ProfileImage from './ProfileImage.vue'
+import ArticleTagList from '@/components/article/ArticleTagList.vue'
+import ProfileImage from '@/components/common/ProfileImage.vue'
 
 export default defineComponent({
   name: 'ArticlePreviewList',

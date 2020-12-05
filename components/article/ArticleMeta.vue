@@ -66,7 +66,7 @@
 import Vue, { PropType } from 'vue'
 import { Article, Author } from '@/types'
 
-import ProfileImage from './ProfileImage.vue'
+import ProfileImage from '@/components/common/ProfileImage.vue'
 
 export default Vue.extend({
   name: 'ArticleMeta',

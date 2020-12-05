@@ -43,12 +43,12 @@ import {
   useFetch,
 } from '@nuxtjs/composition-api'
 
-import ArticlePreviewList from '@/components/ArticlePreviewList.vue'
-import ArticleListLoading from '@/components/ArticleListLoading.vue'
-import Banner from '@/components/Banner.vue'
-import TabNavigation from '@/components/TabNavigation.vue'
-import Pagination from '@/components/Pagination.vue'
-import PopularTagList from '@/components/PopularTagList.vue'
+import ArticlePreviewList from '@/components/articleList/ArticlePreviewList.vue'
+import ArticleListLoading from '@/components/articleList/ArticleListLoading.vue'
+import PopularTagList from '@/components/articleList/PopularTagList.vue'
+import TabNavigation from '@/components/articleList/TabNavigation.vue'
+import Banner from '@/components/banner/Banner.vue'
+import Pagination from '@/components/common/Pagination.vue'
 
 import { useArticleList, useTag, useUser } from '@/compositions'
 import { feedTypes } from '@/constants'

@@ -15,8 +15,9 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import AuthNavigationBar from '@/components/AuthNavigationBar.vue'
-import NavigationBar from '@/components/NavigationBar.vue'
+
+import AuthNavigationBar from '@/components/common/AuthNavigationBar.vue'
+import NavigationBar from '@/components/common/NavigationBar.vue'
 import useUser from '@/compositions/useUser'
 
 export default defineComponent({

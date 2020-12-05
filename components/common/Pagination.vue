@@ -17,6 +17,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, toRefs } from '@nuxtjs/composition-api'
+
 import usePagination from '@/compositions/usePagination'
 import { LIMIT_LIST_ITEM } from '@/constants'
 

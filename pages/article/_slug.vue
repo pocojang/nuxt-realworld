@@ -75,12 +75,12 @@ import {
   computed,
 } from '@nuxtjs/composition-api'
 
-import ArticleBanner from '@/components/ArticleBanner.vue'
-import ArticleMeta from '@/components/ArticleMeta.vue'
-import ArticleTagList from '@/components/ArticleTagList.vue'
-import CommentCardList from '@/components/CommentCardList.vue'
-import CommentEditor from '@/components/CommentEditor.vue'
-import ErrorList from '@/components/ErrorList.vue'
+import ArticleBanner from '@/components/article/ArticleBanner.vue'
+import ArticleMeta from '@/components/article/ArticleMeta.vue'
+import ArticleTagList from '@/components/article/ArticleTagList.vue'
+import CommentCardList from '@/components/comment/CommentCardList.vue'
+import CommentEditor from '@/components/comment/CommentEditor.vue'
+import ErrorList from '@/components/common/ErrorList.vue'
 
 import {
   useArticleSlug,

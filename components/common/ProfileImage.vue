@@ -4,7 +4,8 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
-import { useUtils } from '@/compositions'
+
+import useUtils from '@/compositions/useUtils'
 
 export default defineComponent({
   name: 'ProfileImage',

@@ -53,8 +53,9 @@
 
 <script lang="ts">
 import Vue, { PropOptions } from 'vue'
+
 import { Article, CustomErrors } from '@/types'
-import ErrorList from './ErrorList.vue'
+import ErrorList from '@/components/common/ErrorList.vue'
 
 export default Vue.extend({
   name: 'Editor',

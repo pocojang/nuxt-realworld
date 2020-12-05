@@ -16,6 +16,7 @@
 
 <script lang="ts">
 import Vue, { PropType } from 'vue'
+
 import { Tag } from '@/types'
 
 export default Vue.extend({

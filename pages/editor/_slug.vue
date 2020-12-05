@@ -49,8 +49,9 @@ import {
   useContext,
   useFetch,
 } from '@nuxtjs/composition-api'
+
 import { useArticleSlug, useEditor, useError } from '@/compositions'
-import Editor from '@/components/Editor.vue'
+import Editor from '@/components/common/Editor.vue'
 
 // TODO: [Vue warn]: toRefs() expects a reactive object but received a plain one.
 export default defineComponent({

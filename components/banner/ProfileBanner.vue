@@ -19,9 +19,10 @@
 <script lang="ts">
 import { PropType } from 'vue'
 import { defineComponent } from '@nuxtjs/composition-api'
+
 import { Profile } from '@/types'
-import BannerContainer from './BannerContainer.vue'
-import ProfileImage from './ProfileImage.vue'
+import BannerContainer from '@/components/banner/BannerContainer.vue'
+import ProfileImage from '@/components/common/ProfileImage.vue'
 
 export default defineComponent({
   name: 'ProfileBanner',

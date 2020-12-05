@@ -16,6 +16,7 @@
 
 <script lang="ts">
 import Vue, { PropType } from 'vue'
+
 import { FeedTabItems, PostTabItems } from '@/constants'
 
 export default Vue.extend({

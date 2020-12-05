@@ -10,7 +10,8 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import BannerContainer from './BannerContainer.vue'
+
+import BannerContainer from '@/components/banner/BannerContainer.vue'
 
 export default Vue.extend({
   name: 'ArticleBanner',

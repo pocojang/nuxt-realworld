@@ -30,9 +30,10 @@
 </template>
 
 <script lang="ts">
-import { CustomErrors } from '@/types'
 import Vue, { PropOptions } from 'vue'
-import ErrorList from './ErrorList.vue'
+
+import { CustomErrors } from '@/types'
+import ErrorList from '@/components/common/ErrorList.vue'
 
 export default Vue.extend({
   name: 'FormContainer',

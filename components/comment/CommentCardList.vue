@@ -38,8 +38,9 @@
 
 <script lang="ts">
 import Vue, { PropOptions } from 'vue'
+
 import { Comment, User } from '@/types'
-import ProfileImage from './ProfileImage.vue'
+import ProfileImage from '@/components/common/ProfileImage.vue'
 
 /**
  *

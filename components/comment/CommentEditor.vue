@@ -30,8 +30,9 @@
 <script lang="ts">
 import { defineComponent, ref } from '@nuxtjs/composition-api'
 import { PropType } from 'vue'
+
 import { User } from '@/types'
-import ProfileImage from './ProfileImage.vue'
+import ProfileImage from '@/components/common/ProfileImage.vue'
 
 export default defineComponent({
   name: 'CommentEditor',
