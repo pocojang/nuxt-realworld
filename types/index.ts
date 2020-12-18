@@ -45,7 +45,7 @@ export interface Comment {
 
 export type ResponseType<K extends string, V> = Promise<{ [P in K]: V }>
 
-export type ResponseTypes<ObjT> = Promise<ObjT>
+export type ResponseTypes<T> = Promise<T>
 
 export type OptionalPick<T, K extends keyof T> = Pick<Partial<T>, K>
 

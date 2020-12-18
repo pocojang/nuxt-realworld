@@ -8,6 +8,7 @@ export type UpdateUserRequest = OptionalPick<
   'email' | 'username' | 'bio' | 'image'
 > & { password?: string }
 type UserResponse = ResponseType<'user', User>
+
 export const userRepository = (axios: NuxtAxiosInstance) => ({
   authLogin(payload: AuthLoginRequest): UserResponse | CustomErrors {
     return axios.$post('/users/login', { user: payload })
