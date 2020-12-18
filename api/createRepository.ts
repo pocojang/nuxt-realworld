@@ -11,6 +11,7 @@ import {
   TagRepository,
   UserRepository,
 } from '@/api'
+import { ErrorType } from '@/constants'
 
 export type Repository = {
   article: ArticleRepository
@@ -32,26 +33,23 @@ const createRepository = ({ app, $axios, redirect }: Context): Repository => {
 
     const code = error.response.status
 
-    if (code === 422) {
+    if (code === ErrorType.Unprocessable) {
       return Promise.reject(error.response.data.errors)
     }
 
-    // Unauthorized requests
-    if (code === 401) {
+    if (code === ErrorType.Unauthorized) {
       redirect('/login')
 
       return
     }
 
-    // Forbidden requests
-    if (code === 403) {
+    if (code === ErrorType.Forbidden) {
       app?.router?.back()
 
       return
     }
 
-    // Not found requests
-    if (code === 404) {
+    if (code === ErrorType.NotFound) {
       redirect('/')
     }
   })
