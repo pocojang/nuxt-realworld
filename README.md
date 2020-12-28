@@ -86,6 +86,10 @@ The example application is a social blogging site (i.e. a Medium.com clone) call
     - Show basic user info
     - List of articles populated from author's created articles or author's favorited articles
 
-<br />
+
+## Vue related implementations of the Realworld app
+[gothinkster/vue-realworld-example-app](https://github.com/gothinkster/vue-realworld-example-app) - vue2, js  
+[AlexBrohshtut/vue-ts-realworld-app](https://github.com/AlexBrohshtut/vue-ts-realworld-app) - vue2, ts, class-component  
+[mutoe/vue3-realworld-example-app](https://github.com/mutoe/vue3-realworld-example-app) - vue3, vite, ts, composition api
 
 [![Brought to you by Thinkster](https://raw.githubusercontent.com/gothinkster/realworld/master/media/end.png)](https://thinkster.io)
